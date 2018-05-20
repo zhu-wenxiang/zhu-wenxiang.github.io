@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+    
+    <entry>
+      <title>Hello World</title>
+      <link href="/2018/05/12/hello-world/"/>
+      <url>/2018/05/12/hello-world/</url>
+      <content type="html"><![CDATA[<p>这是第一篇博客</p><p>第一篇博客嘛，标题肯定要是伟大的”hello world”了。这一篇主要用来测试。尝试插入图片之类。</p><p>博客的搭建是参考了<a href="https://blog.csdn.net/yimingsilence/article/details/53354041" target="_blank" rel="noopener">个人博客的搭建-github pages + hexo vs wordpress</a>，讲的非常的详细。以及<a href="https://hexo.io/zh-cn/docs" target="_blank" rel="noopener">Hexo官方文档</a>，还有<a href="https://material.viosey.com/docs" target="_blank" rel="noopener">Material Theme Docs</a>。</p><p>然后测试一下图片的插入。反正也只是为了用个有，就直接试试微博的图片，不去搞什么七牛或者又拍云了。</p><img src="https://wx1.sinaimg.cn/mw690/9be83a1fgy1frbcaqng1nj20u01hcu0x.jpg"><p>看来是可以用的啊。再放一张看看。</p><img src="https://wx4.sinaimg.cn/mw690/9be83a1fgy1frbcaz6534j21401z47wh.jpg"><p>嗯，应该是没问题了。</p><p>那么代码块呢。</p><pre><code class="javascript">alert(&quot;Hello World&quot;);function(a)function(b)</code></pre><pre><code class="java">System.out.println(&quot;Hello World&quot;);class A{    int i=0;    for(int j=0;j&lt;10;j++){        System.out.println(j);    }}</code></pre><pre><code>alert(&quot;Hello World&quot;)System.out.println(&quot;Hello World&quot;)</code></pre><p>直接用MarkDown的三个反向单引号也可以实现显示代码块，好像不需要使用codeblock模块嘛。</p><h4 id="好了，第一篇博客写完了。"><a href="#好了，第一篇博客写完了。" class="headerlink" title="好了，第一篇博客写完了。"></a>好了，第一篇博客写完了。</h4>]]></content>
+      
+      
+    </entry>
+    
+  
+  
+</search>
