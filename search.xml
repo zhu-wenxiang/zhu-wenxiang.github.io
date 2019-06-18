@@ -3,6 +3,15 @@
   
     
     <entry>
+      <title></title>
+      <link href="/2019/06/18/%E5%9B%BE%E7%89%87%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/"/>
+      <url>/2019/06/18/%E5%9B%BE%E7%89%87%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/</url>
+      <content type="html"><![CDATA[<h2 id="图片显示的问题"><a href="#图片显示的问题" class="headerlink" title="图片显示的问题"></a>图片显示的问题</h2><p>今天看了博客突然发现hello-world的图片无法显示了，于是再来测试一下微博是否仍然可以作为图床使用。</p><p>第一张图片 </p><img src="https://wx2.sinaimg.cn/mw690/9be83a1fgy1g4590ujrmtj21401z4wr9.jpg"><p>原来的一张图片</p><p><img src="https://wx1.sinaimg.cn/mw690/9be83a1fgy1frbcaqng1nj20u01hcu0x.jpg" alt="helloworld中的图片"></p>]]></content>
+      
+      
+    </entry>
+    
+    <entry>
       <title>Java复习</title>
       <link href="/2019/01/17/Java%E5%A4%8D%E4%B9%A0/"/>
       <url>/2019/01/17/Java%E5%A4%8D%E4%B9%A0/</url>
