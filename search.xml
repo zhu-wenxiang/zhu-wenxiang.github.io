@@ -3,11 +3,17 @@
   
     
     <entry>
-      <title></title>
+      <title>图片显示问题</title>
       <link href="/2019/06/18/%E5%9B%BE%E7%89%87%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/"/>
       <url>/2019/06/18/%E5%9B%BE%E7%89%87%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/</url>
-      <content type="html"><![CDATA[<h2 id="图片显示的问题"><a href="#图片显示的问题" class="headerlink" title="图片显示的问题"></a>图片显示的问题</h2><p>今天看了博客突然发现hello-world的图片无法显示了，于是再来测试一下微博是否仍然可以作为图床使用。</p><p>第一张图片 </p><img src="https://wx2.sinaimg.cn/mw690/9be83a1fgy1g4590ujrmtj21401z4wr9.jpg"><p>原来的一张图片</p><p><img src="https://wx1.sinaimg.cn/mw690/9be83a1fgy1frbcaqng1nj20u01hcu0x.jpg" alt="helloworld中的图片"></p>]]></content>
+      <content type="html"><![CDATA[<h1 id="Hello-world文章中的图片无法显示"><a href="#Hello-world文章中的图片无法显示" class="headerlink" title="Hello-world文章中的图片无法显示"></a>Hello-world文章中的图片无法显示</h1><p>今天打开blog看了一下，发现helloworld的文章突然无法显示了，决定再测试一下微博的是否仍然可以当作图床</p><p>第一张图片</p><img src="https://wx1.sinaimg.cn/mw690/9be83a1fgy1frbcaqng1nj20u01hcu0x.jpg"><p>今天刚传的一张图片</p><img src="https://wx2.sinaimg.cn/mw690/9be83a1fgy1g4590ujrmtj21401z4wr9.jpg">]]></content>
       
+      
+        <tags>
+            
+            <tag> blog遇到的问题 </tag>
+            
+        </tags>
       
     </entry>
     
