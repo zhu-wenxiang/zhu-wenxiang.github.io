@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zhu-wenxiang.github.io/"/>
-  <updated>2020-01-04T10:15:35.124Z</updated>
+  <updated>2020-01-20T04:26:00.567Z</updated>
   <id>https://zhu-wenxiang.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>IDEA的Main menu隐藏后如何恢复</title>
+    <link href="https://zhu-wenxiang.github.io/2020/01/18/IDEA%E7%9A%84Main-menu%E9%9A%90%E8%97%8F%E5%90%8E%E5%A6%82%E4%BD%95%E6%81%A2%E5%A4%8D/"/>
+    <id>https://zhu-wenxiang.github.io/2020/01/18/IDEA的Main-menu隐藏后如何恢复/</id>
+    <published>2020-01-18T06:21:16.000Z</published>
+    <updated>2020-01-20T04:26:00.567Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;如何恢复IDEA的Main-Menu&quot;&gt;&lt;a href=&quot;#如何恢复IDEA的Main-Menu&quot; class=&quot;headerlink&quot; title=&quot;如何恢复IDEA的Main Menu&quot;&gt;&lt;/a&gt;如何恢复IDEA的Main
+        
+      
+    
+    </summary>
+    
+      <category term="使用" scheme="https://zhu-wenxiang.github.io/categories/%E4%BD%BF%E7%94%A8/"/>
+    
+    
+      <category term="软件工具问题" scheme="https://zhu-wenxiang.github.io/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7%E9%97%AE%E9%A2%98/"/>
+    
+  </entry>
   
   <entry>
     <title>Thinking in Java Notes——没什么能逃得过反射</title>

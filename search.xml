@@ -3,6 +3,27 @@
   
     
     <entry>
+      <title>IDEA的Main menu隐藏后如何恢复</title>
+      <link href="/2020/01/18/IDEA%E7%9A%84Main-menu%E9%9A%90%E8%97%8F%E5%90%8E%E5%A6%82%E4%BD%95%E6%81%A2%E5%A4%8D/"/>
+      <url>/2020/01/18/IDEA%E7%9A%84Main-menu%E9%9A%90%E8%97%8F%E5%90%8E%E5%A6%82%E4%BD%95%E6%81%A2%E5%A4%8D/</url>
+      <content type="html"><![CDATA[<h3 id="如何恢复IDEA的Main-Menu"><a href="#如何恢复IDEA的Main-Menu" class="headerlink" title="如何恢复IDEA的Main Menu"></a>如何恢复IDEA的Main Menu</h3><p>很简单，不用去修改什么配置文件，只需要双击shift，然后在弹出的菜单里搜索Main Menu，点击off开关，打开就可以。</p>]]></content>
+      
+      <categories>
+          
+          <category> 使用 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 软件工具问题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>Thinking in Java Notes——没什么能逃得过反射</title>
       <link href="/2020/01/04/Thinking-in-Java/"/>
       <url>/2020/01/04/Thinking-in-Java/</url>
