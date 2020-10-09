@@ -44,7 +44,7 @@
     
     <title>
         
-            关于我 | 
+            归档: 2020/10 | 
         
         Jason&#39;s Blog
     </title>
@@ -213,7 +213,7 @@
     <!-- WebAPP Icons -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="application-name" content="Jason&#39;s Blog">
-    <meta name="msapplication-starturl" content="https://zhu-wenxiang.github.io/about/">
+    <meta name="msapplication-starturl" content="https://zhu-wenxiang.github.io/archives/2020/10/">
     <meta name="msapplication-navbutton-color" content="#0097A7">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Jason&#39;s Blog">
@@ -228,9 +228,9 @@
     
 
     <!-- The Open Graph protocol -->
-    <meta property="og:url" content="https://zhu-wenxiang.github.io/about/">
+    <meta property="og:url" content="https://zhu-wenxiang.github.io/archives/2020/10/">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="关于我 | Jason&#39;s Blog">
+    <meta property="og:title" content="归档: 2020/10 | Jason&#39;s Blog">
     <meta property="og:image" content="/img/favicon.png">
     <meta property="og:description" content="Jason&#39;s Blog">
     
@@ -242,7 +242,7 @@
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="https://zhu-wenxiang.github.io/about/index.html" />
+        <link rel="canonical" href="https://zhu-wenxiang.github.io/archives/2020/10/index.html" />
     
 
     <!-- Structured-data for SEO -->
@@ -277,177 +277,98 @@
                         </button>
                     
 
-                    <!-- Post TOC -->
+                    <!-- Index Module -->
+<div class="material-index mdl-grid">
+    
+    <div class="locate-thumbnail-symbol"></div>
 
+    <!-- Pin on top -->
+    
 
-<!-- Layouts -->
-
-    <!-- Post Module -->
-    <div class="material-post_container">
-
-        <div class="material-post mdl-grid">
-            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
-
-                <!-- Post Header(Thumbnail & Title) -->
-                
-    <!-- Paradox Post Header -->
+    <!-- Normal Post -->
+    
+        
+            
+                <!-- Paradox Thumbnail -->
+                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
+    <!-- Post Thumbnail -->
     
         
             <!-- Random Thumbnail -->
             <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-            <script type="text/ls-javascript" id="post-thumbnail-script">
-    var randomNum = Math.floor(Math.random() * 19 + 1);
+        
+    
 
-    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+        <!-- Post Title -->
+        <p class="article-headline-p"><a href="/2020/10/10/深入理解计算机系统补充读物/">深入理解计算机系统补充读物</a></p>
+    </div>
+
+    <!-- Post Excerpt -->
+    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
+        
+            
+        
+        &nbsp;&nbsp;&nbsp;
+        <span>
+            <a href="/2020/10/10/深入理解计算机系统补充读物/" target="_self">阅读全文</a>
+        </span>
+    </div>
+    <!-- Post_entry Info-->
+    <div id="post_entry-info">
+        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
+            <!-- Author Avatar -->
+            <div id="author-avatar">
+                <img src="/img/avatar.png" width="44px" height="44px" alt="猪头是个聪明的人物's avatar">
+            </div>
+            <div>
+                <strong>猪头是个聪明的人物</strong>
+                <span>10月 10, 2020</span>
+            </div>
+        </div>
+        <div id="post_entry-right-info">
+          
+              <!-- Category -->
+              <span class="post_entry-category">
+                  <a class="post_category-link" href="/categories/CSAPP/">CSAPP</a>
+              </span>
+            
+
+            
+
+            
+
+            <!-- Post Views -->
+            <span class="post_entry-views">
+            </span>
+        </div>
+    </div>
+</div>
+
+            
+            
+        
+    
+
+    
+
+    
+        <script type="text/ls-javascript" id="thumbnail-script">
+    var randomNum;
+
+    var locatePost = $('.locate-thumbnail-symbol').next();
+    for(var i = 0; i < 10; i++) {
+        randomNum = Math.floor(Math.random() * 19 + 1);
+
+        locatePost.children('.post_thumbnail-random').attr('id', 'random_thumbnail-'+randomNum);
+        locatePost.children('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
     $('.post_thumbnail-random').addClass('lazy');
+
+        locatePost = locatePost.next();
+    }
 </script>
 
-        
-    
-            <p class="article-headline-p">
-                关于我
-            </p>
-        </div>
-
-
-
-
-
-                
-                    <!-- Paradox Post Info -->
-                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
-
-    <!-- Author Avatar -->
-    <div id="author-avatar">
-        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
-    </div>
-    <!-- Author Name & Date -->
-    <div>
-        <strong>猪头是个聪明的人物</strong>
-        <span>5月 15, 2018</span>
-    </div>
-
-    <div class="section-spacer"></div>
-
-    <!-- Favorite -->
-    <!--
-        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
-            <i class="material-icons" role="presentation">favorite</i>
-            <span class="visuallyhidden">favorites</span>
-        </button>
-    -->
-
-    <!-- Qrcode -->
-    
-
-    <!-- Tags (bookmark) -->
-    
-
-    <!-- Share -->
-    
-        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-    <i class="material-icons" role="presentation">share</i>
-    <span class="visuallyhidden">share</span>
-</button>
-<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
-    
-
-    
-
-    <!-- Share Weibo -->
-    
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=关于我&url=https://zhu-wenxiang.github.io/about/index.html&pic=https://zhu-wenxiang.github.io/img/favicon.png&searchPic=false&style=simple" target="_blank">
-            <li class="mdl-menu__item">
-                分享到微博
-            </li>
-        </a>
-    
-
-    <!-- Share Twitter -->
-    
-
-    <!-- Share Facebook -->
-    
-
-    <!-- Share Google+ -->
-    
-        <a class="post_share-link" href="https://plus.google.com/share?url=https://zhu-wenxiang.github.io/about/index.html" target="_blank">
-            <li class="mdl-menu__item">
-                分享到 Google+
-            </li>
-        </a>
-    
-
-    <!-- Share LinkedIn -->
-    
-        <a class="post_share-link" href="https://www.linkedin.com/shareArticle?mini=true&url=https://zhu-wenxiang.github.io/about/index.html&title=关于我" target="_blank">
-            <li class="mdl-menu__item">
-                分享到 LinkedIn
-            </li>
-        </a>
-    
-
-    <!-- Share QQ -->
-    
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=Jason&#39;s Blog&title=关于我&summary=Jason&#39;s Blog&pics=https://zhu-wenxiang.github.io/img/favicon.png&url=https://zhu-wenxiang.github.io/about/index.html" target="_blank">
-            <li class="mdl-menu__item">
-                分享到 QQ
-            </li>
-        </a>
-    
-
-    <!-- Share Telegram -->
-    
-        <a class="post_share-link" href="https://telegram.me/share/url?url=https://zhu-wenxiang.github.io/about/index.html&text=关于我" target="_blank">
-            <li class="mdl-menu__item">
-                分享到 Telegram
-            </li>
-        </a>
-    
-</ul>
-
     
 </div>
-
-                
-
-                <!-- Post Content -->
-                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
-    
-        <h2 id="你好"><a href="#你好" class="headerlink" title="你好"></a>你好</h2><p>我是Jason，真名嘛。。。。朱某某，嘻嘻嘻。也可以叫我—猪头是个聪明的人物。这个是我听《猪头不是猪》这首歌的时候偶然想到的，很喜欢。</p>
-<h2 id="博客的用途"><a href="#博客的用途" class="headerlink" title="博客的用途"></a>博客的用途</h2><p>年纪渐长，没能挣到小目标记性却越来越差，所以博客主要就是用来记录我平时遇到的一些问题以及这些问题的解决方案。还有一些学习总结什么的。基本不会涉及个人心情、感悟之类的东西，毕竟已经过了那个喜欢感慨的年纪。而且这个博客是挂在全球最大同性交友社区上的，就主要用在自学上吧。以后有机会的话自己买个腾讯云的服务器然后写个自己设计的博客网站挂出来，可以记录一些自己生活之类的。</p>
-<h2 id="说两句"><a href="#说两句" class="headerlink" title="说两句"></a>说两句</h2><p>搞这个博客的时候我还是个无业游民，很久很久没有工作了，一直在边打零工边自学，不知道以后会怎么样，和其他人也没什么联系。所以就不像其他大牛那样放个友链申请的链接了。博客所附的邮箱查看频率很高，所以，你懂的。。。。</p>
-<h4 id="嗯，就这样吧！"><a href="#嗯，就这样吧！" class="headerlink" title="嗯，就这样吧！"></a>嗯，就这样吧！</h4>
-        
-    
-
-    
-</div>
-
-
-                
-
-                <!-- Post Comments -->
-                
-                    
-                
-            </div>
-
-            <!-- Post Prev & Next Nav -->
-            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
-    <!-- Prev Nav -->
-    
-
-    <!-- Section Spacer -->
-    <div class="section-spacer"></div>
-
-    <!-- Next Nav -->
-    
-</nav>
-
-        </div>
-    </div>
-
 
 
                     
@@ -638,6 +559,14 @@ It will not impact the appearance and can give developers a lot of support :)
 </aside>
 
                     
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
 
                     
 

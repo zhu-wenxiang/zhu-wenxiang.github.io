@@ -3,6 +3,27 @@
   
     
     <entry>
+      <title>深入理解计算机系统补充读物</title>
+      <link href="/2020/10/10/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E8%A1%A5%E5%85%85%E8%AF%BB%E7%89%A9/"/>
+      <url>/2020/10/10/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E8%A1%A5%E5%85%85%E8%AF%BB%E7%89%A9/</url>
+      <content type="html"><![CDATA[<h1 id="深入理解计算机系统补充读物"><a href="#深入理解计算机系统补充读物" class="headerlink" title="深入理解计算机系统补充读物"></a>深入理解计算机系统补充读物</h1><ol><li>体系结构宗师 David Patterson写的《计算机组织与设计：硬件/软件接口》和《计算机体系架构：量化研究方法》，前一本书俗称算盘书，目前的第5版是RISC-V版本的，推荐原因：补充本书的第4章：处理器体系结构。</li><li>已故知名技术作家Richard Stevens写的《UNIX环境高级编程》，简称APUE，学习UNIX/LINUX系统编程的不二之选，推荐原因：补充本书的第8，10，11，12章内容。</li><li>Redhat公司的Ulrich Drepper写的文章《What Every Programmer Should Know About Memory》，全面系统地介绍了程序如何使用内存以及应该怎么做内存优化， 推荐原因：补充本书的第6章：存储器层次结构</li><li>俞甲子和石凡一起写的《程序员的自我修养:链接、装载与库》，介绍系统软件的运行机制和原理，讲解应用程序在编译、链接和运行时刻所发生的各种事项，推荐原因：补充本书的第7章：链接。</li></ol>]]></content>
+      
+      <categories>
+          
+          <category> CSAPP </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 读物 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>IDEA的Main menu隐藏后如何恢复</title>
       <link href="/2020/01/18/IDEA%E7%9A%84Main-menu%E9%9A%90%E8%97%8F%E5%90%8E%E5%A6%82%E4%BD%95%E6%81%A2%E5%A4%8D/"/>
       <url>/2020/01/18/IDEA%E7%9A%84Main-menu%E9%9A%90%E8%97%8F%E5%90%8E%E5%A6%82%E4%BD%95%E6%81%A2%E5%A4%8D/</url>

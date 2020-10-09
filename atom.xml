@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zhu-wenxiang.github.io/"/>
-  <updated>2020-01-20T04:26:00.567Z</updated>
+  <updated>2020-10-09T18:28:45.171Z</updated>
   <id>https://zhu-wenxiang.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>深入理解计算机系统补充读物</title>
+    <link href="https://zhu-wenxiang.github.io/2020/10/10/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E8%A1%A5%E5%85%85%E8%AF%BB%E7%89%A9/"/>
+    <id>https://zhu-wenxiang.github.io/2020/10/10/深入理解计算机系统补充读物/</id>
+    <published>2020-10-09T18:12:06.000Z</published>
+    <updated>2020-10-09T18:28:45.171Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;深入理解计算机系统补充读物&quot;&gt;&lt;a href=&quot;#深入理解计算机系统补充读物&quot; class=&quot;headerlink&quot; title=&quot;深入理解计算机系统补充读物&quot;&gt;&lt;/a&gt;深入理解计算机系统补充读物&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;体系结构宗师 David
+        
+      
+    
+    </summary>
+    
+      <category term="CSAPP" scheme="https://zhu-wenxiang.github.io/categories/CSAPP/"/>
+    
+    
+      <category term="读物" scheme="https://zhu-wenxiang.github.io/tags/%E8%AF%BB%E7%89%A9/"/>
+    
+  </entry>
   
   <entry>
     <title>IDEA的Main menu隐藏后如何恢复</title>
