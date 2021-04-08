@@ -240,7 +240,7 @@
 
     
         <meta property="article:published_time" content="Tue Apr 06 2021 21:48:54 GMT+0800">
-        <meta property="article:modified_time" content="Thu Apr 08 2021 23:54:14 GMT+0800">
+        <meta property="article:modified_time" content="Fri Apr 09 2021 00:02:08 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -478,16 +478,10 @@
 <li>“a”,表示使用a,b,c,d……来作为顺序的标志；</li>
 <li>“A”，使用大写的英文字母来标记顺序；</li>
 <li>“i”，使用小写的罗马数字来标记；</li>
-<li>“I”，使用大写的罗马数字来标记。</li>
+<li>“I”，使用大写的罗马数字来标记。<br><br><h3 id="无序列表标签（ul标签）"><a href="#无序列表标签（ul标签）" class="headerlink" title="无序列表标签（ul标签）"></a>无序列表标签（<code>ul</code>标签）</h3><code>ul</code>标签用来只是无序列表，无序列表内的每个条目使用<code>li</code>标签来包裹。<br>这里要注意的是，<code>ul</code>标签是没有用来修改样式的属性的，也就是说<code>ul</code>标签自带的只有实心点来指示条目，如果想要修改样式，就需要使用<code>list-style-type</code>这一个CSS property来修改。<h3 id="li元素的使用"><a href="#li元素的使用" class="headerlink" title="li元素的使用"></a><code>li</code>元素的使用</h3><code>li</code>元素主要用于指示列表中的一个item。需要注意的是在有序列表<code>ol</code>中的<code>li</code>可以通过属性<code>value</code>的值来修改当前的计数器，后面的条目会在当前值的基础上往上加。例如：<br>&lt;li value=”4”&gt;mangoes&lt;/li&gt;<br>，那么后面的就是5，6……了。<h3 id="创建描述性列表"><a href="#创建描述性列表" class="headerlink" title="创建描述性列表"></a>创建描述性列表</h3>所谓的描述性列表就是列表的每一个条目包含了条目名称和条目定义两个内容。描述性列表所对应的标签是<code>dl</code>（description list），<code>dl</code>中的每一个条目以term/description grouping的形式存在。指示term的标签是<code>dt</code>；指示description的标签是<code>dd</code>。这三个标签都没有local attributes。<br>一个<code>dt</code>下可以对应多个<code>dd</code>，<code>dd</code>内也可以使用各种其他标签，诸如<code>i</code>、<code>b</code>等。<h3 id="创建自定义的列表"><a href="#创建自定义的列表" class="headerlink" title="创建自定义的列表"></a>创建自定义的列表</h3>自定义列表是使用无序列表（unordered list）<code>ul</code>，然后配合CSS样式表中的<code>counter</code>特性和<code>:before</code>，<code>:after</code>这种选择器来完成。具体将在第17章讲解。<h2 id="使用图表（figures）"><a href="#使用图表（figures）" class="headerlink" title="使用图表（figures）"></a>使用图表（figures）</h2>传统的<code>figure</code>标签定义的就是图表（diagram or illustration），HTML5中定义的figure其语义化意义更加宽泛，只要是和文章主线相关的一个独立的单独单元就可以。也就是说，代码段或者一些输出，图片等，都可以使用<code>figure</code>标签来展示。<br><code>figure</code>标签有一个可选的内部元素<code>figcaption</code>，该标签主要用来包裹图表的标题（caption）。</li>
 </ul>
 </li>
 </ul>
-<hr>
-<h3 id="无序列表标签（ul标签）"><a href="#无序列表标签（ul标签）" class="headerlink" title="无序列表标签（ul标签）"></a>无序列表标签（<code>ul</code>标签）</h3><p><code>ul</code>标签用来只是无序列表，无序列表内的每个条目使用<code>li</code>标签来包裹。<br>这里要注意的是，<code>ul</code>标签是没有用来修改样式的属性的，也就是说<code>ul</code>标签自带的只有实心点来指示条目，如果想要修改样式，就需要使用<code>list-style-type</code>这一个CSS property来修改。</p>
-<h3 id="li元素的使用"><a href="#li元素的使用" class="headerlink" title="li元素的使用"></a><code>li</code>元素的使用</h3><p><code>li</code>元素主要用于指示列表中的一个item。需要注意的是在有序列表<code>ol</code>中的<code>li</code>可以通过属性<code>value</code>的值来修改当前的计数器，后面的条目会在当前值的基础上往上加。例如：<li value="4">mangoes</li>，那么后面的就是5，6……了。</p>
-<h3 id="创建描述性列表"><a href="#创建描述性列表" class="headerlink" title="创建描述性列表"></a>创建描述性列表</h3><p>所谓的描述性列表就是列表的每一个条目包含了条目名称和条目定义两个内容。描述性列表所对应的标签是<code>dl</code>（description list），<code>dl</code>中的每一个条目以term/description grouping的形式存在。指示term的标签是<code>dt</code>；指示description的标签是<code>dd</code>。这三个标签都没有local attributes。<br>一个<code>dt</code>下可以对应多个<code>dd</code>，<code>dd</code>内也可以使用各种其他标签，诸如<code>i</code>、<code>b</code>等。</p>
-<h3 id="创建自定义的列表"><a href="#创建自定义的列表" class="headerlink" title="创建自定义的列表"></a>创建自定义的列表</h3><p>自定义列表是使用无序列表（unordered list）<code>ul</code>，然后配合CSS样式表中的<code>counter</code>特性和<code>:before</code>，<code>:after</code>这种选择器来完成。具体将在第17章讲解。</p>
-<h2 id="使用图表（figures）"><a href="#使用图表（figures）" class="headerlink" title="使用图表（figures）"></a>使用图表（figures）</h2><p>传统的<code>figure</code>标签定义的就是图表（diagram or illustration），HTML5中定义的figure其语义化意义更加宽泛，只要是和文章主线相关的一个独立的单独单元就可以。也就是说，代码段或者一些输出，图片等，都可以使用<code>figure</code>标签来展示。<br><code>figure</code>标签有一个可选的内部元素<code>figcaption</code>，该标签主要用来包裹图表的标题（caption）。</p>
 
         
     
