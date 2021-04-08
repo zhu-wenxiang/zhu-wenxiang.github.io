@@ -240,7 +240,7 @@
 
     
         <meta property="article:published_time" content="Tue Apr 06 2021 21:48:54 GMT+0800">
-        <meta property="article:modified_time" content="Fri Apr 09 2021 00:43:35 GMT+0800">
+        <meta property="article:modified_time" content="Fri Apr 09 2021 00:51:25 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -471,7 +471,8 @@
 <h2 id="添加主题分隔"><a href="#添加主题分隔" class="headerlink" title="添加主题分隔"></a>添加主题分隔</h2><p><code>hr</code>元素代表段落级别的主题分隔，样式上的表现是一条水平分隔线。<code>hr</code>在HTML5中代表转向另一个相关点（topic）。<br><code>hr</code>元素的有效使用在文档明细中的定义比较模糊，只有两个例子，一个是故事中的场景转换；另一个是在一本相关书籍中，在一个section内，两个topic之间的转变。</p>
 <h2 id="使用List来将内容分组"><a href="#使用List来将内容分组" class="headerlink" title="使用List来将内容分组"></a>使用List来将内容分组</h2><p>HTML5中定义了很多元素来创建列表，主要有无序列表，有序列表和描述性列表。</p>
 <h3 id="有序列表-ol元素"><a href="#有序列表-ol元素" class="headerlink" title="有序列表(ol元素)"></a>有序列表(<code>ol</code>元素)</h3><p>定义有序列表（ordered list）的标签是<code>ol</code>，内部每一个条目是使用<code>li</code>来包裹。<br>要想修改有序列表的一些参数，主要是通过各种属性来修改。</p>
-<p><ul><li> 修改第一个元素的顺序值（ordinal value）——使用<code>start</code>属性，它的值将会被作为第一个元素的序数值。如果该值未被指定，那么有序列表默认从1开始计数。</li></ul></p>
+<p><ul></ul></p>
+<p><li> 修改第一个元素的顺序值（ordinal value）——使用<code>start</code>属性，它的值将会被作为第一个元素的序数值。如果该值未被指定，那么有序列表默认从1开始计数。</li></p>
 <p><li> <code>type</code>可以指定列表条目(<code>li</code>)的计数标志，共有以下几种可以选择：<br>    <ul><li>“1”（默认值），代表使用数字;</li><br>    <li>“a”,表示使用a,b,c,d……来作为顺序的标志；</li><br>    <li>“A”，使用大写的英文字母来标记顺序；</li><br>    <li>“i”，使用小写的罗马数字来标记；</li><br>    <li>“I”，使用大写的罗马数字来标记。</li></ul></li></p>
 <h3 id="无序列表标签（ul标签）"><a href="#无序列表标签（ul标签）" class="headerlink" title="无序列表标签（ul标签）"></a>无序列表标签（<code>ul</code>标签）</h3><p><code>ul</code>标签用来只是无序列表，无序列表内的每个条目使用<code>li</code>标签来包裹。<br>这里要注意的是，<code>ul</code>标签是没有用来修改样式的属性的，也就是说<code>ul</code>标签自带的只有实心点来指示条目，如果想要修改样式，就需要使用<code>list-style-type</code>这一个CSS property来修改。</p>
 <h3 id="li元素的使用"><a href="#li元素的使用" class="headerlink" title="li元素的使用"></a><code>li</code>元素的使用</h3><p><code>li</code>元素主要用于指示列表中的一个item。需要注意的是在有序列表<code>ol</code>中的<code>li</code>可以通过属性<code>value</code>的值来修改当前的计数器，后面的条目会在当前值的基础上往上加。例如：<br>&lt;li value=”4”&gt;mangoes&lt;/li&gt;，那么后面的就是5，6……了。</p>
