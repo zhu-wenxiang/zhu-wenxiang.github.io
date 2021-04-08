@@ -44,7 +44,7 @@
     
     <title>
         
-            永葆青春 | 
+            HTML5权威指南 Chapter 9 Grouping Content | 
         
         Jason&#39;s Blog
     </title>
@@ -55,7 +55,7 @@
 
     <meta name="format-detection" content="telephone=no"/>
     <meta name="description" itemprop="description" content="Jason&#39;s Blog">
-    <meta name="keywords" content=",书籍">
+    <meta name="keywords" content=",HTML5权威指南">
     <meta name="theme-color" content="#0097A7">
 
     <!-- Disable Fucking Bloody Baidu Tranformation -->
@@ -216,7 +216,7 @@
     <!-- WebAPP Icons -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="application-name" content="Jason&#39;s Blog">
-    <meta name="msapplication-starturl" content="https://zhu-wenxiang.github.io/2018/12/20/永葆青春/">
+    <meta name="msapplication-starturl" content="https://zhu-wenxiang.github.io/2021/04/06/Chapter-9-Grouping-Content/">
     <meta name="msapplication-navbutton-color" content="#0097A7">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Jason&#39;s Blog">
@@ -231,16 +231,16 @@
     
 
     <!-- The Open Graph protocol -->
-    <meta property="og:url" content="https://zhu-wenxiang.github.io/2018/12/20/永葆青春/">
+    <meta property="og:url" content="https://zhu-wenxiang.github.io/2021/04/06/Chapter-9-Grouping-Content/">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="永葆青春 | Jason&#39;s Blog">
+    <meta property="og:title" content="HTML5权威指南 Chapter 9 Grouping Content | Jason&#39;s Blog">
     <meta property="og:image" content="/img/favicon.png">
     <meta property="og:description" content="Jason&#39;s Blog">
-    <meta property="og:article:tag" content="书籍"> 
+    <meta property="og:article:tag" content="HTML5权威指南"> 
 
     
-        <meta property="article:published_time" content="Thu Dec 20 2018 10:05:20 GMT+0800">
-        <meta property="article:modified_time" content="Thu Dec 20 2018 11:32:16 GMT+0800">
+        <meta property="article:published_time" content="Tue Apr 06 2021 21:48:54 GMT+0800">
+        <meta property="article:modified_time" content="Thu Apr 08 2021 23:11:54 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -248,7 +248,7 @@
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="https://zhu-wenxiang.github.io/2018/12/20/永葆青春/index.html" />
+        <link rel="canonical" href="https://zhu-wenxiang.github.io/2021/04/06/Chapter-9-Grouping-Content/index.html" />
     
 
     <!-- Structured-data for SEO -->
@@ -306,6 +306,15 @@
     <!-- Left aligned menu below button -->
     
     
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#理解为什么要给内容分组"><span class="post-toc-number">1.</span> <span class="post-toc-text">理解为什么要给内容分组</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#创建段落（paragraphs）"><span class="post-toc-number">2.</span> <span class="post-toc-text">创建段落（paragraphs）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用div元素"><span class="post-toc-number">3.</span> <span class="post-toc-text">使用div元素</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#保留内容自身的格式"><span class="post-toc-number">4.</span> <span class="post-toc-text">保留内容自身的格式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#从其他源引用内容"><span class="post-toc-number">5.</span> <span class="post-toc-text">从其他源引用内容</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#添加主题分隔"><span class="post-toc-number">6.</span> <span class="post-toc-text">添加主题分隔</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用List来将内容分组"><span class="post-toc-number">7.</span> <span class="post-toc-text">使用List来将内容分组</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#有序列表-ol元素"><span class="post-toc-number">7.1.</span> <span class="post-toc-text">有序列表(ol元素)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#无序列表标签（ul标签）"><span class="post-toc-number">7.2.</span> <span class="post-toc-text">无序列表标签（ul标签）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#li元素的使用"><span class="post-toc-number">7.3.</span> <span class="post-toc-text">li元素的使用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#创建描述性列表"><span class="post-toc-number">7.4.</span> <span class="post-toc-text">创建描述性列表</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#创建自定义的列表"><span class="post-toc-number">7.5.</span> <span class="post-toc-text">创建自定义的列表</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用图表（figures）"><span class="post-toc-number">7.6.</span> <span class="post-toc-text">使用图表（figures）</span></a></li></ol></li></ol>
+    </ul>
+    
 
 
 
@@ -335,7 +344,7 @@
         
     
             <p class="article-headline-p">
-                永葆青春
+                HTML5权威指南 Chapter 9 Grouping Content
             </p>
         </div>
 
@@ -354,7 +363,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>猪头是个聪明的人物</strong>
-        <span>12月 20, 2018</span>
+        <span>4月 06, 2021</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -378,7 +387,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/书籍/">书籍</a>
+        <a class="post_tag-link" href="/tags/HTML5权威指南/">HTML5权威指南</a>
     </ul>
     
 
@@ -395,7 +404,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=永葆青春&url=https://zhu-wenxiang.github.io/2018/12/20/永葆青春/index.html&pic=https://zhu-wenxiang.github.io/img/favicon.png&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=HTML5权威指南 Chapter 9 Grouping Content&url=https://zhu-wenxiang.github.io/2021/04/06/Chapter-9-Grouping-Content/index.html&pic=https://zhu-wenxiang.github.io/img/favicon.png&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -410,7 +419,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=https://zhu-wenxiang.github.io/2018/12/20/永葆青春/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://zhu-wenxiang.github.io/2021/04/06/Chapter-9-Grouping-Content/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -419,7 +428,7 @@
 
     <!-- Share LinkedIn -->
     
-        <a class="post_share-link" href="https://www.linkedin.com/shareArticle?mini=true&url=https://zhu-wenxiang.github.io/2018/12/20/永葆青春/index.html&title=永葆青春" target="_blank">
+        <a class="post_share-link" href="https://www.linkedin.com/shareArticle?mini=true&url=https://zhu-wenxiang.github.io/2021/04/06/Chapter-9-Grouping-Content/index.html&title=HTML5权威指南 Chapter 9 Grouping Content" target="_blank">
             <li class="mdl-menu__item">
                 分享到 LinkedIn
             </li>
@@ -428,7 +437,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=Jason&#39;s Blog&title=永葆青春&summary=Jason&#39;s Blog&pics=https://zhu-wenxiang.github.io/img/favicon.png&url=https://zhu-wenxiang.github.io/2018/12/20/永葆青春/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=Jason&#39;s Blog&title=HTML5权威指南 Chapter 9 Grouping Content&summary=Jason&#39;s Blog&pics=https://zhu-wenxiang.github.io/img/favicon.png&url=https://zhu-wenxiang.github.io/2021/04/06/Chapter-9-Grouping-Content/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -437,7 +446,7 @@
 
     <!-- Share Telegram -->
     
-        <a class="post_share-link" href="https://telegram.me/share/url?url=https://zhu-wenxiang.github.io/2018/12/20/永葆青春/index.html&text=永葆青春" target="_blank">
+        <a class="post_share-link" href="https://telegram.me/share/url?url=https://zhu-wenxiang.github.io/2021/04/06/Chapter-9-Grouping-Content/index.html&text=HTML5权威指南 Chapter 9 Grouping Content" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Telegram
             </li>
@@ -453,19 +462,26 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <p>“码农翻身”公众号翻译了一篇文章，<a href="https://sizovs.net/2018/12/17/stop-learning-frameworks/" target="_blank" rel="noopener">别再学习框架了–Eduard Sizovs</a>里面提到了一些能够永保青春的书籍，记录下来，不然微信里点了收藏也不看，还是这个方便。</p>
+        <p>This chapter is for the elements that could group related content together.这些元素能够给予文档一个整体的架构，并且可以给一些内容进一步的意义。</p>
+<h2 id="理解为什么要给内容分组"><a href="#理解为什么要给内容分组" class="headerlink" title="理解为什么要给内容分组"></a>理解为什么要给内容分组</h2><p>浏览器在呈现HTML文档的时候，会把内容中的多行空白压缩成一个空格，这样就把浏览器所呈现的布局和HTML文档源码布局给区分开来了。正因为HTML源码中的结构无法影响浏览器所呈现出来的网页页面，我们才需要使用Grouping Elements来给文档构建起架构来。本章所给出的标签可以让你将相连区块的内容聚成各自的小组。</p>
+<h2 id="创建段落（paragraphs）"><a href="#创建段落（paragraphs）" class="headerlink" title="创建段落（paragraphs）"></a>创建段落（paragraphs）</h2><p>p 标签<code>&lt;p&gt;</code>，主要用于包裹某<strong>一个</strong>论点或者想法的几句话，当然，有时候也可以用于某个主题（theme）下的几个论点或者是想法。<br>一个<code>p</code>标签内的空白行仍然会被折叠成<strong>单个空格字符</strong></p>
+<h2 id="使用div元素"><a href="#使用div元素" class="headerlink" title="使用div元素"></a>使用<code>div</code>元素</h2><p><code>div</code>元素并没有特别的意义，当其他HTML元素无法满足你的需求时，可以使用<code>div</code>。在使用时，通常通过一些全局属性（所有标签都有的属性）来给<code>div</code>加上意义，一般是<code>class</code>或者<code>id</code>这种属性。<br>使用自定义架构的一个问题就是自定义的部分其意义对于自己来说是熟悉的，但是很有可能看的人看不懂，不利于第三方处理文档。<br>当一组或者多个段落都需要使用同一种样式的时候，可以使用<code>div</code>来包裹，然后使用class等熟悉定义样式，由于父子元素在样式上的继承特性，其所包含的子元素可以直接应用<code>div</code>所有的部分样式。</p>
+<h2 id="保留内容自身的格式"><a href="#保留内容自身的格式" class="headerlink" title="保留内容自身的格式"></a>保留内容自身的格式</h2><p><code>pre</code>标签能够保留该标签所包含内容自带的格式。该标签内的HTML源码有多少空行他就会保留多少空行。由于该标签无法让你通过标签和样式来控制显示效果，所以使用的时候要谨慎。<br>比较典型的应用就是使用<code>pre</code>标签来保存<code>code</code>标签所包含的内容，由于<code>code</code>标签内的内容通常需要包含一些自带的样式，那些代码、显示结果之间的空行和缩进是不能被省略的，所以通常这些内容需要使用<code>pre</code></p>
+<h2 id="从其他源引用内容"><a href="#从其他源引用内容" class="headerlink" title="从其他源引用内容"></a>从其他源引用内容</h2><p><code>blockquote</code>标签主要用于引用其他地方的一块内容。该元素和第8章所讲的<code>q</code>标签比较相似，只是<code>blockquote</code>主要用于大块内容的引用。<code>cite</code>属性用来指定引用内容的URL（就是该段引用内容的出处文档地址）。<br>这里值得注意的是<code>blockquote</code>并不会保留引用内容的格式，如果需要分段或者分割线的话，就要使用对应的<code>p</code>、<code>hr</code>这些标签。</p>
+<h2 id="添加主题分隔"><a href="#添加主题分隔" class="headerlink" title="添加主题分隔"></a>添加主题分隔</h2><p><code>hr</code>元素代表段落级别的主题分隔，样式上的表现是一条水平分隔线。<code>hr</code>在HTML5中代表转向另一个相关点（topic）。<br><code>hr</code>元素的有效使用在文档明细中的定义比较模糊，只有两个例子，一个是故事中的场景转换；另一个是在一本相关书籍中，在一个section内，两个topic之间的转变。</p>
+<h2 id="使用List来将内容分组"><a href="#使用List来将内容分组" class="headerlink" title="使用List来将内容分组"></a>使用List来将内容分组</h2><p>HTML5中定义了很多元素来创建列表，主要有无序列表，有序列表和描述性列表。</p>
+<h3 id="有序列表-ol元素"><a href="#有序列表-ol元素" class="headerlink" title="有序列表(ol元素)"></a>有序列表(<code>ol</code>元素)</h3><p>定义有序列表（ordered list）的标签是<code>ol</code>，内部每一个条目是使用<code>li</code>来包裹。<br>要想修改有序列表的一些参数，主要是通过各种属性来修改。</p>
 <ul>
-<li>《程序员的修炼之道》</li>
-<li>《代码整洁之道》</li>
-<li>《程序员的职业素养》</li>
-<li>《领域驱动设计》</li>
-<li>《测试驱动的面向对象软件开发》</li>
-<li>《持续交付》</li>
-<li>《深入理解操作系统》—CSAPP</li>
+<li>修改第一个元素的顺序值（ordinal value）——使用<code>start</code>属性，它的值将会被作为第一个元素的序数值。如果该值未被指定，那么有序列表默认从1开始计数。</li>
+<li><code>type</code>可以指定列表条目(<code>li</code>)的计数标志，共有以下几种可以选择：<ul>
+<li>“1”（默认值），代表使用数字；</li>
+<li>“a”,表示使用a,b,c,d……来作为顺序的标志；</li>
+<li>“A”，使用大写的英文字母来标记顺序；</li>
+<li>“i”，使用小写的罗马数字来标记；</li>
+<li>“I”，使用大写的罗马数字来标记。<h3 id="无序列表标签（ul标签）"><a href="#无序列表标签（ul标签）" class="headerlink" title="无序列表标签（ul标签）"></a>无序列表标签（<code>ul</code>标签）</h3><code>ul</code>标签用来只是无序列表，无序列表内的每个条目使用<code>li</code>标签来包裹。<br>这里要注意的是，<code>ul</code>标签是没有用来修改样式的属性的，也就是说<code>ul</code>标签自带的只有实心点来指示条目，如果想要修改样式，就需要使用<code>list-style-type</code>这一个CSS property来修改。<h3 id="li元素的使用"><a href="#li元素的使用" class="headerlink" title="li元素的使用"></a><code>li</code>元素的使用</h3><code>li</code>元素主要用于指示列表中的一个item。需要注意的是在有序列表<code>ol</code>中的<code>li</code>可以通过属性<code>value</code>的值来修改当前的计数器，后面的条目会在当前值的基础上往上加。例如：</li><li value="4">mangoes</li>，那么后面的就是5，6……了。<h3 id="创建描述性列表"><a href="#创建描述性列表" class="headerlink" title="创建描述性列表"></a>创建描述性列表</h3>所谓的描述性列表就是列表的每一个条目包含了条目名称和条目定义两个内容。描述性列表所对应的标签是<code>dl</code>（description list），<code>dl</code>中的每一个条目以term/description grouping的形式存在。指示term的标签是<code>dt</code>；指示description的标签是<code>dd</code>。这三个标签都没有local attributes。<br>一个<code>dt</code>下可以对应多个<code>dd</code>，<code>dd</code>内也可以使用各种其他标签，诸如<code>i</code>、<code>b</code>等。<h3 id="创建自定义的列表"><a href="#创建自定义的列表" class="headerlink" title="创建自定义的列表"></a>创建自定义的列表</h3>自定义列表是使用无序列表（unordered list）<code>ul</code>，然后配合CSS样式表中的<code>counter</code>特性和<code>:before</code>，<code>:after</code>这种选择器来完成。具体将在第17章讲解。<h3 id="使用图表（figures）"><a href="#使用图表（figures）" class="headerlink" title="使用图表（figures）"></a>使用图表（figures）</h3>传统的<code>figure</code>标签定义的就是图表（diagram or illustration），HTML5中定义的figure其语义化意义更加宽泛，只要是和文章主线相关的一个独立的单独单元就可以。也就是说，代码段或者一些输出，图片等，都可以使用<code>figure</code>标签来展示。<br><code>figure</code>标签有一个可选的内部元素<code>figcaption</code>，该标签主要用来包裹图表的标题（caption）。</ul></li>
 </ul>
-<p>Markdown语法参考网站，还是写一下方便，省的每次找：<a href="https://coding.net/help/doc/project/markdown.html#i-4" target="_blank" rel="noopener">Markdown语法介绍</a>，还有，<a href="https://www.markdownguide.org/extended-syntax#tables" target="_blank" rel="noopener">Markdown Guide</a>，<a href="http://www.markdown.cn/" target="_blank" rel="noopener">Markdown教程</a>。Hexo官方文档也同样重要<a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">文档|Hexo</a>。</p>
-<hr>
-<p>记住在填上面tags等那些模板参数的时候，一定要先打一个空格，否则hexo server命令后会报错。</p>
+
+
 
         
     
@@ -486,21 +502,13 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/2019/01/17/Java复习/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/2018/05/12/hello-world/" id="post_nav-older" class="next-content">
+        <a href="/2021/04/02/hexo-deploy时无需一直输入用户名密码/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
