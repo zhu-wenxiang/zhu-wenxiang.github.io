@@ -3,6 +3,27 @@
   
     
     <entry>
+      <title>HTML5权威指南Chapter 10 Creating Section</title>
+      <link href="/2021/04/09/Chapter-10-Creating-Section/"/>
+      <url>/2021/04/09/Chapter-10-Creating-Section/</url>
+      <content type="html"><![CDATA[<p>本章所介绍的标签主要作用：分隔内容，从而让每一个主题或者概念（topic or concept）能够相互独立。本章大多数的标签都是新的，而且充分体现了意义与样式相分离的思想，所以大部分标签是不带任何样式效果的。</p><h2 id="使用基本的标题标签"><a href="#使用基本的标题标签" class="headerlink" title="使用基本的标题标签"></a>使用基本的标题标签</h2><p>Headings标签的父元素不能是<code>address</code>标签的子元素或者<code>address</code>。<br>标题主要用来分隔不同的主题（topic）。由于读者大多对标题的功能比较熟悉，尽量不要给标题赋予其他的功能，以免造成困扰。</p><h2 id="隐藏副标题"><a href="#隐藏副标题" class="headerlink" title="隐藏副标题"></a>隐藏副标题</h2><p>在HTML5中，如果要使用副标题，可以使用<code>hgroup</code>，在<code>hgroup</code>中可以放置多个标题，同时文档的大纲中只会显示<code>hgroup</code>的第一个子标题。<br><code>hgroup</code>在标题层级中的地位也是由第一个子标题来决定（如果第一个子标题是<code>h2</code>，则整个<code>hgroup</code>在标题层级中就属于<code>h2</code>）</p><h2 id="创建区块（sections）"><a href="#创建区块（sections）" class="headerlink" title="创建区块（sections）"></a>创建区块（sections）</h2><p>本身标题就已经把内容分区（section）了，而<code>section</code>标签是可以手动分区的。使用<code>section</code>标签可以让文档的分区与标题标签相分离。<code>section</code>标签在使用的时候并没有明确的规则与要求，要注意的是<code>section</code>标签所包裹的内容一般都是正文内容（大纲中会列出的内容）。<br><code>section</code>使用的注意点在于其内部的标题标签样式。在<code>section</code>标签嵌套使用的时候，同级的标题标签会拥有不同的样式，父元素<code>section</code>中的<code>h1</code>标题所包含的内容要比其子元素<code>section</code>中的<code>h1</code>在显示样式上高一个级别。当然，这些标题标签的层级关系浏览器会自动处理，不需要手动定义样式。<br>在这里要提出的是：《HTML5权威指南》这本书在本章的Creating Sections这一节描述道欧朋（Opera）浏览器中，父子<code>section</code>元素中的<code>h1</code>是相同的显示效果，在<time datetime="2021-4-11">2021年4月</time>测试，现在子元素中的<code>h1</code>样式已经会发生改变，欧朋浏览器在展示的时候也会和其他浏览器一样低一个等级。</p><h2 id="header和footer元素的使用"><a href="#header和footer元素的使用" class="headerlink" title="header和footer元素的使用"></a><code>header</code>和<code>footer</code>元素的使用</h2><p><code>header</code>和<code>footer</code>元素主要用于包裹开始信息和结束信息。<br><code>header</code>元素主要用来包裹开始信息，这里的开始信息包括了<code>hgroup</code>这样的元素，<code>hgroup</code>里面还可以包裹各种标题标签。<br>这里要注意的是，<code>header</code>元素既可以出现在整个文档的开头，也可以内嵌在某个<code>section</code>中，这里也可以看到<code>header</code>的作用和第七章所描述的<code>head</code>是存在不同的。<code>header</code>主要包裹的报头（masthead），导航栏，标题组，logo等内容。<br><code>footer</code>主要包括的是一些结尾信息，包括但不限于版权信息，作者，相关参考内容，免责声明（disclaimer），也可以包括logo之类的。</p><h2 id="创建导航栏"><a href="#创建导航栏" class="headerlink" title="创建导航栏"></a>创建导航栏</h2><p>创建导航栏主要使用<code>nav</code>标签，该标签主要是为了确定一篇文档的主导航区块，该标签内包含的是一些本文档或者其他文档页面的链接（例如淘宝页面的商品种类导航栏）。<br><code>nav</code>标签可应用环境不仅仅是开头，也可以用在结尾处引申阅读时列出所有的资源。<br><code>nav</code>标签本身是没有样式的，需要使用CSS才能显示出效果。</p><h2 id="article标签的使用"><a href="#article标签的使用" class="headerlink" title="article标签的使用"></a><code>article</code>标签的使用</h2><p><code>article</code>标签主要用在那些可以独立出来的内容，这些内容本身是非常完整的整体，可以作为独立的一部分放到任何其他地方。<br>该标签同样本身也没有样式效果，需要使用CSS。</p><h2 id="创建侧边栏-SideBar，aside"><a href="#创建侧边栏-SideBar，aside" class="headerlink" title="创建侧边栏(SideBar，aside)"></a>创建侧边栏(SideBar，<code>aside</code>)</h2><p>侧边栏标签<code>aside</code>主要用于那些和文章主线内容弱相关的内容，就好像杂志里面的那些页面上一小块的历史小趣事一样，只和主体内容有一点点的联系（切线一样的相关性）。<br><code>aside</code>标签也是没有样式的，一般都是使用一些CSS样式让该区域内容浮动到靠边区域显示。</p><h2 id="提供联系信息"><a href="#提供联系信息" class="headerlink" title="提供联系信息"></a>提供联系信息</h2><p><code>address</code>标签可以指示文档或者<code>article</code>的联系信息，例如给作者发送电子邮件所要用的邮箱等。示例代码：</p><pre><code class="HMTL">&lt;address&gt;有问题的话，请使用电子邮件与我联系&lt;a href=&quot;mailto:adam@myboringblog.com&quot;&gt;Email me&lt;/a&gt;&lt;/address&gt;</code></pre><p><code>address</code>中的内容是使用<em>斜体</em>展示的。</p><h2 id="details标签的使用"><a href="#details标签的使用" class="headerlink" title="details标签的使用"></a><code>details</code>标签的使用</h2><p><code>details</code>标签用来包裹一些详细解释等内容，该标签的应用内容并没有太过严格的要求，要注意的是该标签的样式。<br>该标签有一个子标签<code>summary</code>，这个标签的合法父元素只能是<code>details</code>，<code>summary</code>主要用来包裹<code>details</code>区域内始终显示的内容，相当于该区域的标题。默认情况下<code>details</code>区域内除了<code>summary</code>区域的内容，其他区域的内容都是折叠的，如果需要默认不折叠内容，需要使用<code>apply</code>属性。</p><pre><code>&lt;details open=&quot;open&quot;&gt;            &lt;summary&gt;我们这里主要将一下引申内容&lt;/summary&gt;            看看是否被折叠起来了。如果折叠了的话应该要怎么办？            当然是通过使用&lt;code&gt;open&lt;/code&gt;属性来完成默认打开的操作啊。        &lt;/details&gt;</code></pre><h2 id="summary"><a href="#summary" class="headerlink" title="summary"></a>summary</h2><p>本章主要讲了创建区块的标签，还有将不相关内容独立出来的标签。这些标签大多都是新的，且对于HTML5的语义学特性有非常好的增强效果。</p>]]></content>
+      
+      <categories>
+          
+          <category> HTML5权威指南 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> HTML5权威指南 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>HTML5权威指南 Chapter 9 Grouping Content</title>
       <link href="/2021/04/06/Chapter-9-Grouping-Content/"/>
       <url>/2021/04/06/Chapter-9-Grouping-Content/</url>
