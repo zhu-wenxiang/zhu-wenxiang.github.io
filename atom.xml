@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zhu-wenxiang.github.io/"/>
-  <updated>2021-04-12T14:31:00.959Z</updated>
+  <updated>2021-04-17T04:01:57.985Z</updated>
   <id>https://zhu-wenxiang.github.io/</id>
   
   <author>
@@ -17,11 +17,65 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>HTML5权威指南Chapter 10 Creating Section</title>
+    <title>HTML5权威指南 Chapter 12 Working with Forms</title>
+    <link href="https://zhu-wenxiang.github.io/2021/04/15/Chapter-12-Working-with-Forms/"/>
+    <id>https://zhu-wenxiang.github.io/2021/04/15/Chapter-12-Working-with-Forms/</id>
+    <published>2021-04-15T06:02:00.000Z</published>
+    <updated>2021-04-17T04:01:57.985Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;在HTML5中，表单（form）受到了重视，拥有了很多新的特性，包括收集特定数据类型的信息以及甄别输入框中所输入的内容是否符合要求（以前这些操作都是要通过JS来完成的，但是现在已经可以通过HTML5来完成了）。&lt;/p&gt;
+&lt;h2 id=&quot;认识表单相关的基本元素&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="HTML5权威指南" scheme="https://zhu-wenxiang.github.io/categories/HTML5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/"/>
+    
+    
+      <category term="HTML5权威指南" scheme="https://zhu-wenxiang.github.io/tags/HTML5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HTML5权威指南 Chapter 11 Table Elements</title>
+    <link href="https://zhu-wenxiang.github.io/2021/04/12/Chapter-11-Table-Elements/"/>
+    <id>https://zhu-wenxiang.github.io/2021/04/12/Chapter-11-Table-Elements/</id>
+    <published>2021-04-12T14:39:40.000Z</published>
+    <updated>2021-04-17T07:14:48.624Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;表格在HTML文档中的作用主要是从两个维度展示数据。在以前的HTML文档中，经常把表格用来控制页面内容的布局，但是在HTML5中不允许这样做的。而且必须应用最新的CSS表格特性。&lt;/p&gt;
+&lt;h2 id=&quot;有关表格的三个最基本元素&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="HTML5权威指南" scheme="https://zhu-wenxiang.github.io/categories/HTML5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/"/>
+    
+    
+      <category term="HMTL5权威指南" scheme="https://zhu-wenxiang.github.io/tags/HMTL5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HTML5权威指南Chapter 10 Creating Sections</title>
     <link href="https://zhu-wenxiang.github.io/2021/04/09/Chapter-10-Creating-Section/"/>
     <id>https://zhu-wenxiang.github.io/2021/04/09/Chapter-10-Creating-Section/</id>
     <published>2021-04-09T10:27:15.000Z</published>
-    <updated>2021-04-12T14:31:00.959Z</updated>
+    <updated>2021-04-12T14:38:37.829Z</updated>
     
     <summary type="html">
     
