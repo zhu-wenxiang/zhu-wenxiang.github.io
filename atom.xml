@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zhu-wenxiang.github.io/"/>
-  <updated>2021-04-17T04:01:57.985Z</updated>
+  <updated>2021-04-20T10:29:21.681Z</updated>
   <id>https://zhu-wenxiang.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>HTML5权威指南 Chapter 13 Customizing the Input Element</title>
+    <link href="https://zhu-wenxiang.github.io/2021/04/17/Chapter-13-Customizing-the-Input-Element/"/>
+    <id>https://zhu-wenxiang.github.io/2021/04/17/Chapter-13-Customizing-the-Input-Element/</id>
+    <published>2021-04-17T07:19:14.000Z</published>
+    <updated>2021-04-20T10:29:21.681Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;通过设置输入框&lt;code&gt;input&lt;/code&gt;标签的&lt;code&gt;type&lt;/code&gt;属性，可以控制能够输入到输入框中的具体数据类型。&lt;code&gt;type&lt;/code&gt;属性对应的值有23种，&lt;code&gt;input&lt;/code&gt;标签所拥有的attributes共有30多种
+        
+      
+    
+    </summary>
+    
+      <category term="HTML5权威指南" scheme="https://zhu-wenxiang.github.io/categories/HTML5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/"/>
+    
+    
+      <category term="HTML5权威指南" scheme="https://zhu-wenxiang.github.io/tags/HTML5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/"/>
+    
+  </entry>
   
   <entry>
     <title>HTML5权威指南 Chapter 12 Working with Forms</title>
