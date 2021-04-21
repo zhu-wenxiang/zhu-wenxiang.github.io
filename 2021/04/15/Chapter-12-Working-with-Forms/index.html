@@ -240,7 +240,7 @@
 
     
         <meta property="article:published_time" content="Thu Apr 15 2021 14:02:00 GMT+0800">
-        <meta property="article:modified_time" content="Tue Apr 20 2021 18:38:34 GMT+0800">
+        <meta property="article:modified_time" content="Wed Apr 21 2021 14:06:56 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -477,43 +477,61 @@
 <ul>
 <li><code>application/x-www-form-urlencoded</code>，这是<code>enctype</code>的默认值。该选项不能用于文件上传操作。在该选项下，表单通过<code>input</code>文本框收集用户信息，传输给服务器，编码方案与编码URL的方法是一样的，上传的内容包括<code>input</code>的<code>name</code>属性的值和用户输入的值（也就是<code>value</code>属性的值）。其传输格式是：输入框的name值和用户输入内容用等号相连，多个输入框的name/value对使用&amp;符号相连，特殊字符使用对应的HTML entity来代替。</li>
 <li><code>multipart/form-data</code>，可用于上传文件至服务器。该编码方案更加复杂，所得到的最终编码也比较冗长，建议当需要上传文件至服务器的时候选择该编码方式。</li>
-<li><code>text/plain</code>，该编码方法目前没有正式的明细说明，不同的浏览器使用该方案时编码信息的方式是不一样的。所以，尽量不要使用该方案。<h3 id="自动填写表单的开关"><a href="#自动填写表单的开关" class="headerlink" title="自动填写表单的开关"></a>自动填写表单的开关</h3><code>autocomplete</code>属性可以决定是否记住用户所填的内容并且在下次填写表单时自动填入内容。该属性<code>form</code>和<code>input</code>标签都有。默认值是”on”，需要关闭的话就将值改为”off”。<code>input</code>的属性可以override表单的全局设置。<h3 id="提交表单后浏览器返回页面的打开方式"><a href="#提交表单后浏览器返回页面的打开方式" class="headerlink" title="提交表单后浏览器返回页面的打开方式"></a>提交表单后浏览器返回页面的打开方式</h3>当用户提交表单过后（submit后），浏览器默认会在当前标签页打开返回文档页面，如果想要在其他地方打开，可以使用<code>target</code>属性。<br>该属性可选值有<code>_self</code>——当前窗口、<code>_blank</code>——新空白标签页、<code>_parent</code>——在parent frameset中打开返回页面、<code>_top</code>——open it in the full body of the window、<code>&lt;frame&gt;</code>)——在指定的frame中打开。<br><code>_blank</code>和<code>_self</code>都是self-evident，其他的都要依赖<code>frame</code>的使用。<h3 id="设置表单名称"><a href="#设置表单名称" class="headerlink" title="设置表单名称"></a>设置表单名称</h3>表单名称的设置通过<code>form</code>的<code>name</code>属性来设置。该属性主要用于在DOM（Document Object Model）中有多个表单时来区分，这个<code>name</code>属性的值可以作为DOM中的唯一标识符。它和<code>id</code>的主要区别在于id主要用于CSS选择器。<em>name的值用于DOM，id的值一般用在CSS选择器</em>。<br>form的<code>name</code>不会被传输到服务器，只是用于DOM中，所以并不像<code>input</code>的<code>name</code>那样重要。<br><code>input</code>的属性<code>name</code>如果没有赋予值（指name没有出现过，因为如果后面是空格的话，空格也是值）,该<code>input</code>输入框内的值不会被上传。<br><strong>这里还要特别注意：当表单中的<code>button</code>标签的<code>type</code>属性值为<code>button</code>时，点击提交是没有反应的，这时不会提交页面</strong><h2 id="给表单的输入框加上标签（label）"><a href="#给表单的输入框加上标签（label）" class="headerlink" title="给表单的输入框加上标签（label）"></a>给表单的输入框加上标签（<code>label</code>）</h2><code>label</code>标签主要用来关联<code>input</code>标签，本节只说明了该怎样使用，以及<code>label</code>可用于一些辅助技术（assistive technologies），但并未举例。<br>使用示例代码：<pre><code class="HTML">&lt;label for=&quot;fave&quot;&gt;Fruit: &lt;input id=&quot;fave&quot; name=&quot;fave&quot;/&gt;&lt;/label&gt;
+<li><code>text/plain</code>，该编码方法目前没有正式的明细说明，不同的浏览器使用该方案时编码信息的方式是不一样的。所以，尽量不要使用该方案。</li>
+</ul>
+<hr>
+<h3 id="自动填写表单的开关"><a href="#自动填写表单的开关" class="headerlink" title="自动填写表单的开关"></a>自动填写表单的开关</h3><p><code>autocomplete</code>属性可以决定是否记住用户所填的内容并且在下次填写表单时自动填入内容。该属性<code>form</code>和<code>input</code>标签都有。默认值是”on”，需要关闭的话就将值改为”off”。<code>input</code>的属性可以override表单的全局设置。</p>
+<h3 id="提交表单后浏览器返回页面的打开方式"><a href="#提交表单后浏览器返回页面的打开方式" class="headerlink" title="提交表单后浏览器返回页面的打开方式"></a>提交表单后浏览器返回页面的打开方式</h3><p>当用户提交表单过后（submit后），浏览器默认会在当前标签页打开返回文档页面，如果想要在其他地方打开，可以使用<code>target</code>属性。<br>该属性可选值有<code>_self</code>——当前窗口、<code>_blank</code>——新空白标签页、<code>_parent</code>——在parent frameset中打开返回页面、<code>_top</code>——open it in the full body of the window、<code>&lt;frame&gt;</code>)——在指定的frame中打开。<br><code>_blank</code>和<code>_self</code>都是self-evident，其他的都要依赖<code>frame</code>的使用。</p>
+<h3 id="设置表单名称"><a href="#设置表单名称" class="headerlink" title="设置表单名称"></a>设置表单名称</h3><p>表单名称的设置通过<code>form</code>的<code>name</code>属性来设置。该属性主要用于在DOM（Document Object Model）中有多个表单时来区分，这个<code>name</code>属性的值可以作为DOM中的唯一标识符。它和<code>id</code>的主要区别在于id主要用于CSS选择器。<em>name的值用于DOM，id的值一般用在CSS选择器</em>。<br>form的<code>name</code>不会被传输到服务器，只是用于DOM中，所以并不像<code>input</code>的<code>name</code>那样重要。<br><code>input</code>的属性<code>name</code>如果没有赋予值（指name没有出现过，因为如果后面是空格的话，空格也是值）,该<code>input</code>输入框内的值不会被上传。<br><strong>这里还要特别注意：当表单中的<code>button</code>标签的<code>type</code>属性值为<code>button</code>时，点击提交是没有反应的，这时不会提交页面</strong></p>
+<h2 id="给表单的输入框加上标签（label）"><a href="#给表单的输入框加上标签（label）" class="headerlink" title="给表单的输入框加上标签（label）"></a>给表单的输入框加上标签（<code>label</code>）</h2><p><code>label</code>标签主要用来关联<code>input</code>标签，本节只说明了该怎样使用，以及<code>label</code>可用于一些辅助技术（assistive technologies），但并未举例。<br>使用示例代码：</p>
+<pre><code class="HTML">&lt;label for=&quot;fave&quot;&gt;Fruit: &lt;input id=&quot;fave&quot; name=&quot;fave&quot;/&gt;&lt;/label&gt;
 </code></pre>
-<code>for</code>属性的值对应于<code>input</code>元素的<code>id</code>属性值。<code>label</code>可以独立于<code>input</code>定义，并不一定要被<code>input</code>文件包裹在里面。<h2 id="自动对焦"><a href="#自动对焦" class="headerlink" title="自动对焦"></a>自动对焦</h2>当加载页面过后，让鼠标焦点直接位于某个输入框中，方便用户输入，无需手动选中。想要达到这样的效果，要通过<code>autofocus</code>属性。无需以键值对形式列出，写出该属性即可。例如：<pre><code class="HTML">&lt;input autofocus id=&quot;fave&quot; name=&quot;fave&quot;/&gt;
+<p><code>for</code>属性的值对应于<code>input</code>元素的<code>id</code>属性值。<code>label</code>可以独立于<code>input</code>定义，并不一定要被<code>input</code>文件包裹在里面。</p>
+<h2 id="自动对焦"><a href="#自动对焦" class="headerlink" title="自动对焦"></a>自动对焦</h2><p>当加载页面过后，让鼠标焦点直接位于某个输入框中，方便用户输入，无需手动选中。想要达到这样的效果，要通过<code>autofocus</code>属性。无需以键值对形式列出，写出该属性即可。例如：</p>
+<pre><code class="HTML">&lt;input autofocus id=&quot;fave&quot; name=&quot;fave&quot;/&gt;
 </code></pre>
-注意：该属性只能用于一个输入元素，当页面出现多个应用了该属性的标签时，鼠标会停留在<strong>最后一个</strong>输入框内。<h2 id="如何禁止在输入框内输入内容"><a href="#如何禁止在输入框内输入内容" class="headerlink" title="如何禁止在输入框内输入内容"></a>如何禁止在输入框内输入内容</h2>应用输入标签的<code>disabled</code>属性可以使得该输入框无法输入内容。该属性和<code>autofocus</code>一样，无需使用键值对，只需要写出该属性即可。<h2 id="将表单的标签进行分组"><a href="#将表单的标签进行分组" class="headerlink" title="将表单的标签进行分组"></a>将表单的标签进行分组</h2>当处理复杂的表单的时候，将标签进行分组，可以使操作更方便。将表单元素分组的标签是<code>fieldset</code>。示例代码：<pre><code class="HTML">&lt;fieldset&gt;
-  &lt;p&gt;&lt;label for=&quot;name&quot;&gt;Name: &lt;input id=&quot;name&quot; name=&quot;name&quot;/&gt;&lt;/label&gt;&lt;/p&gt;
-  &lt;p&gt;&lt;label for=&quot;name&quot;&gt;City: &lt;input id=&quot;city&quot; name=&quot;city&quot;/&gt;&lt;/label&gt;&lt;/p&gt;
+<p>注意：该属性只能用于一个输入元素，当页面出现多个应用了该属性的标签时，鼠标会停留在<strong>最后一个</strong>输入框内。</p>
+<h2 id="如何禁止在输入框内输入内容"><a href="#如何禁止在输入框内输入内容" class="headerlink" title="如何禁止在输入框内输入内容"></a>如何禁止在输入框内输入内容</h2><p>应用输入标签的<code>disabled</code>属性可以使得该输入框无法输入内容。该属性和<code>autofocus</code>一样，无需使用键值对，只需要写出该属性即可。</p>
+<h2 id="将表单的标签进行分组"><a href="#将表单的标签进行分组" class="headerlink" title="将表单的标签进行分组"></a>将表单的标签进行分组</h2><p>当处理复杂的表单的时候，将标签进行分组，可以使操作更方便。将表单元素分组的标签是<code>fieldset</code>。示例代码：</p>
+<pre><code class="HTML">&lt;fieldset&gt;
+    &lt;p&gt;&lt;label for=&quot;name&quot;&gt;Name: &lt;input id=&quot;name&quot; name=&quot;name&quot;/&gt;&lt;/label&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;label for=&quot;name&quot;&gt;City: &lt;input id=&quot;city&quot; name=&quot;city&quot;/&gt;&lt;/label&gt;&lt;/p&gt;
 &lt;/fieldset&gt;
 &lt;fieldset&gt;
-  &lt;p&gt;&lt;label for=&quot;fave1&quot;&gt;#1: &lt;input id=&quot;fave1&quot; name=&quot;fave1&quot;/&gt;&lt;/label&gt;&lt;/p&gt;
-  &lt;p&gt;&lt;label for=&quot;fave2&quot;&gt;#2: &lt;input id=&quot;fave2&quot; name=&quot;fave2&quot;/&gt;&lt;/label&gt;&lt;/p&gt;
-  &lt;p&gt;&lt;label for=&quot;fave3&quot;&gt;#3: &lt;input id=&quot;fave3&quot; name=&quot;fave3&quot;/&gt;&lt;/label&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;label for=&quot;fave1&quot;&gt;#1: &lt;input id=&quot;fave1&quot; name=&quot;fave1&quot;/&gt;&lt;/label&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;label for=&quot;fave2&quot;&gt;#2: &lt;input id=&quot;fave2&quot; name=&quot;fave2&quot;/&gt;&lt;/label&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;label for=&quot;fave3&quot;&gt;#3: &lt;input id=&quot;fave3&quot; name=&quot;fave3&quot;/&gt;&lt;/label&gt;&lt;/p&gt;
 &lt;/fieldset&gt;
 </code></pre>
-<h3 id="给不同的表单标签组添加组名"><a href="#给不同的表单标签组添加组名" class="headerlink" title="给不同的表单标签组添加组名"></a>给不同的表单标签组添加组名</h3>在给标签分组过后，可以通过<code>legend</code>标签为表单标签组添加组名。代码示例：<pre><code class="HTML">&lt;fieldset&gt;
-  &lt;legend&gt;Enter Your Details&lt;/legend&gt;
-      &lt;p&gt;&lt;label for=&quot;name&quot;&gt;Name: &lt;input id=&quot;name&quot; name=&quot;name&quot;/&gt;&lt;/label&gt;&lt;/p&gt;
-      &lt;p&gt;&lt;label for=&quot;name&quot;&gt;City: &lt;input id=&quot;city&quot; name=&quot;city&quot;/&gt;&lt;/label&gt;&lt;/p&gt;
+<h3 id="给不同的表单标签组添加组名"><a href="#给不同的表单标签组添加组名" class="headerlink" title="给不同的表单标签组添加组名"></a>给不同的表单标签组添加组名</h3><p>在给标签分组过后，可以通过<code>legend</code>标签为表单标签组添加组名。代码示例：</p>
+<pre><code class="HTML">&lt;fieldset&gt;
+    &lt;legend&gt;Enter Your Details&lt;/legend&gt;
+        &lt;p&gt;&lt;label for=&quot;name&quot;&gt;Name: &lt;input id=&quot;name&quot; name=&quot;name&quot;/&gt;&lt;/label&gt;&lt;/p&gt;
+        &lt;p&gt;&lt;label for=&quot;name&quot;&gt;City: &lt;input id=&quot;city&quot; name=&quot;city&quot;/&gt;&lt;/label&gt;&lt;/p&gt;
 &lt;/fieldset&gt;
 </code></pre>
-<h3 id="按组禁止在输入框中输入内容"><a href="#按组禁止在输入框中输入内容" class="headerlink" title="按组禁止在输入框中输入内容"></a>按组禁止在输入框中输入内容</h3>只要激活<code>fieldset</code>标签的<code>disabled</code>属性就可以禁止在其包裹的所有输入框中输入内容。<h2 id="按钮标签的使用"><a href="#按钮标签的使用" class="headerlink" title="按钮标签的使用"></a>按钮标签的使用</h2>按钮标签<code>&lt;button&gt;</code>可以有三种用法，由其<code>type</code>属性来确定。该属性的三个可选值分别是<code>submit</code>、<code>reset</code>、<code>button</code>。<h3 id="用来提交表单"><a href="#用来提交表单" class="headerlink" title="用来提交表单"></a>用来提交表单</h3>将<code>type</code>属性设置为<code>submit</code>，<code>type=”submit”</code>。这是按下<code>button</code>会向服务器提交包含了该按钮的表单。<br>这是表单中按钮的默认设置，在使用该设置时，可以额外设置一些其他的属性。包括：<br><code>form</code>：该属性可指定要提交的表单，可以设置提交多个表单，也可指定提交哪些表单。在下一节会具体介绍。<br><code>formaction</code>：重写提交form的<code>action</code>属性。重写目标服务器的URL<br><code>formenctype</code>：重写所提交表单的<code>enctype</code><br><code>formmethod</code>：重写所提交表单的<code>method</code><br><code>formtarget</code>：重写所提交表单的<code>target</code>属性<br><code>formvalidate</code>：重写当前表单的<code>novalidate</code>属性，具体参见第14章。<br>这些属性主要用于重写所提交表单的一些属性。<h3 id="用来重置表单"><a href="#用来重置表单" class="headerlink" title="用来重置表单"></a>用来重置表单</h3>当<code>button</code>按钮的<code>type</code>属性被设置为<code>reset</code>时，按下按钮可将表单内所有的输入框重置为初始状态。<br>当使用该属性值的时候，并没有其他额外的属性参数可以设置。<h3 id="不执行任何操作"><a href="#不执行任何操作" class="headerlink" title="不执行任何操作"></a>不执行任何操作</h3>当<code>button</code>这个属性的值设为<code>button</code>时，它仅仅就是一个按钮，不会执行如何操作。当然，该属性值主要是为了配合JS脚本的使用，这在后面会有详细的介绍。<br><code>button</code>元素内部是可以使用Phrasing Elements的，也就是说，可以对按钮的文本内容应用一些Mark Up Elements。<h2 id="将表单外部元素与表单关联起来"><a href="#将表单外部元素与表单关联起来" class="headerlink" title="将表单外部元素与表单关联起来"></a>将表单外部元素与表单关联起来</h2>在HTML4中，要由表单提交的数据，必须位于表单元素之中。在HTML5中，这一约束已经没有了。位于某个表单标签之外的<code>input</code>、<code>button</code>等标签，只要将其属性<code>form</code>设置为某个表单的<code>id</code>，就可以被包含到表单中，在表单提交时，一起提交数据。示例：<pre><code class="HTML">&lt;form id=&quot;voteform&quot; method=&quot;post&quot; action=&quot;http://titan:8080/form&quot;&gt;
-  &lt;p&gt;
-      &lt;label for=&quot;fave&quot;&gt;
-          Fruit: &lt;input autofocus id=&quot;fave&quot; name=&quot;fave&quot;/&gt;
-      &lt;/label&gt;
-  &lt;/p&gt;
+<h3 id="按组禁止在输入框中输入内容"><a href="#按组禁止在输入框中输入内容" class="headerlink" title="按组禁止在输入框中输入内容"></a>按组禁止在输入框中输入内容</h3><p>只要激活<code>fieldset</code>标签的<code>disabled</code>属性就可以禁止在其包裹的所有输入框中输入内容。</p>
+<h2 id="按钮标签的使用"><a href="#按钮标签的使用" class="headerlink" title="按钮标签的使用"></a>按钮标签的使用</h2><p>按钮标签<code>&lt;button&gt;</code>可以有三种用法，由其<code>type</code>属性来确定。该属性的三个可选值分别是<code>submit</code>、<code>reset</code>、<code>button</code>。</p>
+<h3 id="用来提交表单"><a href="#用来提交表单" class="headerlink" title="用来提交表单"></a>用来提交表单</h3><p>将<code>type</code>属性设置为<code>submit</code>，<code>type=”submit”</code>。这是按下<code>button</code>会向服务器提交包含了该按钮的表单。<br>这是表单中按钮的默认设置，在使用该设置时，可以额外设置一些其他的属性。包括：<br><code>form</code>：该属性可指定要提交的表单，可以设置提交多个表单，也可指定提交哪些表单。在下一节会具体介绍。<br><code>formaction</code>：重写提交form的<code>action</code>属性。重写目标服务器的URL<br><code>formenctype</code>：重写所提交表单的<code>enctype</code><br><code>formmethod</code>：重写所提交表单的<code>method</code><br><code>formtarget</code>：重写所提交表单的<code>target</code>属性<br><code>formvalidate</code>：重写当前表单的<code>novalidate</code>属性，具体参见第14章。<br>这些属性主要用于重写所提交表单的一些属性。</p>
+<h3 id="用来重置表单"><a href="#用来重置表单" class="headerlink" title="用来重置表单"></a>用来重置表单</h3><p>当<code>button</code>按钮的<code>type</code>属性被设置为<code>reset</code>时，按下按钮可将表单内所有的输入框重置为初始状态。<br>当使用该属性值的时候，并没有其他额外的属性参数可以设置。</p>
+<h3 id="不执行任何操作"><a href="#不执行任何操作" class="headerlink" title="不执行任何操作"></a>不执行任何操作</h3><p>当<code>button</code>这个属性的值设为<code>button</code>时，它仅仅就是一个按钮，不会执行如何操作。当然，该属性值主要是为了配合JS脚本的使用，这在后面会有详细的介绍。<br><code>button</code>元素内部是可以使用Phrasing Elements的，也就是说，可以对按钮的文本内容应用一些Mark Up Elements。</p>
+<h2 id="将表单外部元素与表单关联起来"><a href="#将表单外部元素与表单关联起来" class="headerlink" title="将表单外部元素与表单关联起来"></a>将表单外部元素与表单关联起来</h2><p>在HTML4中，要由表单提交的数据，必须位于表单元素之中。在HTML5中，这一约束已经没有了。位于某个表单标签之外的<code>input</code>、<code>button</code>等标签，只要将其属性<code>form</code>设置为某个表单的<code>id</code>，就可以被包含到表单中，在表单提交时，一起提交数据。示例：</p>
+<pre><code class="HTML">&lt;form id=&quot;voteform&quot; method=&quot;post&quot; action=&quot;http://titan:8080/form&quot;&gt;
+    &lt;p&gt;
+        &lt;label for=&quot;fave&quot;&gt;
+            Fruit: &lt;input autofocus id=&quot;fave&quot; name=&quot;fave&quot;/&gt;
+        &lt;/label&gt;
+    &lt;/p&gt;
 &lt;/form&gt;
-  &lt;p&gt;
-      &lt;label for=&quot;name&quot;&gt;
-          Name: &lt;input form=&quot;voteform&quot; id=&quot;name&quot; name=&quot;name&quot;/&gt;
-      &lt;/label&gt;
-  &lt;/p&gt;
-  &lt;button form=&quot;voteform&quot; type=&quot;submit&quot;&gt;Submit Vote&lt;/button&gt;
-  &lt;button form=&quot;voteform&quot; type=&quot;reset&quot;&gt;Reset&lt;/button&gt;
+    &lt;p&gt;
+        &lt;label for=&quot;name&quot;&gt;
+            Name: &lt;input form=&quot;voteform&quot; id=&quot;name&quot; name=&quot;name&quot;/&gt;
+        &lt;/label&gt;
+    &lt;/p&gt;
+    &lt;button form=&quot;voteform&quot; type=&quot;submit&quot;&gt;Submit Vote&lt;/button&gt;
+    &lt;button form=&quot;voteform&quot; type=&quot;reset&quot;&gt;Reset&lt;/button&gt;
 </code></pre>
-<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2>本章描述了表单一些基本标签，以及这些标签的常用特性。下一章将会介绍一些HTML5中的表单新特性。</li>
-</ul>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>本章描述了表单一些基本标签，以及这些标签的常用特性。下一章将会介绍一些HTML5中的表单新特性。</p>
 
         
     
@@ -640,7 +658,7 @@
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2021/04/">四月 2021<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/10/">十月 2020<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/01/">一月 2020<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/06/">六月 2019<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/01/">一月 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/12/">十二月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/05/">五月 2018<span class="sidebar_archives-count">1</span></a>
+                <a class="sidebar_archives-link" href="/archives/2021/04/">四月 2021<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/10/">十月 2020<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2020/01/">一月 2020<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/06/">六月 2019<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/01/">一月 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/12/">十二月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/05/">五月 2018<span class="sidebar_archives-count">1</span></a>
             </ul>
         </li>
         
@@ -658,7 +676,7 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                <a class="sidebar_archives-link" href="/categories/CSAPP/">CSAPP<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/CSAPP习题错误/">CSAPP习题错误<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/HTML5权威指南/">HTML5权威指南<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/categories/使用/">使用<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/读书笔记/">读书笔记<span class="sidebar_archives-count">1</span></a>
+                <a class="sidebar_archives-link" href="/categories/CSAPP/">CSAPP<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/CSAPP习题错误/">CSAPP习题错误<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/HTML5权威指南/">HTML5权威指南<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/使用/">使用<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/读书笔记/">读书笔记<span class="sidebar_archives-count">1</span></a>
             </ul>
         </li>
         

@@ -44,7 +44,7 @@
     
     <title>
         
-            归档: 2019 | 
+            HTML5权威指南 Chapter 14 Other Form Elements and Input Validation | 
         
         Jason&#39;s Blog
     </title>
@@ -55,7 +55,7 @@
 
     <meta name="format-detection" content="telephone=no"/>
     <meta name="description" itemprop="description" content="Jason&#39;s Blog">
-    <meta name="keywords" content="">
+    <meta name="keywords" content=",HTML5权威指南">
     <meta name="theme-color" content="#0097A7">
 
     <!-- Disable Fucking Bloody Baidu Tranformation -->
@@ -82,6 +82,9 @@
         <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?MKetZV3cUTfDxvMffaOezg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
 
         
+            
+                <style id="prettify_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_css","/css/prettify.min.css?zp8STOU9v89XWFEnN+6YmQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+                <style id="prettify_theme"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_theme","/css/prettify/github-v2.min.css?AfzKxt++K+/lhZBlSjnxwg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
             
         
 
@@ -213,7 +216,7 @@
     <!-- WebAPP Icons -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="application-name" content="Jason&#39;s Blog">
-    <meta name="msapplication-starturl" content="https://zhu-wenxiang.github.io/archives/2019/">
+    <meta name="msapplication-starturl" content="https://zhu-wenxiang.github.io/2021/04/21/Chapter-14-Other-Form-Elements-and-Input-Validation/">
     <meta name="msapplication-navbutton-color" content="#0097A7">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Jason&#39;s Blog">
@@ -228,13 +231,16 @@
     
 
     <!-- The Open Graph protocol -->
-    <meta property="og:url" content="https://zhu-wenxiang.github.io/archives/2019/">
+    <meta property="og:url" content="https://zhu-wenxiang.github.io/2021/04/21/Chapter-14-Other-Form-Elements-and-Input-Validation/">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="归档: 2019 | Jason&#39;s Blog">
+    <meta property="og:title" content="HTML5权威指南 Chapter 14 Other Form Elements and Input Validation | Jason&#39;s Blog">
     <meta property="og:image" content="/img/favicon.png">
     <meta property="og:description" content="Jason&#39;s Blog">
-    
+    <meta property="og:article:tag" content="HTML5权威指南"> 
 
+    
+        <meta property="article:published_time" content="Wed Apr 21 2021 14:24:31 GMT+0800">
+        <meta property="article:modified_time" content="Wed Apr 21 2021 22:17:16 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -242,7 +248,7 @@
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="https://zhu-wenxiang.github.io/archives/2019/index.html" />
+        <link rel="canonical" href="https://zhu-wenxiang.github.io/2021/04/21/Chapter-14-Other-Form-Elements-and-Input-Validation/index.html" />
     
 
     <!-- Structured-data for SEO -->
@@ -277,211 +283,277 @@
                         </button>
                     
 
-                    <!-- Index Module -->
-<div class="material-index mdl-grid">
-    
-    <div class="locate-thumbnail-symbol"></div>
+                    <!-- Post TOC -->
 
-    <!-- Pin on top -->
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一些标签补充"><span class="post-toc-number">1.</span> <span class="post-toc-text">一些标签补充</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#创建含选项的标签"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">创建含选项的标签</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#给选项标签加上架构"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">给选项标签加上架构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#输入多行内容"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">输入多行内容</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#做个计算器"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">做个计算器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#创建公钥和私钥对"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">创建公钥和私钥对</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#输入校验"><span class="post-toc-number">2.</span> <span class="post-toc-text">输入校验</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#设置输入框不能为空"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">设置输入框不能为空</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#确保输入的数值在指定范围内"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">确保输入的数值在指定范围内</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#保证输入的内容符合特定要求"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">保证输入的内容符合特定要求</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#正则表达式结合其他属性"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">正则表达式结合其他属性</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#禁用当前表单的输入校验"><span class="post-toc-number">3.</span> <span class="post-toc-text">禁用当前表单的输入校验</span></a></li></ol>
+    </ul>
     
 
-    <!-- Normal Post -->
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
     
         
             <!-- Random Thumbnail -->
             <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
 
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2019/06/25/Polymorphism和类的初始化/">Polymorphism和类的初始化</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            在阅读
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2019/06/25/Polymorphism和类的初始化/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="猪头是个聪明的人物's avatar">
-            </div>
-            <div>
-                <strong>猪头是个聪明的人物</strong>
-                <span>6月 25, 2019</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-              <!-- Category -->
-              <span class="post_entry-category">
-                  <a class="post_category-link" href="/categories/读书笔记/">读书笔记</a>
-              </span>
-            
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2019/06/18/图片显示问题/">图片显示问题</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2019/06/18/图片显示问题/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="猪头是个聪明的人物's avatar">
-            </div>
-            <div>
-                <strong>猪头是个聪明的人物</strong>
-                <span>6月 18, 2019</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2019/01/17/Java复习/">Java复习</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            在码农翻身上看到了一篇Java复习的文章，里面提到了一些书，及记下来方便以后找，反正微信收藏了也不看。
-
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2019/01/17/Java复习/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="猪头是个聪明的人物's avatar">
-            </div>
-            <div>
-                <strong>猪头是个聪明的人物</strong>
-                <span>1月 17, 2019</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-
-    
-
-    
-        <script type="text/ls-javascript" id="thumbnail-script">
-    var randomNum;
-
-    var locatePost = $('.locate-thumbnail-symbol').next();
-    for(var i = 0; i < 10; i++) {
-        randomNum = Math.floor(Math.random() * 19 + 1);
-
-        locatePost.children('.post_thumbnail-random').attr('id', 'random_thumbnail-'+randomNum);
-        locatePost.children('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
     $('.post_thumbnail-random').addClass('lazy');
-
-        locatePost = locatePost.next();
-    }
 </script>
 
+        
+    
+            <p class="article-headline-p">
+                HTML5权威指南 Chapter 14 Other Form Elements and Input Validation
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>猪头是个聪明的人物</strong>
+        <span>4月 21, 2021</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/HTML5权威指南/">HTML5权威指南</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=HTML5权威指南 Chapter 14 Other Form Elements and Input Validation&url=https://zhu-wenxiang.github.io/2021/04/21/Chapter-14-Other-Form-Elements-and-Input-Validation/index.html&pic=https://zhu-wenxiang.github.io/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+
+    <!-- Share Facebook -->
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://zhu-wenxiang.github.io/2021/04/21/Chapter-14-Other-Form-Elements-and-Input-Validation/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+        <a class="post_share-link" href="https://www.linkedin.com/shareArticle?mini=true&url=https://zhu-wenxiang.github.io/2021/04/21/Chapter-14-Other-Form-Elements-and-Input-Validation/index.html&title=HTML5权威指南 Chapter 14 Other Form Elements and Input Validation" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 LinkedIn
+            </li>
+        </a>
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=Jason&#39;s Blog&title=HTML5权威指南 Chapter 14 Other Form Elements and Input Validation&summary=Jason&#39;s Blog&pics=https://zhu-wenxiang.github.io/img/favicon.png&url=https://zhu-wenxiang.github.io/2021/04/21/Chapter-14-Other-Form-Elements-and-Input-Validation/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+        <a class="post_share-link" href="https://telegram.me/share/url?url=https://zhu-wenxiang.github.io/2021/04/21/Chapter-14-Other-Form-Elements-and-Input-Validation/index.html&text=HTML5权威指南 Chapter 14 Other Form Elements and Input Validation" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Telegram
+            </li>
+        </a>
+    
+</ul>
+
     
 </div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>本章将结束HTML5中表单的讲解。还会讲到HTML5中对于表单验证所能提供的一些支持。</p>
+<h2 id="一些标签补充"><a href="#一些标签补充" class="headerlink" title="一些标签补充"></a>一些标签补充</h2><p>本节主要补充5个可以在表单中使用的其他元素。它们分别是<code>select</code>、<code>optgroup</code>、<code>textarea</code>、<code>output</code>、<code>keygen</code></p>
+<h3 id="创建含选项的标签"><a href="#创建含选项的标签" class="headerlink" title="创建含选项的标签"></a>创建含选项的标签</h3><p><code>select</code>标签可以创建一个包含多个选项的列表。与<code>radio</code>属性下的<code>input</code>不同的是，它更紧凑，而且支持多选。<br>该标签可以设置的属性有：<code>name</code>、<code>disabled</code>、<code>form</code>、<code>autofocus</code>、<code>required</code>，这些属性的使用和普通的<code>input</code>元素是一致的。<br>该标签的local attributes中，与使用相关的是：1.）<code>size</code>，该属性可以设置<code>select</code>框可以展示多少个选项。2.）<code>multiple</code>，当应用该属性时，选择框可以多选。<br><code>select</code>标签内的各个选项可以使用<code>option</code>标签来定义，它和<code>datalist</code>标签[[Chapter-13-Customizing-the-Input-Element#用作 code datalist code]]中使用的<code>option</code>是一样的。示例代码：</p>
+<pre><code class="HTML">&lt;select id=&quot;fave&quot; name=&quot;fave&quot;&gt;
+    &lt;option value=&quot;apples&quot; selected label=&quot;Apples&quot;&gt;Apples&lt;/option&gt;
+    &lt;option value=&quot;oranges&quot; label=&quot;Oranges&quot;&gt;Oranges&lt;/option&gt;
+    &lt;option value=&quot;cherries&quot; label=&quot;Cherries&quot;&gt;Cherries&lt;/option&gt;
+    &lt;option value=&quot;pears&quot; label=&quot;Pears&quot;&gt;Pears&lt;/option&gt;
+&lt;/select&gt;
+//展示多个选项、多选的使用
+&lt;select id=&quot;fave&quot; name=&quot;fave&quot; size=&quot;5&quot; multiple&gt;//这里size是5，也就是展示5个选项
+</code></pre>
+<p>当网页用户需要多选的时候，只需要按住CTRL然后点击就可以了。</p>
+<h3 id="给选项标签加上架构"><a href="#给选项标签加上架构" class="headerlink" title="给选项标签加上架构"></a>给选项标签加上架构</h3><p>给选项加上架构，也就是把多个<code>option</code>分组，使用的是<code>optgroup</code>标签，每一个组的名称可以由该标签的属性<code>label</code>来定义。这个和[[Chapter-12-Working-with-Forms#将表单的标签进行分组]]将表单中多个输入元素分组其实是类似的。示例代码：</p>
+<pre><code class="HTML">&lt;select id=&quot;fave&quot; name=&quot;fave&quot;&gt;
+    &lt;optgroup label=&quot;Top Choices&quot;&gt;
+        &lt;option value=&quot;apples&quot; label=&quot;Apples&quot;&gt;Apples&lt;/option&gt;
+        &lt;option value=&quot;oranges&quot; label=&quot;Oranges&quot;&gt;Oranges&lt;/option&gt;
+    &lt;/optgroup&gt;
+    &lt;optgroup label=&quot;Others&quot;&gt;
+        &lt;option value=&quot;cherries&quot; label=&quot;Cherries&quot;&gt;Cherries&lt;/option&gt;
+        &lt;option value=&quot;pears&quot; label=&quot;Pears&quot;&gt;Pears&lt;/option&gt;
+    &lt;/optgroup&gt;
+</code></pre>
+<h3 id="输入多行内容"><a href="#输入多行内容" class="headerlink" title="输入多行内容"></a>输入多行内容</h3><p><code>textarea</code>标签可以让用户输入多行内容。它的local attributes有：<code>name</code>、<code>disabled</code>、<code>form</code>、<code>readonly</code>、<code>maxlength</code>、<code>autofocus</code>、<code>required</code>、<code>placeholder</code>、<code>dirname</code>、<code>rows</code>、<code>wrap</code>、<code>cols</code>。<br>其中，有三个标签属性是<code>textarea</code>所特有的，用来设置输入框参数的，其他属性的使用和普通的输入框属性没有区别。<br><code>cols</code>、<code>rows</code>：指定了<code>textarea</code>的尺寸<br><code>wrap</code>：有<code>hard</code>和<code>soft</code>两个选择。区别在于，当使用<code>hard</code>时，提交到表单的文本中，每一个行所拥有的字符数量都不会超过<code>cols</code>属性的值。<br>示例代码：</p>
+<pre><code class="HTML">&lt;textarea cols=&quot;20&quot; rows=&quot;5&quot; wrap=&quot;hard&quot; id=&quot;story&quot; name=&quot;story&quot;&gt;
+    Tell us why this is your favorite fruit
+&lt;/textarea&gt;
+</code></pre>
+<h3 id="做个计算器"><a href="#做个计算器" class="headerlink" title="做个计算器"></a>做个计算器</h3><p><code>output</code>标签可以用来显示算数计算的结果。<br>它有三个local attributes，分别是<code>name</code>、<code>form</code>、<code>for</code>，前面两个很好理解，一个是指的标签名，一个是隶属表单的ID（因为HTML5中表单可以关联外部元素[[Chapter-12-Working-with-Forms#将表单外部元素与表单关联起来]]）。<br><code>for</code>属性可以用来指定要计算的两个数的输入标签。当然，要实现该效果还需要使用JS，代码示例：</p>
+<pre><code class="HTML">&lt;form onsubmit=&quot;return false&quot; oninput=&quot;res.value = quant.valueAsNumber * price.valueAsNumber&quot;&gt;
+    &lt;fieldset&gt;
+    &lt;legend&gt;Price Calculator&lt;/legend&gt;
+        &lt;input type=&quot;number&quot; placeholder=&quot;Quantity&quot; id=&quot;quant&quot; name=&quot;quant&quot;/&gt; 
+        x
+        &lt;input type=&quot;number&quot; placeholder=&quot;Price&quot; id=&quot;price&quot; name=&quot;price&quot;/&gt; 
+        =
+        &lt;output for=&quot;quant name&quot; name=&quot;res&quot;/&gt;
+    &lt;/fieldset&gt;
+&lt;/form&gt;
+</code></pre>
+<p>可以看到，把两个输入框的数字相乘是通过JS事件<code>oninput</code>来实现的，这个在JS（第40章）还会描述。</p>
+<h3 id="创建公钥和私钥对"><a href="#创建公钥和私钥对" class="headerlink" title="创建公钥和私钥对"></a>创建公钥和私钥对</h3><p><code>keygen</code>标签可以用来产生公钥和私钥对。当表单被提交的时候，会产生公钥和私钥对，公钥会发送给服务器，私钥会被浏览器保存至用户的密钥仓库（key store）。<br>该标签各大浏览器的支持都不是很好，作者建议尽量避免使用该标签。</p>
+<h2 id="输入校验"><a href="#输入校验" class="headerlink" title="输入校验"></a>输入校验</h2><p>HTML5以前，实现输入校验主要是使用JQuery提供的一些校验组件来实现。虽然HTML5有了校验功能，但是各浏览器的支持并不一样。所以使用的时候还是要谨慎。<br>能够用来是实施校验的属性主要有三个：<code>required</code>、<code>min</code>、<code>max</code>、<code>pattern</code>。</p>
+<h3 id="设置输入框不能为空"><a href="#设置输入框不能为空" class="headerlink" title="设置输入框不能为空"></a>设置输入框不能为空</h3><p><code>required</code>属性可以将输入框设为必填。我个人感觉该特性对于接受各大产品的《用户隐私协议》作用颇大。<br>在使用该属性的时候，如果有默认的<code>value</code>值，那么该输入框就已经是填了；如果想要提示但是没有默认值，要使用<code>placeholder</code>，<br>通过标签属性校验的缺点就是不会像JS那样给即时提示，在提交的时候才会提示，而且<strong>一次只提示一个</strong>。</p>
+<h3 id="确保输入的数值在指定范围内"><a href="#确保输入的数值在指定范围内" class="headerlink" title="确保输入的数值在指定范围内"></a>确保输入的数值在指定范围内</h3><p>当<code>input</code>的<code>type</code>属性是<code>number</code>的时候，可以通过<code>min</code>和<code>max</code>属性来设置输入数字的上下限。上限和下限值都是允许渠道的，也就是数学上的前后双闭区间。<br>指定了最大最小值并不代表该输入框不能为空，所以一般配合<code>required</code>属性来使用。</p>
+<h3 id="保证输入的内容符合特定要求"><a href="#保证输入的内容符合特定要求" class="headerlink" title="保证输入的内容符合特定要求"></a>保证输入的内容符合特定要求</h3><p><code>pattern</code>属性可以定义一个正则表达式用来校验用户的输入内容。<br>同样的，提供该属性值的时候浏览器并不会要求该值必填，需要配合<code>required</code>来使用。</p>
+<h3 id="正则表达式结合其他属性"><a href="#正则表达式结合其他属性" class="headerlink" title="正则表达式结合其他属性"></a>正则表达式结合其他属性</h3><p>当输入框的<code>type</code>属性是<code>email</code>或者<code>url</code>的时候，这是可以结合<code>pattern</code>定义的正则表达式给予更强的限制，例如只允许输入特定公司的电子邮件。示例代码：</p>
+<pre><code class="HTML">&lt;label for=&quot;email&quot;&gt;
+Email: &lt;input type=&quot;email&quot; placeholder=&quot;user@mydomain.com&quot; required pattern=&quot;.*@mydomain.com$&quot; id=&quot;email&quot; name=&quot;email&quot;/&gt;
+&lt;/label&gt;
+</code></pre>
+<h2 id="禁用当前表单的输入校验"><a href="#禁用当前表单的输入校验" class="headerlink" title="禁用当前表单的输入校验"></a>禁用当前表单的输入校验</h2><p>在某些情况下开发者可能需要禁用输入校验，例如用户在某一时刻需要先保存未填写完成的表单去从事其他工作然后在回到表单填写，这时候需要禁用输入校验。<br>有两种实现方式，分别是对于<code>form</code>标签，以及对<code>button</code>和<code>input</code>进行设置。<br><code>form</code>：应用<code>novalidate</code>属性<br>表单提交标签<code>input</code>（type=“submit”）或者<code>button</code>（type=”submit”）：应用<code>formnovalidate</code><br>当然，要想成功保存未填写完成的表单，还需要服务器端有相应的功能模块才行。</p>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2021/04/17/Chapter-13-Customizing-the-Input-Element/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
 
 
                     
@@ -814,6 +886,10 @@ It will not impact the appearance and can give developers a lot of support :)
 <!-- Import prettify js  -->
 
     
+        
+            <script>lsloader.load("prettify_js","/js/prettify.min.js?WN07fivHQSMKWy7BmHBB6w==", true)</script>
+        
+    
 
 
 
@@ -826,6 +902,11 @@ It will not impact the appearance and can give developers a lot of support :)
     });
 
     
+        
+            $(function() {
+                $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+                prettyPrint();
+                })
         
     
     
