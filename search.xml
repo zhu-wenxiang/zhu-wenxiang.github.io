@@ -3,6 +3,48 @@
   
     
     <entry>
+      <title>HTML5权威指南 Chapter 16 CSS in Context</title>
+      <link href="/2021/05/17/Chapter-16-CSS-in-Context/"/>
+      <url>/2021/05/17/Chapter-16-CSS-in-Context/</url>
+      <content type="html"><![CDATA[<h2 id="Understanding-CSS-Standardization"><a href="#Understanding-CSS-Standardization" class="headerlink" title="Understanding CSS Standardization"></a>Understanding CSS Standardization</h2><p>过去由于浏览器大战，造成了CSS的标准化十分困难。CSS3在制定标准的时候，选择了分模块指定标准的策略，使得CSS3缺乏一个全面的兼容标准。<br>而且，《HTML权威指南》这本书写的时候，很多CSS3标准模块还没有完成制定，所以本书尽量选择了一些不会有太大改变的属性（property）。<br>这里要说一下，由于浏览器大战所留下的特定浏览器应用特定属性的结果，一些特定浏览器属性会加上浏览器前缀。对应如下表：</p><table><thead><tr><th>browsers</th><th>prefix</th></tr></thead><tbody><tr><td>Chrome Safari</td><td>-webkit-</td></tr><tr><td>opera</td><td>-o-</td></tr><tr><td>Firefox</td><td>-moz-</td></tr><tr><td>IE</td><td>-ms-</td></tr></tbody></table><p>主要是根据内核来划分的。</p><h3 id="Box模型："><a href="#Box模型：" class="headerlink" title="Box模型："></a>Box模型：</h3><p><img src="https://i.loli.net/2021/06/17/bupeqGKtTfQFzM8.jpg" alt="box.JPG"><br><img src="https://i.loli.net/2021/06/17/45foSlzrRXBebiW.jpg" alt="多个box.JPG"></p><p>这里只需要知道Box模型的margin，padding代表了什么。以及当一个元素内有多个子元素的时候，padding是怎么组成的就可以。</p>]]></content>
+      
+      <categories>
+          
+          <category> HTML5权威指南 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> HTML5权威指南 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>HTML5权威指南 Chapter 15 Embedding Content</title>
+      <link href="/2021/04/21/Chapter-15-Embedding-Content/"/>
+      <url>/2021/04/21/Chapter-15-Embedding-Content/</url>
+      <content type="html"><![CDATA[<p>本章主要给出在HTML中嵌入内容的一些标签，包括图片，将其他文档作为一部分嵌入，一些插件等。当然，本章并没有包含全部的嵌入内容讲解，后面CSS和JS部分还会有。</p><h2 id="嵌入图片"><a href="#嵌入图片" class="headerlink" title="嵌入图片"></a>嵌入图片</h2><p>使用<code>img</code>标签来在页面嵌入图片。和图片设置相关的attributes是<code>src</code>、<code>alt</code>、<code>width</code>、<code>height</code>。<br><code>src</code>：该属性指定图片的URL<br><code>alt</code>：定义当图片无法显示的时候需要显示的说明文本<br><code>width</code>、<code>height</code>：给出图片的高和宽（单位是pixels），这两个参数主要说明图片的尺寸。由于图片是在标记文档处理好后才加载的，所以浏览器会先根据尺寸在布局里留下空间，待标签全部加载好后才会通过URL去找到图片；如果这里省略了这两个参数，那么浏览器就需要在找到图片过后根据图片的尺寸重新排版网页，所以这两个参数是非常重要的。<br><code>width</code>和<code>height</code>只是告诉浏览器图片的尺寸，并不能用来动态调整图片尺寸，这种做法并不能得到想要的结果。</p><h3 id="在超链接中嵌入图片"><a href="#在超链接中嵌入图片" class="headerlink" title="在超链接中嵌入图片"></a>在超链接中嵌入图片</h3><h2 id="在一个HTML文档中嵌入另一个HTML文档页面"><a href="#在一个HTML文档中嵌入另一个HTML文档页面" class="headerlink" title="在一个HTML文档中嵌入另一个HTML文档页面"></a>在一个HTML文档中嵌入另一个HTML文档页面</h2>]]></content>
+      
+      <categories>
+          
+          <category> HTML5权威指南 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> HTML5权威指南 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>HTML5权威指南 Chapter 14 Other Form Elements and Input Validation</title>
       <link href="/2021/04/21/Chapter-14-Other-Form-Elements-and-Input-Validation/"/>
       <url>/2021/04/21/Chapter-14-Other-Form-Elements-and-Input-Validation/</url>
