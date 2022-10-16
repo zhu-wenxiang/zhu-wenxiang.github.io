@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+    
+    <entry>
+      <title>精通Spring4.x企业级应用实战第二章阅读记录1</title>
+      <link href="/2022/10/15/%E7%B2%BE%E9%80%9ASpring4-x%E4%BC%81%E4%B8%9A%E7%BA%A7%E5%BA%94%E7%94%A8%E5%AE%9E%E6%88%98%E7%AC%AC%E4%BA%8C%E7%AB%A0%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%951/"/>
+      <url>/2022/10/15/%E7%B2%BE%E9%80%9ASpring4-x%E4%BC%81%E4%B8%9A%E7%BA%A7%E5%BA%94%E7%94%A8%E5%AE%9E%E6%88%98%E7%AC%AC%E4%BA%8C%E7%AB%A0%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%951/</url>
+      <content type="html"><![CDATA[<h1 id="第一部分：2-4单元测试以前"><a href="#第一部分：2-4单元测试以前" class="headerlink" title="第一部分：2.4单元测试以前"></a>第一部分：2.4单元测试以前</h1><h2 id="queryForInt-sql-args-已经无法使用"><a href="#queryForInt-sql-args-已经无法使用" class="headerlink" title="queryForInt(sql,args)已经无法使用"></a>queryForInt(sql,args)已经无法使用</h2><p>《精通Spring4.xx企业级应用实战》中第二章，2.3.2 UserDao这节，代码清单2-4 UserDao，使用了<code>jdbc.queryForInt(sqlStr,new Object[]{ userName, password})</code> ，但是在实际使用时，也就是本文写作时间2022-10-15日，<code>queryForInt()</code>方法已经无法使用，取而代之的是以下代码：</p><pre><code>//同时，这里要注意，书中所说的queryForInt()方法已经被废弃，需要使用以下方法来产生一个int的返回值  public int getMatchCount(String userName,String password){      return jdbcTemplate.queryForObject(MATCH_COUNT_SQL,new Object[]{userName,password},Integer.class);  }</code></pre><p>解决方案来自本篇文章<a href="https://mkyong.com/spring/jdbctemplate-queryforint-is-deprecated/" target="_blank" rel="noopener">JdbcTemplate queryForInt() is Deprecated</a></p><h2 id="单元测试代码清单2-10存在错误"><a href="#单元测试代码清单2-10存在错误" class="headerlink" title="单元测试代码清单2-10存在错误"></a>单元测试代码清单2-10存在错误</h2><p>在本书第39页，也就是2.4.3 单元测试，代码清单2-10 UserServiceTest中，<code>@ContextConfiguration(&quot;classpath*:/applicationContext.xml&quot;)</code>是错误的。这里的配置文件应该是<code>@ContextConfiguration(&quot;classpath*:/smart-context.xml&quot;)</code>。但是在本书的配套代码中，是使用的<code>smart-context.xml</code>，可是书中给出的示例代码里，是不对的。</p><hr><h2 id="final修饰的引用数据类型"><a href="#final修饰的引用数据类型" class="headerlink" title="final修饰的引用数据类型"></a>final修饰的引用数据类型</h2><pre><code>//通过userName来查找数据库中的User，并将其封装后返回,这里我使用了lambda表达式来改写书中的代码。  public User findUserByUserName(final String userName){      final User user=new User();      jdbcTemplate.query(FIND_USER_BY_NAME, new Object[]{userName}, resultSet -&gt; {          user.setUserId(resultSet.getInt(&quot;user_id&quot;));          user.setUserName(userName);          user.setCredits(resultSet.getInt(&quot;credits&quot;));      });      return user;  }</code></pre><p>在这里，user对象的参数<code>id</code>,<code>userName</code> 等都是可以更改的。<code>final</code>的意义在于引用变量 <code>user</code> 不能再绑定其他的<code>User</code>对象。也就是<code>final</code>修饰的引用变量一旦指向确定的对象，就无法再更改指向其他对象。</p><h2 id="JDBC-连接驱动类更改"><a href="#JDBC-连接驱动类更改" class="headerlink" title="JDBC 连接驱动类更改"></a>JDBC 连接驱动类更改</h2><pre><code>&lt;!--定义一个DHCP实现 的数据源--&gt;  &lt;bean id=&quot;dataSource&quot; class=&quot;org.apache.commons.dbcp.BasicDataSource&quot;        destroy-method=&quot;close&quot;        p:driverClassName=&quot;com.mysql.jdbc.Driver&quot;        p:url=&quot;jdbc:mysql://localhost:3306/sampledb&quot;        p:username=&quot;scott&quot;        p:password=&quot;tiger&quot;  /&gt;</code></pre><p>在以上的代码中，出现了以下提示</p><blockquote><p>Loading class <code>com.mysql.jdbc.Driver</code>. This is deprecated. The new driver class is `com.mysql.cj.jdbc.Driver’.</p></blockquote><p>但是，使用该driver类也可以连接数据库并且测试成功。</p><h2 id="测试须知"><a href="#测试须知" class="headerlink" title="测试须知"></a>测试须知</h2><p>测试的时候<code>TestNG</code> 默认会把测试内容回滚，不会真正对数据库的数据进行任何更改，如果要看到更改，需要手动关闭回滚。</p><pre><code>@Test      @Rollback(value = false)      public void testLoginSuccess() {          User user=userService.findUserByUserName(&quot;admin&quot;);          user.setUserId(1);          user.setUserName(&quot;admin&quot;);          user.setLastIp(&quot;192.127.1.1&quot;);          user.setLastVisit(new Date());          userService.loginSuccess(user);      }  }</code></pre><h2 id="Spring配置文件的命名空间"><a href="#Spring配置文件的命名空间" class="headerlink" title="Spring配置文件的命名空间"></a>Spring配置文件的命名空间</h2><p>在Spring配置文件applicationContext.xml（本书第二章示例中配置文件名为smart-config.xml）,<code>xmlns:aop</code>,<code>xmlns:tx</code>这些prefix声明过后，还要在下面的<code>xsi:schemaLocation=&quot;&quot;</code>里面添加链接。否则会提示无法加载Spring配置文件。</p><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;  &lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;         xmlns:context=&quot;http://www.springframework.org/schema/context&quot;         xmlns:p=&quot;http://www.springframework.org/schema/p&quot;         xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;         xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;         xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans         http://www.springframework.org/schema/beans/spring-beans.xsd       http://www.springframework.org/schema/context       http://www.springframework.org/schema/context/spring-context.xsd        http://www.springframework.org/schema/tx       http://www.springframework.org/schema/tx/spring-tx-4.0.xsd       http://www.springframework.org/schema/aop       http://www.springframework.org/schema/aop/spring-aop-4.0.xsd&quot;&gt;</code></pre><p>关于命名空间，参考了这篇文章的讲解。<a href="https://blog.csdn.net/hhx_echo/article/details/76095840" target="_blank" rel="noopener">Spring配置文件之引入命名空间</a></p><h2 id="小技巧"><a href="#小技巧" class="headerlink" title="小技巧"></a>小技巧</h2><h3 id="lambda表达式一键生成"><a href="#lambda表达式一键生成" class="headerlink" title="lambda表达式一键生成"></a>lambda表达式一键生成</h3><p>将匿名内部类转换为lambda表达式，可以由IDEA来完成。具体可以参考<a href="https://blog.csdn.net/weixin_58321767/article/details/121782182?spm=1001.2101.3001.6661.1&amp;utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-121782182-blog-121512874.t5_landing_title_tags_v2&amp;depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-121782182-blog-121512874.t5_landing_title_tags_v2&amp;utm_relevant_index=1" target="_blank" rel="noopener">IDEA生成lambda表达式的快捷键</a></p><h3 id="IDEA-Editor提示换行的竖线"><a href="#IDEA-Editor提示换行的竖线" class="headerlink" title="IDEA Editor提示换行的竖线"></a>IDEA Editor提示换行的竖线</h3><p>当单行代码长度比较长的时候，IDEA Editor中会遇到一条灰色竖线。<a href="https://blog.csdn.net/qq_42705060/article/details/118697949" target="_blank" rel="noopener">关闭代码过长提示线</a></p>]]></content>
+      
+      <categories>
+          
+          <category> Spring企业级实战 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Spring </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>Chpter 17 Using the CSS Selectors Part I</title>
+      <link href="/2021/06/17/Chpter-17-Using-the-CSS-Selectors-Part-I/"/>
+      <url>/2021/06/17/Chpter-17-Using-the-CSS-Selectors-Part-I/</url>
+      <content type="html"><![CDATA[]]></content>
+      
+      <categories>
+          
+          <category> HTML5权威指南 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> HTML5权威指南 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>HTML5权威指南 Chapter 16 CSS in Context</title>
+      <link href="/2021/05/17/Chapter-16-CSS-in-Context/"/>
+      <url>/2021/05/17/Chapter-16-CSS-in-Context/</url>
+      <content type="html"><![CDATA[<h2 id="Understanding-CSS-Standardization"><a href="#Understanding-CSS-Standardization" class="headerlink" title="Understanding CSS Standardization"></a>Understanding CSS Standardization</h2><p>过去由于浏览器大战，造成了CSS的标准化十分困难。CSS3在制定标准的时候，选择了分模块指定标准的策略，使得CSS3缺乏一个全面的兼容标准。<br>而且，《HTML权威指南》这本书写的时候，很多CSS3标准模块还没有完成制定，所以本书尽量选择了一些不会有太大改变的属性（property）。<br>这里要说一下，由于浏览器大战所留下的特定浏览器应用特定属性的结果，一些特定浏览器属性会加上浏览器前缀。对应如下表：</p><table><thead><tr><th>browsers</th><th>prefix</th></tr></thead><tbody><tr><td>Chrome Safari</td><td>-webkit-</td></tr><tr><td>opera</td><td>-o-</td></tr><tr><td>Firefox</td><td>-moz-</td></tr><tr><td>IE</td><td>-ms-</td></tr></tbody></table><p>主要是根据内核来划分的。</p><h3 id="Box模型："><a href="#Box模型：" class="headerlink" title="Box模型："></a>Box模型：</h3><p><img src="https://i.loli.net/2021/06/17/bupeqGKtTfQFzM8.jpg" alt="box.JPG"><br><img src="https://i.loli.net/2021/06/17/45foSlzrRXBebiW.jpg" alt="多个box.JPG"></p><p>这里只需要知道Box模型的margin，padding代表了什么。以及当一个元素内有多个子元素的时候，padding是怎么组成的就可以。</p>]]></content>
+      
+      <categories>
+          
+          <category> HTML5权威指南 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> HTML5权威指南 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>HTML5权威指南 Chapter 15 Embedding Content</title>
+      <link href="/2021/04/21/Chapter-15-Embedding-Content/"/>
+      <url>/2021/04/21/Chapter-15-Embedding-Content/</url>
+      <content type="html"><![CDATA[<p>本章主要给出在HTML中嵌入内容的一些标签，包括图片，将其他文档作为一部分嵌入，一些插件等。当然，本章并没有包含全部的嵌入内容讲解，后面CSS和JS部分还会有。</p><h2 id="嵌入图片"><a href="#嵌入图片" class="headerlink" title="嵌入图片"></a>嵌入图片</h2><p>使用<code>img</code>标签来在页面嵌入图片。和图片设置相关的attributes是<code>src</code>、<code>alt</code>、<code>width</code>、<code>height</code>。<br><code>src</code>：该属性指定图片的URL<br><code>alt</code>：定义当图片无法显示的时候需要显示的说明文本<br><code>width</code>、<code>height</code>：给出图片的高和宽（单位是pixels），这两个参数主要说明图片的尺寸。由于图片是在标记文档处理好后才加载的，所以浏览器会先根据尺寸在布局里留下空间，待标签全部加载好后才会通过URL去找到图片；如果这里省略了这两个参数，那么浏览器就需要在找到图片过后根据图片的尺寸重新排版网页，所以这两个参数是非常重要的。<br><code>width</code>和<code>height</code>只是告诉浏览器图片的尺寸，并不能用来动态调整图片尺寸，这种做法并不能得到想要的结果。</p><h3 id="在超链接中嵌入图片"><a href="#在超链接中嵌入图片" class="headerlink" title="在超链接中嵌入图片"></a>在超链接中嵌入图片</h3><h2 id="在一个HTML文档中嵌入另一个HTML文档页面"><a href="#在一个HTML文档中嵌入另一个HTML文档页面" class="headerlink" title="在一个HTML文档中嵌入另一个HTML文档页面"></a>在一个HTML文档中嵌入另一个HTML文档页面</h2>]]></content>
+      
+      <categories>
+          
+          <category> HTML5权威指南 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> HTML5权威指南 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>HTML5权威指南 Chapter 14 Other Form Elements and Input Validation</title>
+      <link href="/2021/04/21/Chapter-14-Other-Form-Elements-and-Input-Validation/"/>
+      <url>/2021/04/21/Chapter-14-Other-Form-Elements-and-Input-Validation/</url>
+      <content type="html"><![CDATA[<p>本章将结束HTML5中表单的讲解。还会讲到HTML5中对于表单验证所能提供的一些支持。</p><h2 id="一些标签补充"><a href="#一些标签补充" class="headerlink" title="一些标签补充"></a>一些标签补充</h2><p>本节主要补充5个可以在表单中使用的其他元素。它们分别是<code>select</code>、<code>optgroup</code>、<code>textarea</code>、<code>output</code>、<code>keygen</code></p><h3 id="创建含选项的标签"><a href="#创建含选项的标签" class="headerlink" title="创建含选项的标签"></a>创建含选项的标签</h3><p><code>select</code>标签可以创建一个包含多个选项的列表。与<code>radio</code>属性下的<code>input</code>不同的是，它更紧凑，而且支持多选。<br>该标签可以设置的属性有：<code>name</code>、<code>disabled</code>、<code>form</code>、<code>autofocus</code>、<code>required</code>，这些属性的使用和普通的<code>input</code>元素是一致的。<br>该标签的local attributes中，与使用相关的是：1.）<code>size</code>，该属性可以设置<code>select</code>框可以展示多少个选项。2.）<code>multiple</code>，当应用该属性时，选择框可以多选。<br><code>select</code>标签内的各个选项可以使用<code>option</code>标签来定义，它和<code>datalist</code>标签[[Chapter-13-Customizing-the-Input-Element#用作 code datalist code]]中使用的<code>option</code>是一样的。示例代码：</p><pre><code class="HTML">&lt;select id=&quot;fave&quot; name=&quot;fave&quot;&gt;    &lt;option value=&quot;apples&quot; selected label=&quot;Apples&quot;&gt;Apples&lt;/option&gt;    &lt;option value=&quot;oranges&quot; label=&quot;Oranges&quot;&gt;Oranges&lt;/option&gt;    &lt;option value=&quot;cherries&quot; label=&quot;Cherries&quot;&gt;Cherries&lt;/option&gt;    &lt;option value=&quot;pears&quot; label=&quot;Pears&quot;&gt;Pears&lt;/option&gt;&lt;/select&gt;//展示多个选项、多选的使用&lt;select id=&quot;fave&quot; name=&quot;fave&quot; size=&quot;5&quot; multiple&gt;//这里size是5，也就是展示5个选项</code></pre><p>当网页用户需要多选的时候，只需要按住CTRL然后点击就可以了。</p><h3 id="给选项标签加上架构"><a href="#给选项标签加上架构" class="headerlink" title="给选项标签加上架构"></a>给选项标签加上架构</h3><p>给选项加上架构，也就是把多个<code>option</code>分组，使用的是<code>optgroup</code>标签，每一个组的名称可以由该标签的属性<code>label</code>来定义。这个和[[Chapter-12-Working-with-Forms#将表单的标签进行分组]]将表单中多个输入元素分组其实是类似的。示例代码：</p><pre><code class="HTML">&lt;select id=&quot;fave&quot; name=&quot;fave&quot;&gt;    &lt;optgroup label=&quot;Top Choices&quot;&gt;        &lt;option value=&quot;apples&quot; label=&quot;Apples&quot;&gt;Apples&lt;/option&gt;        &lt;option value=&quot;oranges&quot; label=&quot;Oranges&quot;&gt;Oranges&lt;/option&gt;    &lt;/optgroup&gt;    &lt;optgroup label=&quot;Others&quot;&gt;        &lt;option value=&quot;cherries&quot; label=&quot;Cherries&quot;&gt;Cherries&lt;/option&gt;        &lt;option value=&quot;pears&quot; label=&quot;Pears&quot;&gt;Pears&lt;/option&gt;    &lt;/optgroup&gt;</code></pre><h3 id="输入多行内容"><a href="#输入多行内容" class="headerlink" title="输入多行内容"></a>输入多行内容</h3><p><code>textarea</code>标签可以让用户输入多行内容。它的local attributes有：<code>name</code>、<code>disabled</code>、<code>form</code>、<code>readonly</code>、<code>maxlength</code>、<code>autofocus</code>、<code>required</code>、<code>placeholder</code>、<code>dirname</code>、<code>rows</code>、<code>wrap</code>、<code>cols</code>。<br>其中，有三个标签属性是<code>textarea</code>所特有的，用来设置输入框参数的，其他属性的使用和普通的输入框属性没有区别。<br><code>cols</code>、<code>rows</code>：指定了<code>textarea</code>的尺寸<br><code>wrap</code>：有<code>hard</code>和<code>soft</code>两个选择。区别在于，当使用<code>hard</code>时，提交到表单的文本中，每一个行所拥有的字符数量都不会超过<code>cols</code>属性的值。<br>示例代码：</p><pre><code class="HTML">&lt;textarea cols=&quot;20&quot; rows=&quot;5&quot; wrap=&quot;hard&quot; id=&quot;story&quot; name=&quot;story&quot;&gt;    Tell us why this is your favorite fruit&lt;/textarea&gt;</code></pre><h3 id="做个计算器"><a href="#做个计算器" class="headerlink" title="做个计算器"></a>做个计算器</h3><p><code>output</code>标签可以用来显示算数计算的结果。<br>它有三个local attributes，分别是<code>name</code>、<code>form</code>、<code>for</code>，前面两个很好理解，一个是指的标签名，一个是隶属表单的ID（因为HTML5中表单可以关联外部元素[[Chapter-12-Working-with-Forms#将表单外部元素与表单关联起来]]）。<br><code>for</code>属性可以用来指定要计算的两个数的输入标签。当然，要实现该效果还需要使用JS，代码示例：</p><pre><code class="HTML">&lt;form onsubmit=&quot;return false&quot; oninput=&quot;res.value = quant.valueAsNumber * price.valueAsNumber&quot;&gt;    &lt;fieldset&gt;    &lt;legend&gt;Price Calculator&lt;/legend&gt;        &lt;input type=&quot;number&quot; placeholder=&quot;Quantity&quot; id=&quot;quant&quot; name=&quot;quant&quot;/&gt;         x        &lt;input type=&quot;number&quot; placeholder=&quot;Price&quot; id=&quot;price&quot; name=&quot;price&quot;/&gt;         =        &lt;output for=&quot;quant name&quot; name=&quot;res&quot;/&gt;    &lt;/fieldset&gt;&lt;/form&gt;</code></pre><p>可以看到，把两个输入框的数字相乘是通过JS事件<code>oninput</code>来实现的，这个在JS（第40章）还会描述。</p><h3 id="创建公钥和私钥对"><a href="#创建公钥和私钥对" class="headerlink" title="创建公钥和私钥对"></a>创建公钥和私钥对</h3><p><code>keygen</code>标签可以用来产生公钥和私钥对。当表单被提交的时候，会产生公钥和私钥对，公钥会发送给服务器，私钥会被浏览器保存至用户的密钥仓库（key store）。<br>该标签各大浏览器的支持都不是很好，作者建议尽量避免使用该标签。</p><h2 id="输入校验"><a href="#输入校验" class="headerlink" title="输入校验"></a>输入校验</h2><p>HTML5以前，实现输入校验主要是使用JQuery提供的一些校验组件来实现。虽然HTML5有了校验功能，但是各浏览器的支持并不一样。所以使用的时候还是要谨慎。<br>能够用来是实施校验的属性主要有三个：<code>required</code>、<code>min</code>、<code>max</code>、<code>pattern</code>。</p><h3 id="设置输入框不能为空"><a href="#设置输入框不能为空" class="headerlink" title="设置输入框不能为空"></a>设置输入框不能为空</h3><p><code>required</code>属性可以将输入框设为必填。我个人感觉该特性对于接受各大产品的《用户隐私协议》作用颇大。<br>在使用该属性的时候，如果有默认的<code>value</code>值，那么该输入框就已经是填了；如果想要提示但是没有默认值，要使用<code>placeholder</code>，<br>通过标签属性校验的缺点就是不会像JS那样给即时提示，在提交的时候才会提示，而且<strong>一次只提示一个</strong>。</p><h3 id="确保输入的数值在指定范围内"><a href="#确保输入的数值在指定范围内" class="headerlink" title="确保输入的数值在指定范围内"></a>确保输入的数值在指定范围内</h3><p>当<code>input</code>的<code>type</code>属性是<code>number</code>的时候，可以通过<code>min</code>和<code>max</code>属性来设置输入数字的上下限。上限和下限值都是允许渠道的，也就是数学上的前后双闭区间。<br>指定了最大最小值并不代表该输入框不能为空，所以一般配合<code>required</code>属性来使用。</p><h3 id="保证输入的内容符合特定要求"><a href="#保证输入的内容符合特定要求" class="headerlink" title="保证输入的内容符合特定要求"></a>保证输入的内容符合特定要求</h3><p><code>pattern</code>属性可以定义一个正则表达式用来校验用户的输入内容。<br>同样的，提供该属性值的时候浏览器并不会要求该值必填，需要配合<code>required</code>来使用。</p><h3 id="正则表达式结合其他属性"><a href="#正则表达式结合其他属性" class="headerlink" title="正则表达式结合其他属性"></a>正则表达式结合其他属性</h3><p>当输入框的<code>type</code>属性是<code>email</code>或者<code>url</code>的时候，这是可以结合<code>pattern</code>定义的正则表达式给予更强的限制，例如只允许输入特定公司的电子邮件。示例代码：</p><pre><code class="HTML">&lt;label for=&quot;email&quot;&gt;Email: &lt;input type=&quot;email&quot; placeholder=&quot;user@mydomain.com&quot; required pattern=&quot;.*@mydomain.com$&quot; id=&quot;email&quot; name=&quot;email&quot;/&gt;&lt;/label&gt;</code></pre><h2 id="禁用当前表单的输入校验"><a href="#禁用当前表单的输入校验" class="headerlink" title="禁用当前表单的输入校验"></a>禁用当前表单的输入校验</h2><p>在某些情况下开发者可能需要禁用输入校验，例如用户在某一时刻需要先保存未填写完成的表单去从事其他工作然后在回到表单填写，这时候需要禁用输入校验。<br>有两种实现方式，分别是对于<code>form</code>标签，以及对<code>button</code>和<code>input</code>进行设置。<br><code>form</code>：应用<code>novalidate</code>属性<br>表单提交标签<code>input</code>（type=“submit”）或者<code>button</code>（type=”submit”）：应用<code>formnovalidate</code><br>当然，要想成功保存未填写完成的表单，还需要服务器端有相应的功能模块才行。</p>]]></content>
+      
+      <categories>
+          
+          <category> HTML5权威指南 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> HTML5权威指南 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>HTML5权威指南 Chapter 13 Customizing the Input Element</title>
+      <link href="/2021/04/17/Chapter-13-Customizing-the-Input-Element/"/>
+      <url>/2021/04/17/Chapter-13-Customizing-the-Input-Element/</url>
+      <content type="html"><![CDATA[<p>通过设置输入框<code>input</code>标签的<code>type</code>属性，可以控制能够输入到输入框中的具体数据类型。<code>type</code>属性对应的值有23种，<code>input</code>标签所拥有的attributes共有30多种，其中很多在特定的<code>type</code>值下才能设置。</p><h2 id="当input标签用作文本输入时的可用属性"><a href="#当input标签用作文本输入时的可用属性" class="headerlink" title="当input标签用作文本输入时的可用属性"></a>当<code>input</code>标签用作文本输入时的可用属性</h2><p>当<code>type</code>的值是<code>text</code>时，<code>input</code>标签被浏览器解析为文本输入框，这也是省略<code>type</code>值时浏览器默认给的状态。这时，<code>input</code>可以通过设置不同属性来实现以下功能。</p><h3 id="控制输入长度"><a href="#控制输入长度" class="headerlink" title="控制输入长度"></a>控制输入长度</h3><p>这里的输入长度指两个方面，1）文本框内可输入的文本长度——<code>maxlength</code>属性，2）文本框本身的长度，也就是文本框可展示多少个字符——<code>size</code>属性。这两个属性的可用值均是正整数。代码示例：</p><pre><code class="HTML">&lt;label for=&quot;fave&quot;&gt;    Fruit: &lt;input size=&quot;10&quot; maxlength=&quot;10&quot; id=&quot;fave&quot; name=&quot;fave&quot;/&gt;&lt;/label&gt;</code></pre><p>这里注意：<code>size</code>属性只是限制文本框长度，或者说是<strong>可展示字符</strong>的长度。但不管输入多少，都会被传到服务器；<code>maxlength</code></p><h3 id="设置value属性和placeholder属性"><a href="#设置value属性和placeholder属性" class="headerlink" title="设置value属性和placeholder属性"></a>设置<code>value</code>属性和<code>placeholder</code>属性</h3><p><code>value</code>属性：该属性是指在加载表单时输入框默认的值。这个值可以是以前的输入，也可能是大部分情况下都可用的值。该值的字体颜色和正常输入值是一致的。<br><code>placeholder</code>属性：该属性的值也展示在输入框中，但文本的颜色要比正常输入值淡，属于灰色。该值主要是一些输入提示。示例代码：</p><pre><code class="HTML">&lt;label for=&quot;city&quot;&gt;    City: &lt;input placeholder=&quot;Where you live&quot; id=&quot;city&quot; name=&quot;city&quot;/&gt;&lt;/label&gt;&lt;label for=&quot;fave&quot;&gt;    Fruit: &lt;input value=&quot;Apple&quot; id=&quot;fave&quot; name=&quot;fave&quot;/&gt;&lt;/label&gt;</code></pre><p>当这两个属性同时设置了值的时候，在载入表单的时候，<code>value</code>的值自动填写在输入框中，删去该值，鼠标点击空白处输入框内会出现<code>placeholder</code>的内容。<br><strong>当表单中两个输入框拥有相同的name属性值的时候</strong>，当上传到服务器时，这两个值会被存入对应name的键值对的value里面，中间以逗号隔开。</p><h3 id="用作datalist"><a href="#用作datalist" class="headerlink" title="用作datalist"></a>用作<code>datalist</code></h3><p><code>datalist</code>本身是一个标签，它可以被用来创建一个列表，而当把输入框的<code>list</code>属性的值设置为<code>datalist</code>的id的时候，当前的输入框就成为了一个<code>datalist</code>。<br><code>datalist</code>是列表标签。使用示例：</p><pre><code class="HTML">&lt;datalist id=&quot;fruitlist&quot;&gt;    &lt;option value=&quot;Apples&quot; label=&quot;Lovely Apples&quot;/&gt;    &lt;option value=&quot;Oranges&quot;&gt;Refreshing Oranges&lt;/option&gt;    &lt;option value=&quot;Cherries&quot;/&gt;&lt;/datalist&gt;</code></pre><p>在<code>datalist</code>中，<code>label</code>属性的使用也是非常特殊的。当下拉菜单时，提示框里面显示的<code>label</code>的内容，但是当选择该选项时，<code>input</code>框里输入的是<code>option</code>里面<code>value</code>的值，而不是用户所看到的<code>label</code>的内容；这一点对于<code>option</code>所包裹的标签内容也同样适用，用户看到的是content的文本，但是选择该选项时，<code>input</code>框里填入的是<code>value</code>的值。</p><h3 id="不可输入内容的输入框"><a href="#不可输入内容的输入框" class="headerlink" title="不可输入内容的输入框"></a>不可输入内容的输入框</h3><p>禁止在输入框中输入内容有两个属性可以使用：<code>disabled</code>、<code>readonly</code>。这两个属性都不需要以键值对的形式存在，只需要标出就可以。但两个属性效果是不同的。<br><code>disabled</code>：这时输入框显示的就是<code>value</code>属性的值，且框显示为灰色，一看就知道无法输入内容。最重要的是，当该属性被激活时，<strong>这个<code>input</code>框里的值是不会被提交到服务器端的。</strong><br><code>readonly</code>：该属性被激活时，输入框会显示<code>value</code>属性的值，但是框外表看上去和其他有value切可以修改的框没有区别，只是用户无法修改当前框内的内容。该属性要谨慎使用，因为容易给人造成困扰。</p><h3 id="确定文本的方向性"><a href="#确定文本的方向性" class="headerlink" title="确定文本的方向性"></a>确定文本的方向性</h3><p><code>dirname</code>属性可用于确定文本的方向性，但直到本篇笔记写作，仍没有浏览器支持。<br>控制文本方向可使用<code>dir</code>，属性，有rtl（right to left）和ltr（left to right）两个选择。</p><h2 id="当input标签用作密码输入时的可用属性"><a href="#当input标签用作密码输入时的可用属性" class="headerlink" title="当input标签用作密码输入时的可用属性"></a>当<code>input</code>标签用作密码输入时的可用属性</h2><p>当<code>type</code>属性的值被设为<code>password</code>时，这是输入框用作密码输入。The<br>characters that the user types are represented by a <em>masking character</em>, such as an asterisk (*)。这时有以下属性可用来设置对输入内容的限制。<br><code>maxlength</code>：用户能在密码框内输入的最大字符数量<br><code>pattern</code>：定义用于输入校验的正则表达式<br><code>placeholder</code>：和正常输入框的<code>placeholder</code>功能一样，都是在输入框里以灰色文本显示给用户的一些输入提示<br><code>readonly</code>：让该框成为无法编辑的状态，和正常输入框的<code>readonly</code>属性使用效果一样。<br><code>required</code>：表明用户必须在该标签内输入内容，该输入框不能为空。第14章还有具体讲解。<br><code>size</code>：指定密码输入框的初始值（initial value）。<br>这里注意：如果使用正常的HTTP协议，密码会以明文的方式发送至服务器端，而且在服务器端是可以看见密码明文的。如果需要将密码加密发送，需要使用SSL/HTTPS来传输。</p><h2 id="将输入标签作为按钮来使用"><a href="#将输入标签作为按钮来使用" class="headerlink" title="将输入标签作为按钮来使用"></a>将输入标签作为按钮来使用</h2><p>当输入标签的<code>type</code>属性值是<code>reset</code><code>submit</code><code>button</code>其中一个的时候，<code>input</code>标签就成为了一个按钮，可以用来提交表单，重置，或者单纯作为按钮使用。<br>当<code>type</code>属性值为<code>submit</code>时，这是可设置的additional attributes有<code>formaction</code>、<code>formenctype</code>、<code>formmethod</code>、<code>formtarget</code>、<code>formnovalidate</code>。但是其他两种情况则没有可以设置的相关属性（主要那两个不提交表单，也没什么好设置的）。<br>当用作按钮时，按钮上显示的内容是输入框的<code>value</code>的值。<br>使用输入框作为按钮和直接使用<code>button</code>按钮不同的地方在于，在<code>button</code>中，按钮上显示的文本可以被套上标记样式（例如加粗，因为它们是按钮标签的内容，被开始标签和闭合标签包裹，在按钮标签里面还可以再包裹文本标记标签，但是输入框的<code>value</code>属性值是不能再套标签的）。<br>至于为什么要使用输入框来制作按钮，主要原因是IE6对于按钮标签的支持很差，为了避免出现问题，向下兼容浏览器，所以使用输入标签来制作按钮。</p><h2 id="指定输入框可接受的数据类型"><a href="#指定输入框可接受的数据类型" class="headerlink" title="指定输入框可接受的数据类型"></a>指定输入框可接受的数据类型</h2><h3 id="通过输入框从用户获得数字"><a href="#通过输入框从用户获得数字" class="headerlink" title="通过输入框从用户获得数字"></a>通过输入框从用户获得数字</h3><p>当需要从用户那里获得数字的时候，有两种界面，1）输入框输入数字；2）数值轴输入</p><ol><li>让<code>input</code>标签的<code>type</code>值等于<code>number</code>，这时输入框只能输入数字，和<code>number type</code>相关的一些属性被“激活”。这是可用来设置输入限制的属性有：<code>list</code>——通过<code>datalist</code>来指定数字值、<code>min</code>——确定可输入框内的最小数字（也设定数字输入框右侧的加减按钮的最小值）、<code>max</code>——设定可输入最大值（加减按钮的最大值）、<code>readonly</code>——不接受用户输入、<code>required</code>——该输入框不能为空、<code>step</code>——加或减的步长、<code>value</code>——初始值。<pre><code class="HTML">&lt;label for=&quot;price&quot;&gt; $ per unit in your area:     &lt;input type=&quot;number&quot; step=&quot;1&quot; min=&quot;0&quot; max=&quot;100&quot; value=&quot;1&quot; id=&quot;price&quot; name=&quot;price&quot;/&gt;&lt;/label&gt;</code></pre></li><li>将输入框类型设为<code>range</code>（<code>type=”range”</code>），这时输入框就会成为一个数轴，同样可以通过上面的属性设置用户输入限制。示例代码：<pre><code class="HTML">&lt;label for=&quot;price&quot;&gt; $ per unit in your area: 1 &lt;input type=&quot;range&quot; step=&quot;1&quot; min=&quot;0&quot; max=&quot;100&quot; value=&quot;1&quot; id=&quot;price&quot; name=&quot;price&quot;/&gt;100&lt;/label&gt;</code></pre>这里要注意最大值和最小值虽然在属性里设置了，但还是要在<code>input</code>标签前后标出最小值1和最大值100。而且我试验了谷歌Chrome和IE，在滑动滑块的时候都是不显示数字的，而且上述示例代码（英文原版330页）中如果最小值是1的话，那么<code>min</code>的值应该是1而不是0，因为最大最小值（<code>min</code>和<code>max</code>的值）都是可以取到的。<br>1<input type="range" step="1" min="0" max="100" value="1" name="price">100<h3 id="用于选择“是“和“否”的输入框"><a href="#用于选择“是“和“否”的输入框" class="headerlink" title="用于选择“是“和“否”的输入框"></a>用于选择“是“和“否”的输入框</h3>当用户需要针对某个问题回答”是“和”否“时，可以使用<code>checkbox</code>来获得用户的回答。当作为checkbox使用的时候，以下属性可用来设置<code>input</code>标签。<br><code>checked</code>：当输入框应用该属性时，默认载入表单的时候checkbox是被勾选的状态。重置表单的时候该选项也会被重置为勾选状态。<br><code>required</code>：Specifies that the user must check the check box for the purposes of input validation. See Chapter 14 for details.（好奇怪，那就是一定要选了？？那干嘛让人选是不是？）<br><code>value</code>：当用户给出是的答案时，该<code>name</code>的输入框传输给服务器的值，也就是服务器端存储的<code>name-value</code>对中的<code>value</code>应该填什么（如果checkbox没有被勾选，那么其对应的<code>input</code>就不会传给服务器）。示例代码：<pre><code class="HTML">&lt;label for=&quot;veggie&quot;&gt; Are you vegetarian: &lt;input type=&quot;checkbox&quot; id=&quot;veggie&quot; name=&quot;veggie&quot;/&gt; 你说的那个大神，他头秃吗？&lt;input type=&quot;checkbox&quot; name=&quot;head&quot; value=&quot;bald&quot;/&gt;&lt;/label&gt;</code></pre>效果展示：你说的那个大神，他头秃吗？<input type="checkbox" name="head" value="bald"><h3 id="从固定选项中选出一个"><a href="#从固定选项中选出一个" class="headerlink" title="从固定选项中选出一个"></a>从固定选项中选出一个</h3>使用<code>radio</code>属性可以使<code>input</code>框用来展示多个固定选项，并且从中选择一个将其值传给服务器。当输入框的类型是radio的时候，可设置的属性有以下几个：<br><code>checked</code>：当该选项应用到输入框上，默认选择该选项。重置时也是恢复默认选择<br><code>required</code>：必须在radio buttons中选择一个<br><code>value</code>：当该选项被选中时，上传到服务器的值是什么<br>使用的时候，多个radio buttons拥有同一个name（最后只有一个被选中），示例代码：<pre><code class="HTML">&lt;fieldset&gt; &lt;legend&gt;Vote for your favorite fruit&lt;/legend&gt;     &lt;label for=&quot;apples&quot;&gt;         &lt;input type=&quot;radio&quot; checked value=&quot;Apples&quot; id=&quot;apples&quot; name=&quot;fave&quot;/&gt;Apples     &lt;/label&gt;     &lt;label for=&quot;oranges&quot;&gt;         &lt;input type=&quot;radio&quot; value=&quot;Oranges&quot; id=&quot;oranges&quot; name=&quot;fave&quot;/&gt;Oranges     &lt;/label&gt;     &lt;label for=&quot;cherries&quot;&gt;         &lt;input type=&quot;radio&quot; value=&quot;Cherries&quot; id=&quot;cherries&quot; name=&quot;fave&quot;/&gt;Cherries     &lt;/label&gt;&lt;/fieldset&gt;</code></pre>可以看到，<code>name</code>都是一样的。当作为radio button使用的时候，输入框的<code>value</code>只是传到服务器的值，要显示被选择文本，需要在<code>input</code>后面定义(否则会只有一个圈)。<br>如果不设置默认选中项，也不应用<code>required</code>属性，那么在提交表单的时候不会提交该<code>input</code>标签名及其数据值。<h3 id="特定格式的输入内容"><a href="#特定格式的输入内容" class="headerlink" title="特定格式的输入内容"></a>特定格式的输入内容</h3>当输入电子邮件（<code>email</code>），电话（<code>tel</code>），网页链接（<code>url</code>），时，这些内容都有着固定的格式，所以可以将<code>type</code>设为对应值，从而对输入内容进行校验。<br>校验只会发生在表单提交的时候。<br>而且对于不同的格式，校验质量也不同。各浏览器对于电子邮件的校验都很好，但是对于URL的支持要看浏览器，而对于电话号码，几乎没有什么校验标准。第14章还会有输入校验的描述。</li></ol><hr><p>看完这一节，我个人觉得还是尽量不要使用这些属性，因为他们都是只能在提交表单的时候校验，这不符合目前的操作习惯。</p><h3 id="时间和日期的输入"><a href="#时间和日期的输入" class="headerlink" title="时间和日期的输入"></a>时间和日期的输入</h3><p>针对不同的日期时间表达格式，<code>type</code>有多种不同的选择。所有种类如下：<br><code>datetime</code>：全球化的日期时间显示，包括了时区<br><code>datetime-local</code>：本地时间，当type属性是这个时，不显示时区信息<br><code>date</code>：当前位置的日期<br><code>month</code>：年月<br><code>time</code>：时间<br><code>week</code>：当前是本年的第几周<br>日期及时间的格式标准是<a href="!http://tools.ietf.org/html/rfc3339">RFC 3339</a><br>当作为日期和时间输入时，有以下额外属性可以设置：<br><code>list</code>、<code>min</code>、<code>max</code>、<code>readonly</code>、<code>required</code>、<code>step</code>、<code>value</code>。<br>示例代码和效果如下：</p><pre><code class="HTML">&lt;label for=&quot;lastbuy&quot;&gt;    When did you last buy: &lt;input type=&quot;date&quot; id=&quot;lastbuy&quot; name=&quot;lastbuy&quot;/&gt;&lt;/label&gt;</code></pre><p>时间：<input type="date" name="bye">//type=”date“</p><p><input type="datetime">//type=”datetime”</p><p><input type="datetime-local">//type=”datetime-local”，需要时间的话，这个效果是不错的</p><p><input type="month">//type=”month”；<input type="time">//type=”time”；<input type="week">//type=“week”<br>当然，如果出现datetime那种只有一个框，其他都是用户自己来输入的情况，建议使用JQuery中的Calendar Pickers组件。——截至本篇笔记完成当天<date datetime="2021-4-21">2020-4-21</date>，Chrome和Edge等浏览器对于<code>type=”datetime”</code>的支持仍然只有一个输入框，该选项要谨慎使用。</p><h3 id="给点颜色看看"><a href="#给点颜色看看" class="headerlink" title="给点颜色看看"></a>给点颜色看看</h3><p>这是type的值是<code>color</code>，这是可以在框内输入<code>#</code>开头的6个十六进制数字，每两个一组的格式，分别代表RGB中的一个，从而用来指定颜色。这里输入框是不接受CSS那样直接输入颜色名称的（例如<code>black</code>这种）。<br>示例：<input type="color"><br>示例代码：</p><pre><code class="HTML">&lt;input type=&quot;color&quot; name=&quot;color&quot; id=&quot;your color&quot;/&gt;</code></pre><p>部分浏览器（）当输入框的<code>type</code>属性是<code>color</code>的时候，会给予颜色盘来选择，但并不是全部都这样。——截至本篇笔记完成，除了IE外，各大浏览器均支持了颜色盘；神奇的是，IE对于数字选择属性值<code>range</code>的支持却格外好，能够看到具体的数字，其他的浏览器都做不到。</p><h2 id="通过输入标签获得用户的搜索条目"><a href="#通过输入标签获得用户的搜索条目" class="headerlink" title="通过输入标签获得用户的搜索条目"></a>通过输入标签获得用户的搜索条目</h2><p>当<code>type=”search”</code>的时候，该<code>input</code>标签可用于接收用户要搜索的内容。该属性下可用的额外属性和<code>type=”text”</code>时是相同的；而且，该属性下没有任何实际的效果或者可执行的操作。我尝试了多个浏览器，并没有什么结果。它和普通的文本输入框没有什么区别。</p><h2 id="创建隐身的数据输入框"><a href="#创建隐身的数据输入框" class="headerlink" title="创建隐身的数据输入框"></a>创建隐身的数据输入框</h2><p>当<code>type=”hidden”</code>的时候，可以创建出无法被用户看见的输入框。<br>该输入框的<code>value</code>可以记录一些信息，例如当前用户所编辑的记录在数据库中的ID等等。当然这个需要结合一些其他语言来插入值。</p><h2 id="创建图像按钮和地图"><a href="#创建图像按钮和地图" class="headerlink" title="创建图像按钮和地图"></a>创建图像按钮和地图</h2><p>当<code>input</code>标签的<code>type=”image”</code>时，这是的提交表单标签可以是图片。示例代码：</p><pre><code class="HTML">&lt;input type=&quot;image&quot; src=&quot;accept.png&quot; name=&quot;submit&quot;/&gt;</code></pre><p>主要是要指定一下图片的路径（通过<code>src</code>来指定）。当输入框的<code>type</code>值是<code>image</code>时，有以下额外属性可以使用：<br><code>alt</code>：提供图像的文本描述（可以用于一些辅助技术的使用，例如语音播报从而协助盲人使用）。<br><code>formaction</code><code>formenctype</code><code>formtarget</code><code>formmethod</code><code>formnovalidate</code>：都可以用于设置表单属性<br><code>height</code>、<code>width</code>：用于设置图片的高和宽，单位是像素pixels，如果没有指定该值，那么会展示图片的源尺寸。<br><code>src</code>：指定图片的URL<br>用户点击图片过后，浏览器就会提交表单。这是，使用<code>image</code>的特点就在于——提交的时候会额外提交两个参数<code>submit.x</code>和<code>submit.y</code>，这两个数值记录的是用户点击图片的接触点的位置坐标，该坐标的0点位于图片左上端（top-left corner of the image）<br>这也是地图Maps的由来，这两个数据意味着可以使用由多个区域组成的图片，根据用户点击的位置来决定浏览器的响应操作。</p><h2 id="上传文件"><a href="#上传文件" class="headerlink" title="上传文件"></a>上传文件</h2><p>将<code>type</code>属性设置为<code>file</code>，还要修改表单标签<code>form</code>的<code>enctype</code>，将其设置为<code>multipart/form-data</code>。<br>示例代码：</p><pre><code class="HTML">&lt;form method=&quot;post&quot; action=&quot;http://titan:8080/form&quot; enctype=&quot;multipart/form-data&quot;&gt;&lt;input type=&quot;file&quot; name=&quot;filedata&quot;/&gt;</code></pre>]]></content>
+      
+      <categories>
+          
+          <category> HTML5权威指南 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> HTML5权威指南 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>HTML5权威指南 Chapter 12 Working with Forms</title>
+      <link href="/2021/04/15/Chapter-12-Working-with-Forms/"/>
+      <url>/2021/04/15/Chapter-12-Working-with-Forms/</url>
+      <content type="html"><![CDATA[<p>在HTML5中，表单（form）受到了重视，拥有了很多新的特性，包括收集特定数据类型的信息以及甄别输入框中所输入的内容是否符合要求（以前这些操作都是要通过JS来完成的，但是现在已经可以通过HTML5来完成了）。</p><h2 id="认识表单相关的基本元素"><a href="#认识表单相关的基本元素" class="headerlink" title="认识表单相关的基本元素"></a>认识表单相关的基本元素</h2><p>创建一个表单所需要的最基本的三个标签是：<code>form</code>、<code>input</code>、<code>button</code>。</p><ul><li><code>form</code>标签用来告诉浏览器现在已经遇到一个表单元素了。<code>form</code>元素有很多属性，比较重要的是<code>method</code>——用来表明向服务器传输数据时所使用的方法，<code>action</code>——用来确定目标服务器，该属性的值就是目标服务器的地址。这些在本章后面还会具体全面地讲。</li><li><code>input</code>标签用来给用户输入内容。HTML5中的输入标签根据<code>type</code>值的不同，可以拥有29种属性。这个在下一章会具体讲。</li><li><code>button</code>标签，当用户完成了表单所有内容的输入，需要告诉浏览器将这些数据发送到服务器的时候，就会用到按钮标签（当然按钮标签只是最常用的方案，还有其他方案）。按钮标签也有很多其他的用法，在本章的后面会有更详细的叙述。当按钮标签位于表单元素内，且没有任何<code>attribute</code>设置的时候，其作用就是告诉浏览器提交用户数据至服务器。</li></ul><hr><h3 id="Seeing-the-form"><a href="#Seeing-the-form" class="headerlink" title="Seeing the form"></a>Seeing the form</h3><p>本节作者在自己的域名为TAITAN的服务器上布置了一个node.js脚本用来获取用户提交的数据，并返回包含一个表格（table）的HTML页面，该表格展示了<code>input</code>框内所填入的值和该框<code>name</code>属性的值。<br>我自己在CentOS虚拟机上装node.js模拟服务器端，但是nvm无法安装，所以直接在HBuilderX的终端中运行了formecho.js，也尝试了在PowerShell中输入<code>node formecho.js</code>运行node.js脚本，效果都是一样的。然后将表单提交到了本地端口<code>action=”<a href="http://localhost:8080/form&quot;" target="_blank" rel="noopener">http://localhost:8080/form&quot;</a></code>，也可以运行成功。</p><h2 id="配置表单参数"><a href="#配置表单参数" class="headerlink" title="配置表单参数"></a>配置表单参数</h2><h3 id="设置action属性"><a href="#设置action属性" class="headerlink" title="设置action属性"></a>设置<code>action</code>属性</h3><p><code>action</code>属性所确定的是当前表单内用户所填写的数据将要发到哪个服务器上（填入的是一个URL地址），例如，书中的示例服务器域名为titan，示例表单内的数据要被传到8080端口，URL为<code>/form</code>的地方。<br>如果不指定<code>action</code>的值，那么默认设置是将数据发送到当前文档页面所位于的URL处。<br>如果使用的是相对路径，那么当存在<code>base</code>标签的时候，数据的目的地URL=<code>base</code>标签内所定义的路径+<code>action</code>所定义的相对路径；不存在<code>base</code>标签的时候，目的地URL=当前文档所在路径+<code>action</code>中所定义的相对路径。</p><h3 id="配置HTTP方法（method属性）"><a href="#配置HTTP方法（method属性）" class="headerlink" title="配置HTTP方法（method属性）"></a>配置HTTP方法（<code>method</code>属性）</h3><p><code>method</code>属性确定在向服务器传输 数据时使用的HTTP方法。该属性只有两个可选择的值，<code>GET</code>、<code>POST</code>，分别对应了HTTP方法中的get和post方法。默认使用的方法是<code>GET</code>。<br>GET方法主要用于“安全”的交互，这个safe interactions没有任何副作用，不管请求多少次都不会造成任何改变。<br>POST方法主要用于“不安全”交互，unsafe interactions。这时候提交的数据会造成一些状态的改变。<br>这里的安全与不安全指的就是是否会修改一些数据，如果只是向服务器请求页面而不会造成后端任何数据的改动，那就是用GET方法；相反，如果当前表单所提交的信息会修改服务器端的一些数据或者造成当前状态的改变，那就要使用POST方法了。<br>关于这两种方法的使用，指导思想是：当获取read-only信息的时候，就是用GET方法；对于任何可能改变当前应用状态的操作，都应该使用POST。</p><h3 id="设置数据编码方法-Configure-the-Data-Encoding"><a href="#设置数据编码方法-Configure-the-Data-Encoding" class="headerlink" title="设置数据编码方法(Configure the Data Encoding)"></a>设置数据编码方法(Configure the Data Encoding)</h3><p>设置浏览器所发数据的编码方法和展示方法的，是<code>form</code>标签中的<code>enctype</code>属性，也就是encoding type。该属性能够选择的对应值有三种：<code>application/x-www-form-urlencoded</code>、<code>multipart/form-data</code>、<code>text/plain</code></p><ul><li><code>application/x-www-form-urlencoded</code>，这是<code>enctype</code>的默认值。该选项不能用于文件上传操作。在该选项下，表单通过<code>input</code>文本框收集用户信息，传输给服务器，编码方案与编码URL的方法是一样的，上传的内容包括<code>input</code>的<code>name</code>属性的值和用户输入的值（也就是<code>value</code>属性的值）。其传输格式是：输入框的name值和用户输入内容用等号相连，多个输入框的name/value对使用&amp;符号相连，特殊字符使用对应的HTML entity来代替。</li><li><code>multipart/form-data</code>，可用于上传文件至服务器。该编码方案更加复杂，所得到的最终编码也比较冗长，建议当需要上传文件至服务器的时候选择该编码方式。</li><li><code>text/plain</code>，该编码方法目前没有正式的明细说明，不同的浏览器使用该方案时编码信息的方式是不一样的。所以，尽量不要使用该方案。</li></ul><hr><h3 id="自动填写表单的开关"><a href="#自动填写表单的开关" class="headerlink" title="自动填写表单的开关"></a>自动填写表单的开关</h3><p><code>autocomplete</code>属性可以决定是否记住用户所填的内容并且在下次填写表单时自动填入内容。该属性<code>form</code>和<code>input</code>标签都有。默认值是”on”，需要关闭的话就将值改为”off”。<code>input</code>的属性可以override表单的全局设置。</p><h3 id="提交表单后浏览器返回页面的打开方式"><a href="#提交表单后浏览器返回页面的打开方式" class="headerlink" title="提交表单后浏览器返回页面的打开方式"></a>提交表单后浏览器返回页面的打开方式</h3><p>当用户提交表单过后（submit后），浏览器默认会在当前标签页打开返回文档页面，如果想要在其他地方打开，可以使用<code>target</code>属性。<br>该属性可选值有<code>_self</code>——当前窗口、<code>_blank</code>——新空白标签页、<code>_parent</code>——在parent frameset中打开返回页面、<code>_top</code>——open it in the full body of the window、<code>&lt;frame&gt;</code>)——在指定的frame中打开。<br><code>_blank</code>和<code>_self</code>都是self-evident，其他的都要依赖<code>frame</code>的使用。</p><h3 id="设置表单名称"><a href="#设置表单名称" class="headerlink" title="设置表单名称"></a>设置表单名称</h3><p>表单名称的设置通过<code>form</code>的<code>name</code>属性来设置。该属性主要用于在DOM（Document Object Model）中有多个表单时来区分，这个<code>name</code>属性的值可以作为DOM中的唯一标识符。它和<code>id</code>的主要区别在于id主要用于CSS选择器。<em>name的值用于DOM，id的值一般用在CSS选择器</em>。<br>form的<code>name</code>不会被传输到服务器，只是用于DOM中，所以并不像<code>input</code>的<code>name</code>那样重要。<br><code>input</code>的属性<code>name</code>如果没有赋予值（指name没有出现过，因为如果后面是空格的话，空格也是值）,该<code>input</code>输入框内的值不会被上传。<br><strong>这里还要特别注意：当表单中的<code>button</code>标签的<code>type</code>属性值为<code>button</code>时，点击提交是没有反应的，这时不会提交页面</strong></p><h2 id="给表单的输入框加上标签（label）"><a href="#给表单的输入框加上标签（label）" class="headerlink" title="给表单的输入框加上标签（label）"></a>给表单的输入框加上标签（<code>label</code>）</h2><p><code>label</code>标签主要用来关联<code>input</code>标签，本节只说明了该怎样使用，以及<code>label</code>可用于一些辅助技术（assistive technologies），但并未举例。<br>使用示例代码：</p><pre><code class="HTML">&lt;label for=&quot;fave&quot;&gt;Fruit: &lt;input id=&quot;fave&quot; name=&quot;fave&quot;/&gt;&lt;/label&gt;</code></pre><p><code>for</code>属性的值对应于<code>input</code>元素的<code>id</code>属性值。<code>label</code>可以独立于<code>input</code>定义，并不一定要被<code>input</code>文件包裹在里面。</p><h2 id="自动对焦"><a href="#自动对焦" class="headerlink" title="自动对焦"></a>自动对焦</h2><p>当加载页面过后，让鼠标焦点直接位于某个输入框中，方便用户输入，无需手动选中。想要达到这样的效果，要通过<code>autofocus</code>属性。无需以键值对形式列出，写出该属性即可。例如：</p><pre><code class="HTML">&lt;input autofocus id=&quot;fave&quot; name=&quot;fave&quot;/&gt;</code></pre><p>注意：该属性只能用于一个输入元素，当页面出现多个应用了该属性的标签时，鼠标会停留在<strong>最后一个</strong>输入框内。</p><h2 id="如何禁止在输入框内输入内容"><a href="#如何禁止在输入框内输入内容" class="headerlink" title="如何禁止在输入框内输入内容"></a>如何禁止在输入框内输入内容</h2><p>应用输入标签的<code>disabled</code>属性可以使得该输入框无法输入内容。该属性和<code>autofocus</code>一样，无需使用键值对，只需要写出该属性即可。</p><h2 id="将表单的标签进行分组"><a href="#将表单的标签进行分组" class="headerlink" title="将表单的标签进行分组"></a>将表单的标签进行分组</h2><p>当处理复杂的表单的时候，将标签进行分组，可以使操作更方便。将表单元素分组的标签是<code>fieldset</code>。示例代码：</p><pre><code class="HTML">&lt;fieldset&gt;    &lt;p&gt;&lt;label for=&quot;name&quot;&gt;Name: &lt;input id=&quot;name&quot; name=&quot;name&quot;/&gt;&lt;/label&gt;&lt;/p&gt;    &lt;p&gt;&lt;label for=&quot;name&quot;&gt;City: &lt;input id=&quot;city&quot; name=&quot;city&quot;/&gt;&lt;/label&gt;&lt;/p&gt;&lt;/fieldset&gt;&lt;fieldset&gt;    &lt;p&gt;&lt;label for=&quot;fave1&quot;&gt;#1: &lt;input id=&quot;fave1&quot; name=&quot;fave1&quot;/&gt;&lt;/label&gt;&lt;/p&gt;    &lt;p&gt;&lt;label for=&quot;fave2&quot;&gt;#2: &lt;input id=&quot;fave2&quot; name=&quot;fave2&quot;/&gt;&lt;/label&gt;&lt;/p&gt;    &lt;p&gt;&lt;label for=&quot;fave3&quot;&gt;#3: &lt;input id=&quot;fave3&quot; name=&quot;fave3&quot;/&gt;&lt;/label&gt;&lt;/p&gt;&lt;/fieldset&gt;</code></pre><h3 id="给不同的表单标签组添加组名"><a href="#给不同的表单标签组添加组名" class="headerlink" title="给不同的表单标签组添加组名"></a>给不同的表单标签组添加组名</h3><p>在给标签分组过后，可以通过<code>legend</code>标签为表单标签组添加组名。代码示例：</p><pre><code class="HTML">&lt;fieldset&gt;    &lt;legend&gt;Enter Your Details&lt;/legend&gt;        &lt;p&gt;&lt;label for=&quot;name&quot;&gt;Name: &lt;input id=&quot;name&quot; name=&quot;name&quot;/&gt;&lt;/label&gt;&lt;/p&gt;        &lt;p&gt;&lt;label for=&quot;name&quot;&gt;City: &lt;input id=&quot;city&quot; name=&quot;city&quot;/&gt;&lt;/label&gt;&lt;/p&gt;&lt;/fieldset&gt;</code></pre><h3 id="按组禁止在输入框中输入内容"><a href="#按组禁止在输入框中输入内容" class="headerlink" title="按组禁止在输入框中输入内容"></a>按组禁止在输入框中输入内容</h3><p>只要激活<code>fieldset</code>标签的<code>disabled</code>属性就可以禁止在其包裹的所有输入框中输入内容。</p><h2 id="按钮标签的使用"><a href="#按钮标签的使用" class="headerlink" title="按钮标签的使用"></a>按钮标签的使用</h2><p>按钮标签<code>&lt;button&gt;</code>可以有三种用法，由其<code>type</code>属性来确定。该属性的三个可选值分别是<code>submit</code>、<code>reset</code>、<code>button</code>。</p><h3 id="用来提交表单"><a href="#用来提交表单" class="headerlink" title="用来提交表单"></a>用来提交表单</h3><p>将<code>type</code>属性设置为<code>submit</code>，<code>type=”submit”</code>。这是按下<code>button</code>会向服务器提交包含了该按钮的表单。<br>这是表单中按钮的默认设置，在使用该设置时，可以额外设置一些其他的属性。包括：<br><code>form</code>：该属性可指定要提交的表单，可以设置提交多个表单，也可指定提交哪些表单。在下一节会具体介绍。<br><code>formaction</code>：重写提交form的<code>action</code>属性。重写目标服务器的URL<br><code>formenctype</code>：重写所提交表单的<code>enctype</code><br><code>formmethod</code>：重写所提交表单的<code>method</code><br><code>formtarget</code>：重写所提交表单的<code>target</code>属性<br><code>formvalidate</code>：重写当前表单的<code>novalidate</code>属性，具体参见第14章。<br>这些属性主要用于重写所提交表单的一些属性。</p><h3 id="用来重置表单"><a href="#用来重置表单" class="headerlink" title="用来重置表单"></a>用来重置表单</h3><p>当<code>button</code>按钮的<code>type</code>属性被设置为<code>reset</code>时，按下按钮可将表单内所有的输入框重置为初始状态。<br>当使用该属性值的时候，并没有其他额外的属性参数可以设置。</p><h3 id="不执行任何操作"><a href="#不执行任何操作" class="headerlink" title="不执行任何操作"></a>不执行任何操作</h3><p>当<code>button</code>这个属性的值设为<code>button</code>时，它仅仅就是一个按钮，不会执行如何操作。当然，该属性值主要是为了配合JS脚本的使用，这在后面会有详细的介绍。<br><code>button</code>元素内部是可以使用Phrasing Elements的，也就是说，可以对按钮的文本内容应用一些Mark Up Elements。</p><h2 id="将表单外部元素与表单关联起来"><a href="#将表单外部元素与表单关联起来" class="headerlink" title="将表单外部元素与表单关联起来"></a>将表单外部元素与表单关联起来</h2><p>在HTML4中，要由表单提交的数据，必须位于表单元素之中。在HTML5中，这一约束已经没有了。位于某个表单标签之外的<code>input</code>、<code>button</code>等标签，只要将其属性<code>form</code>设置为某个表单的<code>id</code>，就可以被包含到表单中，在表单提交时，一起提交数据。示例：</p><pre><code class="HTML">&lt;form id=&quot;voteform&quot; method=&quot;post&quot; action=&quot;http://titan:8080/form&quot;&gt;    &lt;p&gt;        &lt;label for=&quot;fave&quot;&gt;            Fruit: &lt;input autofocus id=&quot;fave&quot; name=&quot;fave&quot;/&gt;        &lt;/label&gt;    &lt;/p&gt;&lt;/form&gt;    &lt;p&gt;        &lt;label for=&quot;name&quot;&gt;            Name: &lt;input form=&quot;voteform&quot; id=&quot;name&quot; name=&quot;name&quot;/&gt;        &lt;/label&gt;    &lt;/p&gt;    &lt;button form=&quot;voteform&quot; type=&quot;submit&quot;&gt;Submit Vote&lt;/button&gt;    &lt;button form=&quot;voteform&quot; type=&quot;reset&quot;&gt;Reset&lt;/button&gt;</code></pre><h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>本章描述了表单一些基本标签，以及这些标签的常用特性。下一章将会介绍一些HTML5中的表单新特性。</p>]]></content>
+      
+      <categories>
+          
+          <category> HTML5权威指南 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> HTML5权威指南 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>HTML5权威指南 Chapter 11 Table Elements</title>
+      <link href="/2021/04/12/Chapter-11-Table-Elements/"/>
+      <url>/2021/04/12/Chapter-11-Table-Elements/</url>
+      <content type="html"><![CDATA[<p>表格在HTML文档中的作用主要是从两个维度展示数据。在以前的HTML文档中，经常把表格用来控制页面内容的布局，但是在HTML5中不允许这样做的。而且必须应用最新的CSS表格特性。</p><h2 id="有关表格的三个最基本元素"><a href="#有关表格的三个最基本元素" class="headerlink" title="有关表格的三个最基本元素"></a>有关表格的三个最基本元素</h2><p>创建表格需要知道的最基本的三个元素：<code>table</code>、<code>tr</code>、<code>td</code>。<br><code>table</code>标签：<br>是最基本的表格标签，该标签说明现在创建一个表格。这里要注意的是，HTML4中的表格标签的诸多属性均被废除，现在的<code>table</code>标签只保留了一个属性那就是<code>border</code>，而且该属性的值必须为1，边框的粗细以及其他的表格属性均由CSS来指定。<br><code>tr</code>标签：<br>指表格中的一行，HTML中的表格是由行组成的而不是列，必须明确指定每一行。<code>tr</code>标签的诸多属性均被废除，要想控制行的一些align，valign，bgcolor，charoff，char等属性，需要使用CSS来控制。<br><code>td</code>标签：<br>单元格标签，是表格的最基本组成单位，就是指表格中的一个小格子（a table cell），也就是一行中的一列。<br>HTML中比较好的一点就是浏览器在解析表格的时候会根据单元格的内容自动调整表格的大小，包括行高和列宽等诸多设置，不需要再使用CSS手动去调整。</p><h2 id="thead标签的用法"><a href="#thead标签的用法" class="headerlink" title="thead标签的用法"></a><code>thead</code>标签的用法</h2><p> <code>thead</code>标签主要就是用来创建table headers cells，也就是表头单元格，表头单元格主要用来说明表格数据（the description of the table data），通常位于表格的第一行以及第一列，例如第一行的身高，年龄，第一列的id等。<br> 那么第一行固然很容易实现，就是第一行里面包裹多个 <code>thead</code>单元格，但是第一列的实现就要通过在每一行的第一个添加一个 <code>thead</code>标签了。代码示例如下：</p><pre><code class="HTML">&lt;table&gt;&lt;tr&gt;    &lt;th&gt;Rank&lt;/th&gt;&lt;th&gt;Name&lt;/th&gt;    &lt;th&gt;Color&lt;/th&gt;&lt;th&gt;Size&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;    &lt;th&gt;Favorite:&lt;/th&gt;    &lt;td&gt;Apples&lt;/td&gt;&lt;td&gt;Green&lt;/td&gt;&lt;td&gt;Medium&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;    &lt;th&gt;2nd Favorite:&lt;/th&gt;    &lt;td&gt;Oranges&lt;/td&gt;&lt;td&gt;Orange&lt;/td&gt;&lt;td&gt;Large&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;    &lt;th&gt;3rd Favorite:&lt;/th&gt;    &lt;td&gt;Pomegranate&lt;/td&gt;&lt;td&gt;A kind of greeny-red&lt;/td&gt;    &lt;td&gt;Varies from medium to large&lt;/td&gt;&lt;/tr&gt;</code></pre><p>当然，一行里面不一定只有唯一的 <code>thead</code>，也可以有多个表头列，那是比较复杂的表格。</p><h2 id="表格架构标签"><a href="#表格架构标签" class="headerlink" title="表格架构标签"></a>表格架构标签</h2><p>当需要给表格列上的头信息单元格和行上的头信息单元格赋予不同样式的时候，选择器的使用会非常的麻烦，无法分别作出选择。这时，我们需要区分一下table body，table head等区块，这样选择器在选择的时候会更方便。</p><h3 id="表头行和表身"><a href="#表头行和表身" class="headerlink" title="表头行和表身"></a>表头行和表身</h3><p>在HTML5以前，浏览器会自动给表格添加<code>tbody</code>标签，而有些页面中的表格定义是没有该标签的，这时就会造成CSS选择器中的一些样式定义无法正确应用。所以HTML5中尽量添加<code>tbody</code>。<br><code>thead</code>：如果一个表格没有<code>thead</code>，那么它所有的行都将被假定为属于表格的表身（the body of the table）。而<code>thead</code>所包裹的可以是一组的<code>tr</code>，这些行里面包裹着多个<code>th</code>，从而形成表格的表头信息组。<br>使用<code>thead</code>以及<code>tbody</code>可以使得CSS选择器能更灵活地使用。</p><h3 id="表格的尾部（footer）"><a href="#表格的尾部（footer）" class="headerlink" title="表格的尾部（footer）"></a>表格的尾部（footer）</h3><p>对于表格的尾部（footer），有意思的是在HTML5以前都是只能出现在第一行的前面或者<code>tbody</code>前面的，但是在HTML5里面，既可以把<code>tfoot</code>元素放在<code>tbody</code>的后面（也就是整个tbody元素的后面，在<code>&lt;/tbody&gt;</code>后面）；也可以放在<code>tbody</code>前面，页面在解析的时候，都会把<code>tfoot</code>放到表格的最后一行或多行。<br>至于为什么可以把表格的尾部在编码上放到表身之前，可能是出于方便生成HMTL模板的角度。而把尾部放在后面，更接近自然思维。</p><h2 id="创建非常规表格"><a href="#创建非常规表格" class="headerlink" title="创建非常规表格"></a>创建非常规表格</h2><p>非常规表格主要是存在一些行或者列其跨度占多个单元格。在这里我们主要使用<code>colspan</code>或者是<code>rowspan</code>属性，在某一个单元格中指定该属性的值，可以确认在横向或者纵向占多少个单元格。<br>代码示例：</p><pre><code class="HTML">&lt;tr&gt;    &lt;th&gt;3rd Favorite:&lt;/th&gt;    &lt;td&gt;Pomegranate&lt;/td&gt;    &lt;td colspan=&quot;2&quot; rowspan=&quot;2&quot;&gt;    Pomegranates and cherries can both come in a range of colors and sizes.    &lt;/td&gt;    &lt;td&gt;203&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;    &lt;th rowspan=&quot;2&quot;&gt;Joint 4th:&lt;/th&gt;    &lt;td&gt;Cherries&lt;/td&gt;    &lt;td rowspan=&quot;2&quot;&gt;75&lt;/td&gt;&lt;/tr&gt;</code></pre><p>当然在处理的时候，一个单元格占了多行或多列，那么该行列数量或某一列的行数量一定会减少，在这里要注意其他行要减少单元格数量。</p><h2 id="headers属性的使用"><a href="#headers属性的使用" class="headerlink" title="headers属性的使用"></a><code>headers</code>属性的使用</h2><p><code>headers</code>属性是表格内使用的元素都有的属性。它主要用来指示当前单元格所位于的行或者列的第一个单元格的内容（通常这些单元格是行名或者列名），示例代码如下：</p><pre><code class="HTML">&lt;table&gt;&lt;thead&gt;    &lt;tr&gt;    &lt;th id=&quot;rank&quot;&gt;Rank&lt;/th&gt;    &lt;th id=&quot;name&quot;&gt;Name&lt;/th&gt;    &lt;th id=&quot;color&quot;&gt;Color&lt;/th&gt;    &lt;th id=&quot;sizeAndVotes&quot; colspan=&quot;2&quot;&gt;Size &amp; Votes&lt;/th&gt;    &lt;/tr&gt;    &lt;/thead&gt;&lt;tbody&gt;    &lt;tr&gt;    &lt;th id=&quot;first&quot; headers=&quot;rank&quot;&gt;Favorite:&lt;/th&gt;        &lt;td headers=&quot;name first&quot;&gt;Apples&lt;/td&gt;        &lt;td headers=&quot;color first&quot;&gt;Green&lt;/td&gt;        &lt;td headers=&quot;sizeAndVote first&quot;&gt;Medium&lt;/td&gt;        &lt;td headers=&quot;sizeAndVote first&quot;&gt;500&lt;/td&gt;    &lt;/tr&gt;    &lt;tr&gt;    &lt;th id=&quot;second&quot; headers=&quot;rank&quot;&gt;2nd Favorite:&lt;/th&gt;        &lt;td headers=&quot;name second&quot;&gt;Oranges&lt;/td&gt;        &lt;td headers=&quot;color second&quot;&gt;Orange&lt;/td&gt;        &lt;td headers=&quot;sizeAndVote second&quot;&gt;Large&lt;/td&gt;        &lt;td headers=&quot;sizeAndVote second&quot;&gt;450&lt;/td&gt;    &lt;/tr&gt;&lt;/tbody&gt;</code></pre><h2 id="给表格添加标题"><a href="#给表格添加标题" class="headerlink" title="给表格添加标题"></a>给表格添加标题</h2><p><code>caption</code>标签可以用来定义一个标题，并且可以和某个表格联系起来。示例如下：</p><pre><code class="HTML">&lt;table&gt;    &lt;caption&gt;Results of the 2011 Fruit Survey&lt;/caption&gt;    &lt;thead&gt;        &lt;tr&gt;        &lt;th&gt;Rank&lt;/th&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Color&lt;/th&gt;        &lt;th colspan=&quot;2&quot;&gt;Size &amp; Votes&lt;/th&gt;        &lt;/tr&gt;    &lt;/thead&gt;&lt;tbody&gt;</code></pre><p>一个<code>table</code>标签内只能包含一个标题标签，但是标题标签的位置是不固定的，不管该标签定义在哪里，浏览器在解析的时候，会一直将标题放在表格的上面，就像我们通常所看到的那样。</p><h2 id="表格列的一些操作"><a href="#表格列的一些操作" class="headerlink" title="表格列的一些操作"></a>表格列的一些操作</h2><p>HMTL中的表格是基于行的（The HTML approach to tables is oriented around rows），需要使用列的话，就要用到<code>colgroup</code>和<code>col</code>（column group 和 column）。</p><h3 id="colgroup标签"><a href="#colgroup标签" class="headerlink" title="colgroup标签"></a><code>colgroup</code>标签</h3><p><code>colgroup</code>用来指定表格的多个列主要用于CSS中对列元素的选择。使用示例：</p><pre><code class="HTML">&lt;colgroup id=&quot;colgroup1&quot; span=&quot;3&quot;/&gt;</code></pre><p>该标签要定义在<code>form</code>内部，通过<code>span</code>属性来配置当前id下的列组包含了表格中的几列。顺序是从第一列开始一次向后。<br>在CSS中对列组应用样式，这里要注意，列组中不规则单元格位置由它所包含的第一个单元格位置来确定。<br>在CSS样式中，<code>colgroup</code>对样式的定义，其优先级低于直接应用在<code>tr</code>、<code>td</code>、<code>th</code>这些元素标签上的样式。如果同时存在，行、单元格、表头的样式会覆盖列组所定义的样式。<br>列组包含了一整列，包括表头<code>th</code>单元格等。<em>由于列组标签比较特殊，它并不包裹自己所包含的标签，所以不能使用层级选择器来对其所包含的标签进行操作</em>。</p><h3 id="col"><a href="#col" class="headerlink" title="col"></a><code>col</code></h3><p><code>col</code>标签主要用来选择单列，它是<code>colgroup</code>的内部标签，用来给单列或多列添加<code>id</code>，从而让样式应用更加细。在<code>colgroup</code>没有指定属性<code>span</code>值的时候，可以通过多个<code>col</code>来指定该组有多少列，示例如图：</p><pre><code class="HTML">&lt;colgroup id=&quot;colgroup1&quot;&gt;    &lt;col id=&quot;col1And2&quot; span=&quot;2&quot;/&gt;    &lt;col id=&quot;col3&quot;/&gt;&lt;/colgroup&gt;&lt;colgroup id=&quot;colgroup2&quot; span=&quot;2&quot;/&gt;</code></pre><h2 id="表格的border属性"><a href="#表格的border属性" class="headerlink" title="表格的border属性"></a>表格的<code>border</code>属性</h2><p>该属性非常特殊，它并不是一个样式属性，虽然它的名字很像。该属性的合法值只有”1”或者empty string（“”）,该属性并不能控制表格的border样式（想要控制边框样式要使用CSS）。<br>该属性是告诉浏览器当前的表格，是用来展示数据的（tabular data），而不是用来进行页面布局的。</p>]]></content>
+      
+      <categories>
+          
+          <category> HTML5权威指南 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> HMTL5权威指南 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>HTML5权威指南Chapter 10 Creating Sections</title>
+      <link href="/2021/04/09/Chapter-10-Creating-Section/"/>
+      <url>/2021/04/09/Chapter-10-Creating-Section/</url>
+      <content type="html"><![CDATA[<p>本章所介绍的标签主要作用：分隔内容，从而让每一个主题或者概念（topic or concept）能够相互独立。本章大多数的标签都是新的，而且充分体现了意义与样式相分离的思想，所以大部分标签是不带任何样式效果的。</p><h2 id="使用基本的标题标签"><a href="#使用基本的标题标签" class="headerlink" title="使用基本的标题标签"></a>使用基本的标题标签</h2><p>基本的标题标签为<code>h1</code>-<code>h6</code>，当然，本书提倡尽量使用1-3级标题标签即可。<br>Headings标签的父元素不能是<code>address</code>标签的子元素或者<code>address</code>。<br>标题主要用来分隔不同的主题（topic）。由于读者大多对标题的功能比较熟悉，尽量不要给标题赋予其他的功能，以免造成困扰。</p><h2 id="隐藏副标题"><a href="#隐藏副标题" class="headerlink" title="隐藏副标题"></a>隐藏副标题</h2><p>在HTML5中，如果要使用副标题，可以使用<code>hgroup</code>，在<code>hgroup</code>中可以放置多个标题，同时文档的大纲中只会显示<code>hgroup</code>的第一个子标题。<br><code>hgroup</code>在标题层级中的地位也是由第一个子标题来决定（如果第一个子标题是<code>h2</code>，则整个<code>hgroup</code>在标题层级中就属于<code>h2</code>）</p><h2 id="创建区块（sections）"><a href="#创建区块（sections）" class="headerlink" title="创建区块（sections）"></a>创建区块（sections）</h2><p>本身标题就已经把内容分区（section）了，而<code>section</code>标签是可以手动分区的。使用<code>section</code>标签可以让文档的分区与标题标签相分离。<code>section</code>标签在使用的时候并没有明确的规则与要求，要注意的是<code>section</code>标签所包裹的内容一般都是正文内容（大纲中会列出的内容）。<br><code>section</code>使用的注意点在于其内部的标题标签样式。在<code>section</code>标签嵌套使用的时候，同级的标题标签会拥有不同的样式，父元素<code>section</code>中的<code>h1</code>标题所包含的内容要比其子元素<code>section</code>中的<code>h1</code>在显示样式上高一个级别。当然，这些标题标签的层级关系浏览器会自动处理，不需要手动定义样式。<br>在这里要提出的是：《HTML5权威指南》这本书在本章的Creating Sections这一节描述道欧朋（Opera）浏览器中，父子<code>section</code>元素中的<code>h1</code>是相同的显示效果，在<time datetime="2021-4-11">2021年4月</time>测试，现在子元素中的<code>h1</code>样式已经会发生改变，欧朋浏览器在展示的时候也会和其他浏览器一样低一个等级。</p><h2 id="header和footer元素的使用"><a href="#header和footer元素的使用" class="headerlink" title="header和footer元素的使用"></a><code>header</code>和<code>footer</code>元素的使用</h2><p><code>header</code>和<code>footer</code>元素主要用于包裹开始信息和结束信息。<br><code>header</code>元素主要用来包裹开始信息，这里的开始信息包括了<code>hgroup</code>这样的元素，<code>hgroup</code>里面还可以包裹各种标题标签。<br>这里要注意的是，<code>header</code>元素既可以出现在整个文档的开头，也可以内嵌在某个<code>section</code>中，这里也可以看到<code>header</code>的作用和第七章所描述的<code>head</code>是存在不同的。<code>header</code>主要包裹的报头（masthead），导航栏，标题组，logo等内容。<br><code>footer</code>主要包括的是一些结尾信息，包括但不限于版权信息，作者，相关参考内容，免责声明（disclaimer），也可以包括logo之类的。</p><h2 id="创建导航栏"><a href="#创建导航栏" class="headerlink" title="创建导航栏"></a>创建导航栏</h2><p>创建导航栏主要使用<code>nav</code>标签，该标签主要是为了确定一篇文档的主导航区块，该标签内包含的是一些本文档或者其他文档页面的链接（例如淘宝页面的商品种类导航栏）。<br><code>nav</code>标签可应用环境不仅仅是开头，也可以用在结尾处引申阅读时列出所有的资源。<br><code>nav</code>标签本身是没有样式的，需要使用CSS才能显示出效果。</p><h2 id="article标签的使用"><a href="#article标签的使用" class="headerlink" title="article标签的使用"></a><code>article</code>标签的使用</h2><p><code>article</code>标签主要用在那些可以独立出来的内容，这些内容本身是非常完整的整体，可以作为独立的一部分放到任何其他地方。<br>该标签同样本身也没有样式效果，需要使用CSS。</p><h2 id="创建侧边栏-SideBar，aside"><a href="#创建侧边栏-SideBar，aside" class="headerlink" title="创建侧边栏(SideBar，aside)"></a>创建侧边栏(SideBar，<code>aside</code>)</h2><p>侧边栏标签<code>aside</code>主要用于那些和文章主线内容弱相关的内容，就好像杂志里面的那些页面上一小块的历史小趣事一样，只和主体内容有一点点的联系（切线一样的相关性）。<br><code>aside</code>标签也是没有样式的，一般都是使用一些CSS样式让该区域内容浮动到靠边区域显示。</p><h2 id="提供联系信息"><a href="#提供联系信息" class="headerlink" title="提供联系信息"></a>提供联系信息</h2><p><code>address</code>标签可以指示文档或者<code>article</code>的联系信息，例如给作者发送电子邮件所要用的邮箱等。示例代码：</p><pre><code class="HMTL">&lt;address&gt;有问题的话，请使用电子邮件与我联系&lt;a href=&quot;mailto:adam@myboringblog.com&quot;&gt;Email me&lt;/a&gt;&lt;/address&gt;</code></pre><p><code>address</code>中的内容是使用<em>斜体</em>展示的。</p><h2 id="details标签的使用"><a href="#details标签的使用" class="headerlink" title="details标签的使用"></a><code>details</code>标签的使用</h2><p><code>details</code>标签用来包裹一些详细解释等内容，该标签的应用内容并没有太过严格的要求，要注意的是该标签的样式。<br>该标签有一个子标签<code>summary</code>，这个标签的合法父元素只能是<code>details</code>，<code>summary</code>主要用来包裹<code>details</code>区域内始终显示的内容，相当于该区域的标题。默认情况下<code>details</code>区域内除了<code>summary</code>区域的内容，其他区域的内容都是折叠的，如果需要默认不折叠内容，需要使用<code>apply</code>属性。</p><pre><code>&lt;details open=&quot;open&quot;&gt;            &lt;summary&gt;我们这里主要将一下引申内容&lt;/summary&gt;            看看是否被折叠起来了。如果折叠了的话应该要怎么办？            当然是通过使用&lt;code&gt;open&lt;/code&gt;属性来完成默认打开的操作啊。        &lt;/details&gt;</code></pre><h2 id="summary"><a href="#summary" class="headerlink" title="summary"></a>summary</h2><p>本章主要讲了创建区块的标签，还有将不相关内容独立出来的标签。这些标签大多都是新的，且对于HTML5的语义学特性有非常好的增强效果。</p>]]></content>
+      
+      <categories>
+          
+          <category> HTML5权威指南 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> HTML5权威指南 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>HTML5权威指南 Chapter 9 Grouping Content</title>
+      <link href="/2021/04/06/Chapter-9-Grouping-Content/"/>
+      <url>/2021/04/06/Chapter-9-Grouping-Content/</url>
+      <content type="html"><![CDATA[<p>This chapter is for the elements that could group related content together.这些元素能够给予文档一个整体的架构，并且可以给一些内容进一步的意义。</p><h2 id="理解为什么要给内容分组"><a href="#理解为什么要给内容分组" class="headerlink" title="理解为什么要给内容分组"></a>理解为什么要给内容分组</h2><p>浏览器在呈现HTML文档的时候，会把内容中的多行空白压缩成一个空格，这样就把浏览器所呈现的布局和HTML文档源码布局给区分开来了。正因为HTML源码中的结构无法影响浏览器所呈现出来的网页页面，我们才需要使用Grouping Elements来给文档构建起架构来。本章所给出的标签可以让你将相连区块的内容聚成各自的小组。</p><h2 id="创建段落（paragraphs）"><a href="#创建段落（paragraphs）" class="headerlink" title="创建段落（paragraphs）"></a>创建段落（paragraphs）</h2><p>p 标签<code>&lt;p&gt;</code>，主要用于包裹某<strong>一个</strong>论点或者想法的几句话，当然，有时候也可以用于某个主题（theme）下的几个论点或者是想法。<br>一个<code>p</code>标签内的空白行仍然会被折叠成<strong>单个空格字符</strong></p><h2 id="使用div元素"><a href="#使用div元素" class="headerlink" title="使用div元素"></a>使用<code>div</code>元素</h2><p><code>div</code>元素并没有特别的意义，当其他HTML元素无法满足你的需求时，可以使用<code>div</code>。在使用时，通常通过一些全局属性（所有标签都有的属性）来给<code>div</code>加上意义，一般是<code>class</code>或者<code>id</code>这种属性。<br>使用自定义架构的一个问题就是自定义的部分其意义对于自己来说是熟悉的，但是很有可能看的人看不懂，不利于第三方处理文档。<br>当一组或者多个段落都需要使用同一种样式的时候，可以使用<code>div</code>来包裹，然后使用class等熟悉定义样式，由于父子元素在样式上的继承特性，其所包含的子元素可以直接应用<code>div</code>所有的部分样式。</p><h2 id="保留内容自身的格式"><a href="#保留内容自身的格式" class="headerlink" title="保留内容自身的格式"></a>保留内容自身的格式</h2><p><code>pre</code>标签能够保留该标签所包含内容自带的格式。该标签内的HTML源码有多少空行他就会保留多少空行。由于该标签无法让你通过标签和样式来控制显示效果，所以使用的时候要谨慎。<br>比较典型的应用就是使用<code>pre</code>标签来保存<code>code</code>标签所包含的内容，由于<code>code</code>标签内的内容通常需要包含一些自带的样式，那些代码、显示结果之间的空行和缩进是不能被省略的，所以通常这些内容需要使用<code>pre</code></p><h2 id="从其他源引用内容"><a href="#从其他源引用内容" class="headerlink" title="从其他源引用内容"></a>从其他源引用内容</h2><p><code>blockquote</code>标签主要用于引用其他地方的一块内容。该元素和第8章所讲的<code>q</code>标签比较相似，只是<code>blockquote</code>主要用于大块内容的引用。<code>cite</code>属性用来指定引用内容的URL（就是该段引用内容的出处文档地址）。<br>这里值得注意的是<code>blockquote</code>并不会保留引用内容的格式，如果需要分段或者分割线的话，就要使用对应的<code>p</code>、<code>hr</code>这些标签。</p><h2 id="添加主题分隔"><a href="#添加主题分隔" class="headerlink" title="添加主题分隔"></a>添加主题分隔</h2><p><code>hr</code>元素代表段落级别的主题分隔，样式上的表现是一条水平分隔线。<code>hr</code>在HTML5中代表转向另一个相关点（topic）。<br><code>hr</code>元素的有效使用在文档明细中的定义比较模糊，只有两个例子，一个是故事中的场景转换；另一个是在一本相关书籍中，在一个section内，两个topic之间的转变。</p><h2 id="使用List来将内容分组"><a href="#使用List来将内容分组" class="headerlink" title="使用List来将内容分组"></a>使用List来将内容分组</h2><p>HTML5中定义了很多元素来创建列表，主要有无序列表，有序列表和描述性列表。</p><h3 id="有序列表-ol元素"><a href="#有序列表-ol元素" class="headerlink" title="有序列表(ol元素)"></a>有序列表(<code>ol</code>元素)</h3><p>定义有序列表（ordered list）的标签是<code>ol</code>，内部每一个条目是使用<code>li</code>来包裹。<br>要想修改有序列表的一些参数，主要是通过各种属性来修改。</p><p><ul></ul></p><p><li> 修改第一个元素的顺序值（ordinal value）——使用<code>start</code>属性，它的值将会被作为第一个元素的序数值。如果该值未被指定，那么有序列表默认从1开始计数。</li></p><p><li> <code>type</code>可以指定列表条目(<code>li</code>)的计数标志，共有以下几种可以选择：<br>    <ul><li>“1”（默认值），代表使用数字;</li><br>    <li>“a”,表示使用a,b,c,d……来作为顺序的标志；</li><br>    <li>“A”，使用大写的英文字母来标记顺序；</li><br>    <li>“i”，使用小写的罗马数字来标记；</li><br>    <li>“I”，使用大写的罗马数字来标记。</li></ul></li></p><h3 id="无序列表标签（ul标签）"><a href="#无序列表标签（ul标签）" class="headerlink" title="无序列表标签（ul标签）"></a>无序列表标签（<code>ul</code>标签）</h3><p><code>ul</code>标签用来只是无序列表，无序列表内的每个条目使用<code>li</code>标签来包裹。<br>这里要注意的是，<code>ul</code>标签是没有用来修改样式的属性的，也就是说<code>ul</code>标签自带的只有实心点来指示条目，如果想要修改样式，就需要使用<code>list-style-type</code>这一个CSS property来修改。</p><h3 id="li元素的使用"><a href="#li元素的使用" class="headerlink" title="li元素的使用"></a><code>li</code>元素的使用</h3><p><code>li</code>元素主要用于指示列表中的一个item。需要注意的是在有序列表<code>ol</code>中的<code>li</code>可以通过属性<code>value</code>的值来修改当前的计数器，后面的条目会在当前值的基础上往上加。例如：<br>&lt;li value=”4”&gt;mangoes&lt;/li&gt;，那么后面的就是5，6……了。</p><h3 id="创建描述性列表"><a href="#创建描述性列表" class="headerlink" title="创建描述性列表"></a>创建描述性列表</h3><p>所谓的描述性列表就是列表的每一个条目包含了条目名称和条目定义两个内容。描述性列表所对应的标签是<code>dl</code>（description list），<code>dl</code>中的每一个条目以term/description grouping的形式存在。指示term的标签是<code>dt</code>；指示description的标签是<code>dd</code>。这三个标签都没有local attributes。<br>一个<code>dt</code>下可以对应多个<code>dd</code>，<code>dd</code>内也可以使用各种其他标签，诸如<code>i</code>、<code>b</code>等。</p><h3 id="创建自定义的列表"><a href="#创建自定义的列表" class="headerlink" title="创建自定义的列表"></a>创建自定义的列表</h3><p>自定义列表是使用无序列表（unordered list）<code>ul</code>，然后配合CSS样式表中的<code>counter</code>特性和<code>:before</code>，<code>:after</code>这种选择器来完成。具体将在第17章讲解。</p><h2 id="使用图表（figures）"><a href="#使用图表（figures）" class="headerlink" title="使用图表（figures）"></a>使用图表（figures）</h2><p>传统的<code>figure</code>标签定义的就是图表（diagram or illustration），HTML5中定义的figure其语义化意义更加宽泛，只要是和文章主线相关的一个独立的单独单元就可以。也就是说，代码段或者一些输出，图片等，都可以使用<code>figure</code>标签来展示。<br><code>figure</code>标签有一个可选的内部元素<code>figcaption</code>，该标签主要用来包裹图表的标题（caption）。</p>]]></content>
+      
+      <categories>
+          
+          <category> HTML5权威指南 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> HTML5权威指南 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>hexo在deploy时无需一直输入用户名密码</title>
+      <link href="/2021/04/02/hexo-deploy%E6%97%B6%E6%97%A0%E9%9C%80%E4%B8%80%E7%9B%B4%E8%BE%93%E5%85%A5%E7%94%A8%E6%88%B7%E5%90%8D%E5%AF%86%E7%A0%81/"/>
+      <url>/2021/04/02/hexo-deploy%E6%97%B6%E6%97%A0%E9%9C%80%E4%B8%80%E7%9B%B4%E8%BE%93%E5%85%A5%E7%94%A8%E6%88%B7%E5%90%8D%E5%AF%86%E7%A0%81/</url>
+      <content type="html"><![CDATA[<p>在hexo deploy的时候，一直需要输入用户名和密码，在网上找了很久过后，终于找到了解决方案，这里记录下来：</p><ol><li><p>在系统环境变量中创建一个环境变量：</p><blockquote><p>变量名：HOME<br>变量值：%USERPROFILE%</p></blockquote></li><li><p>在用户目录下新建一个文件，文件名为：.netrc，没有后缀名。然后使用文本文档打开文件，文件内写入如下内容：</p><blockquote><p>machine github.com<br>login username //这里的username输入自己账号用户名<br>password password //这里的password所在位置输入密码</p></blockquote></li></ol>]]></content>
+      
+      
+        <tags>
+            
+            <tag> blog遇到的问题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>HTML5权威指南第6至8章</title>
+      <link href="/2021/04/02/HTML5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%976%E8%87%B38%E7%AB%A0/"/>
+      <url>/2021/04/02/HTML5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%976%E8%87%B38%E7%AB%A0/</url>
+      <content type="html"><![CDATA[<h3 id="这是HTML5权威指南第六章"><a href="#这是HTML5权威指南第六章" class="headerlink" title="这是HTML5权威指南第六章"></a>这是<a href="http://www.xmind.net/m/Y2sZxC" target="_blank" rel="noopener">HTML5权威指南第六章</a></h3><hr><h3 id="这是HTML5权威指南第七章"><a href="#这是HTML5权威指南第七章" class="headerlink" title="这是HTML5权威指南第七章"></a>这是<a href="http://www.xmind.net/m/x7EDeg" target="_blank" rel="noopener">HTML5权威指南第七章</a></h3><hr><h3 id="这是HTML5权威指南第八章"><a href="#这是HTML5权威指南第八章" class="headerlink" title="这是HTML5权威指南第八章"></a>这是<a href="http://www.xmind.net/m/Uv3TRz" target="_blank" rel="noopener">HTML5权威指南第八章</a></h3>]]></content>
+      
+      <categories>
+          
+          <category> HTML5权威指南 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> HTML5权威指南 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>HTML5权威指南第5章</title>
+      <link href="/2021/04/02/HTML5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%E7%AC%AC5%E7%AB%A0/"/>
+      <url>/2021/04/02/HTML5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%E7%AC%AC5%E7%AB%A0/</url>
+      <content type="html"><![CDATA[<p>这是HTML5权威指南第五章的思维导图，这里放上链接，我也把xmind分享到博客的iframe添加到了当前的博客文档中，但是无法显示。</p><hr><p>这个是链接：<a href="http://www.xmind.net/m/qHGB4r" target="_blank" rel="noopener">HTML5权威指南第5章</a></p><hr><iframe src="http://www.xmind.net/embed/96sjAP" width="900px" height="800px" frameborder="0" scrolling="no"></iframe>]]></content>
+      
+      <categories>
+          
+          <category> HTML5权威指南 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> HTML5权威指南 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>HTML5权威指南1-4章</title>
+      <link href="/2021/04/02/HTML5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%971-4%E7%AB%A0/"/>
+      <url>/2021/04/02/HTML5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%971-4%E7%AB%A0/</url>
+      <content type="html"><![CDATA[<h3 id="HTML5权威指南1-4章的思维导图"><a href="#HTML5权威指南1-4章的思维导图" class="headerlink" title="HTML5权威指南1-4章的思维导图"></a>HTML5权威指南1-4章的思维导图</h3><p>第四章写在了我的语雀知识库里面<a href="https://www.yuque.com/docs/share/a00c537d-bed3-46f0-a656-ba325f531de3?#" target="_blank" rel="noopener">《HTML权威指南》</a> ，当时把前面三章也都导入了进去，后来用了过后发现还是xmind好用，用了一段时间xmind过后，觉得markdown更适合HTML5权威指南这种书籍的笔记制作，所以现在把前面的思维导图传上来。后面就是直接使用<a href="https://obsidian.md/" target="_blank" rel="noopener">Obsidian</a> 这个软件加上Markdown语法来记笔记了。这个是xmind第一章到第四章思维导图的一个公链<a href="http://www.xmind.net/m/8DhEcL" target="_blank" rel="noopener">思维导图1-4章</a>，这里我发现xmind分享到blog的功能在markdown文档编辑器里面可以显示，但是上传到github博客过后就显示不出来了，所以放一个链接。</p><iframe src="http://www.xmind.net/embed/MXYsZX" width="1000px" height="800px" frameborder="0" scrolling="no"></iframe>]]></content>
+      
+      <categories>
+          
+          <category> HTML5权威指南 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> HTML5权威指南 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>CSAPP Global Edition习题错误（第二章）</title>
+      <link href="/2020/10/22/CSAPP-Global-Edition%E7%BB%83%E4%B9%A0%E9%94%99%E8%AF%AF%EF%BC%88%E4%B8%80%EF%BC%89/"/>
+      <url>/2020/10/22/CSAPP-Global-Edition%E7%BB%83%E4%B9%A0%E9%94%99%E8%AF%AF%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+      <content type="html"><![CDATA[<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><p>阅读CSAPP这本书的过程收获很多，笔记都记在了Notion上。由于这本书并没有官方电子版，只有纸质版，电子版的只有影印版和Global Edition，在查资料的时候才知道Global Edition中，教学材料都是和原版没有区别的，Practice和Problems却有很多都是不一样的，而且Practice的解答存在错误，所以我看的时候练习和每章后面的习题都是对着英文原版纸质书的影印版来看的，并且会与中文版（原书第三版）对照着检查，在博客里记录一下习题错误的位置。</p><h3 id="具体错误"><a href="#具体错误" class="headerlink" title="具体错误"></a>具体错误</h3><p><strong>Practice Problem 2.14（solution Page 183)</strong> P94</p><p>Global Edition 上写的</p><blockquote><p><strong>Practice Problem 2.14</strong></p><p>suppose that a and b have byte values 0x55 and 0x46,respectively……</p></blockquote><p>但是，影印版上显示的是</p><blockquote><p><strong>Practice Problem 2.14</strong></p><p>suppose that x and y have byte values 0x66 and 0x39, respectively……</p></blockquote><p>中文版和影印版上的是一致的。</p><blockquote><p>练习题 2.14 假设x和y的字节值分别为0x66和0x39。填写下表……</p></blockquote>]]></content>
+      
+      <categories>
+          
+          <category> CSAPP习题错误 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CSAPP习题错误记录 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>深入理解计算机系统补充读物</title>
+      <link href="/2020/10/10/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E8%A1%A5%E5%85%85%E8%AF%BB%E7%89%A9/"/>
+      <url>/2020/10/10/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E8%A1%A5%E5%85%85%E8%AF%BB%E7%89%A9/</url>
+      <content type="html"><![CDATA[<h1 id="深入理解计算机系统补充读物"><a href="#深入理解计算机系统补充读物" class="headerlink" title="深入理解计算机系统补充读物"></a>深入理解计算机系统补充读物</h1><ol><li>体系结构宗师 David Patterson写的《计算机组织与设计：硬件/软件接口》和《计算机体系架构：量化研究方法》，前一本书俗称算盘书，目前的第5版是RISC-V版本的，推荐原因：补充本书的第4章：处理器体系结构。</li><li>已故知名技术作家Richard Stevens写的《UNIX环境高级编程》，简称APUE，学习UNIX/LINUX系统编程的不二之选，推荐原因：补充本书的第8，10，11，12章内容。</li><li>Redhat公司的Ulrich Drepper写的文章《What Every Programmer Should Know About Memory》，全面系统地介绍了程序如何使用内存以及应该怎么做内存优化， 推荐原因：补充本书的第6章：存储器层次结构</li><li>俞甲子和石凡一起写的《程序员的自我修养:链接、装载与库》，介绍系统软件的运行机制和原理，讲解应用程序在编译、链接和运行时刻所发生的各种事项，推荐原因：补充本书的第7章：链接。</li></ol>]]></content>
+      
+      <categories>
+          
+          <category> CSAPP </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 读物 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>IDEA的Main menu隐藏后如何恢复</title>
+      <link href="/2020/01/18/IDEA%E7%9A%84Main-menu%E9%9A%90%E8%97%8F%E5%90%8E%E5%A6%82%E4%BD%95%E6%81%A2%E5%A4%8D/"/>
+      <url>/2020/01/18/IDEA%E7%9A%84Main-menu%E9%9A%90%E8%97%8F%E5%90%8E%E5%A6%82%E4%BD%95%E6%81%A2%E5%A4%8D/</url>
+      <content type="html"><![CDATA[<h3 id="如何恢复IDEA的Main-Menu"><a href="#如何恢复IDEA的Main-Menu" class="headerlink" title="如何恢复IDEA的Main Menu"></a>如何恢复IDEA的Main Menu</h3><p>很简单，不用去修改什么配置文件，只需要双击shift，然后在弹出的菜单里搜索Main Menu，点击off开关，打开就可以。</p>]]></content>
+      
+      <categories>
+          
+          <category> 使用 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 软件工具问题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>Thinking in Java Notes——没什么能逃得过反射</title>
+      <link href="/2020/01/04/Thinking-in-Java/"/>
+      <url>/2020/01/04/Thinking-in-Java/</url>
+      <content type="html"><![CDATA[]]></content>
+      
+      
+        <tags>
+            
+            <tag> Notes of Thinking in Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>Polymorphism和类的初始化</title>
+      <link href="/2019/06/25/Polymorphism%E5%92%8C%E7%B1%BB%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96/"/>
+      <url>/2019/06/25/Polymorphism%E5%92%8C%E7%B1%BB%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96/</url>
+      <content type="html"><![CDATA[<h2 id="在阅读"><a href="#在阅读" class="headerlink" title="在阅读"></a>在阅读</h2>]]></content>
+      
+      <categories>
+          
+          <category> 读书笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Thinking in Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>图片显示问题</title>
+      <link href="/2019/06/18/%E5%9B%BE%E7%89%87%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/"/>
+      <url>/2019/06/18/%E5%9B%BE%E7%89%87%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/</url>
+      <content type="html"><![CDATA[<h1 id="Hello-world文章中的图片无法显示"><a href="#Hello-world文章中的图片无法显示" class="headerlink" title="Hello-world文章中的图片无法显示"></a>Hello-world文章中的图片无法显示</h1><p>今天打开blog看了一下，发现helloworld的文章突然无法显示了，决定再测试一下微博的是否仍然可以当作图床</p><p>第一张图片</p><img src="https://wx1.sinaimg.cn/mw690/9be83a1fgy1frbcaqng1nj20u01hcu0x.jpg"><p>今天刚传的一张图片</p><img src="https://wx2.sinaimg.cn/mw690/9be83a1fgy1g4590ujrmtj21401z4wr9.jpg"><p>查了一下，微博开始限制外链了</p><p>。。。</p><p>当然了，没有什么是大佬们解决不了的，在看了这一<a href="https://www.cnblogs.com/roadwide/p/10777593.html" target="_blank" rel="noopener">hexo博客微博图床失效解决办法</a>短小精悍的文章过后，问题成功解决了。</p><p>请大佬们再一次收下小弟的膝盖。。。。</p><p><img src="https://wx1.sinaimg.cn/mw690/9be83a1fgy1g4590vviusj21401z44is.jpg" alt="markdowm语法下的图片是否可以显示？"></p>]]></content>
+      
+      
+        <tags>
+            
+            <tag> blog遇到的问题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>Java复习</title>
+      <link href="/2019/01/17/Java%E5%A4%8D%E4%B9%A0/"/>
+      <url>/2019/01/17/Java%E5%A4%8D%E4%B9%A0/</url>
+      <content type="html"><![CDATA[<p>在码农翻身上看到了一篇Java复习的文章，里面提到了一些书，及记下来方便以后找，反正微信收藏了也不看。</p><h2 id="方向"><a href="#方向" class="headerlink" title="方向"></a>方向</h2><ul><li>JVM</li><li>排序算法和Java集合&amp;工具类</li><li>多线程和并发包</li><li>存储相关：Redis，Elastic Search，MySQL（现在都不用Oracle了？？）</li><li>框架：Spring全家桶（SpringMVC，SpringBoot）</li><li>分布式：Dubbo</li><li>设计模式</li></ul><h3 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h3><ul><li>《深入理解Java虚拟机：JVM高级特性与最佳实践（第2版）》</li><li>Oracle最新发布的Java虚拟机规范</li></ul><p>文章可信度排行：自建域名&gt;*.github.io&gt;SF&gt;简述=博客园&gt;CSDN&gt;转载</p><h3 id="排序算法和Java集合、工具类"><a href="#排序算法和Java集合、工具类" class="headerlink" title="排序算法和Java集合、工具类"></a>排序算法和Java集合、工具类</h3><p>文章里没有说要看什么书，只说了很重要，尤其是排序，我这里屯了一本《算法》，就是《Algorithms》–Fourth Edition Robert Sedewick and Kevin Wayne。主要是这本书是用Java实现的，我觉得配合Java刚刚好，而且网上评价也不错。</p><h3 id="多线程和并发包"><a href="#多线程和并发包" class="headerlink" title="多线程和并发包"></a>多线程和并发包</h3><p>这有这张图 <img src="https://image-static.segmentfault.com/323/604/3236047827-5c39fa79874ab">，该图片转载自<a href="https://segmentfault.com/u/majiangbiji" target="_blank" rel="noopener">码匠笔记</a>的这篇文章<a href="https://segmentfault.com/a/1190000017869016" target="_blank" rel="noopener">跳槽季如何快速全面复习面试题</a></p><h3 id="数据库丛书"><a href="#数据库丛书" class="headerlink" title="数据库丛书"></a>数据库丛书</h3><ul><li><p>《Redis设计与实现（数据库技术丛书）》</p></li><li><p>《高性能MySQL》</p></li><li>《ElasticSearch权威指南》</li></ul><p>算法很重要，ElasticSearch很多都与上面说到过的query算法有联系。</p><h3 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h3><ul><li>《Spring技术内幕》</li></ul><p>Spring全家桶</p><h3 id="分布式"><a href="#分布式" class="headerlink" title="分布式"></a>分布式</h3><p>Dubbo是一个代表，但是没有必要单纯去学习，公司有项目需求再说。（学习还是要放在算法和操作系统这些基础底层的东西啊！）</p><h3 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h3><p>码农翻身以前提到过《HeadFirst设计模式》，可以看这本书。然后不用可以学习，在实践中学习设计模式的应用，而不是死记硬背。</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>上面的内容有我总结的，还有自己想到的，没有分出来。总之，主要以算法，操作系统这两个基础为主。</p><hr><p>另外继续记录MarkDown语法参考网站</p><p><a href="http://www.markdown.cn/#images" target="_blank" rel="noopener">教程</a></p><p><a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#html" target="_blank" rel="noopener">MarkDown CheetSheet</a></p>]]></content>
+      
+      
+        <tags>
+            
+            <tag> Java学习 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>永葆青春</title>
+      <link href="/2018/12/20/%E6%B0%B8%E8%91%86%E9%9D%92%E6%98%A5/"/>
+      <url>/2018/12/20/%E6%B0%B8%E8%91%86%E9%9D%92%E6%98%A5/</url>
+      <content type="html"><![CDATA[<p>“码农翻身”公众号翻译了一篇文章，<a href="https://sizovs.net/2018/12/17/stop-learning-frameworks/" target="_blank" rel="noopener">别再学习框架了–Eduard Sizovs</a>里面提到了一些能够永保青春的书籍，记录下来，不然微信里点了收藏也不看，还是这个方便。</p><ul><li>《程序员的修炼之道》</li><li>《代码整洁之道》</li><li>《程序员的职业素养》</li><li>《领域驱动设计》</li><li>《测试驱动的面向对象软件开发》</li><li>《持续交付》</li><li>《深入理解操作系统》—CSAPP</li></ul><p>Markdown语法参考网站，还是写一下方便，省的每次找：<a href="https://coding.net/help/doc/project/markdown.html#i-4" target="_blank" rel="noopener">Markdown语法介绍</a>，还有，<a href="https://www.markdownguide.org/extended-syntax#tables" target="_blank" rel="noopener">Markdown Guide</a>，<a href="http://www.markdown.cn/" target="_blank" rel="noopener">Markdown教程</a>。Hexo官方文档也同样重要<a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">文档|Hexo</a>。</p><hr><p>记住在填上面tags等那些模板参数的时候，一定要先打一个空格，否则hexo server命令后会报错。</p>]]></content>
+      
+      
+        <tags>
+            
+            <tag> 书籍 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>Hello World</title>
+      <link href="/2018/05/12/hello-world/"/>
+      <url>/2018/05/12/hello-world/</url>
+      <content type="html"><![CDATA[<p>这是第一篇博客</p><p>第一篇博客嘛，标题肯定要是伟大的”hello world”了。这一篇主要用来测试。尝试插入图片之类。</p><p>博客的搭建是参考了<a href="https://blog.csdn.net/yimingsilence/article/details/53354041" target="_blank" rel="noopener">个人博客的搭建-github pages + hexo vs wordpress</a>，讲的非常的详细。以及<a href="https://hexo.io/zh-cn/docs" target="_blank" rel="noopener">Hexo官方文档</a>，还有<a href="https://material.viosey.com/docs" target="_blank" rel="noopener">Material Theme Docs</a>。</p><p>然后测试一下图片的插入。反正也只是为了用个有，就直接试试微博的图片，不去搞什么七牛或者又拍云了。</p><img src="https://wx1.sinaimg.cn/mw690/9be83a1fgy1frbcaqng1nj20u01hcu0x.jpg"><p>看来是可以用的啊。再放一张看看。</p><img src="https://wx4.sinaimg.cn/mw690/9be83a1fgy1frbcaz6534j21401z47wh.jpg"><p>嗯，应该是没问题了。</p><p>那么代码块呢。</p><pre><code class="javascript">alert(&quot;Hello World&quot;);function(a)function(b)</code></pre><pre><code class="java">System.out.println(&quot;Hello World&quot;);class A{    int i=0;    for(int j=0;j&lt;10;j++){        System.out.println(j);    }}</code></pre><pre><code>alert(&quot;Hello World&quot;)System.out.println(&quot;Hello World&quot;)</code></pre><p>直接用MarkDown的三个反向单引号也可以实现显示代码块，好像不需要使用codeblock模块嘛。</p><h4 id="好了，第一篇博客写完了。"><a href="#好了，第一篇博客写完了。" class="headerlink" title="好了，第一篇博客写完了。"></a>好了，第一篇博客写完了。</h4>]]></content>
+      
+      
+    </entry>
+    
+  
+  
+</search>

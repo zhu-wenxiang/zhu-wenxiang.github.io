@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Jason&#39;s Blog</title>
+  
+  <subtitle>猪头是个聪明的人物</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://zhu-wenxiang.github.io/"/>
+  <updated>2022-10-16T12:18:36.477Z</updated>
+  <id>https://zhu-wenxiang.github.io/</id>
+  
+  <author>
+    <name>猪头是个聪明的人物</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>精通Spring4.x企业级应用实战第二章阅读记录1</title>
+    <link href="https://zhu-wenxiang.github.io/2022/10/15/%E7%B2%BE%E9%80%9ASpring4-x%E4%BC%81%E4%B8%9A%E7%BA%A7%E5%BA%94%E7%94%A8%E5%AE%9E%E6%88%98%E7%AC%AC%E4%BA%8C%E7%AB%A0%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%951/"/>
+    <id>https://zhu-wenxiang.github.io/2022/10/15/精通Spring4-x企业级应用实战第二章阅读记录1/</id>
+    <published>2022-10-15T15:14:35.000Z</published>
+    <updated>2022-10-16T12:18:36.477Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;第一部分：2-4单元测试以前&quot;&gt;&lt;a href=&quot;#第一部分：2-4单元测试以前&quot; class=&quot;headerlink&quot; title=&quot;第一部分：2.4单元测试以前&quot;&gt;&lt;/a&gt;第一部分：2.4单元测试以前&lt;/h1&gt;&lt;h2
+        
+      
+    
+    </summary>
+    
+      <category term="Spring企业级实战" scheme="https://zhu-wenxiang.github.io/categories/Spring%E4%BC%81%E4%B8%9A%E7%BA%A7%E5%AE%9E%E6%88%98/"/>
+    
+    
+      <category term="Spring" scheme="https://zhu-wenxiang.github.io/tags/Spring/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Chpter 17 Using the CSS Selectors Part I</title>
+    <link href="https://zhu-wenxiang.github.io/2021/06/17/Chpter-17-Using-the-CSS-Selectors-Part-I/"/>
+    <id>https://zhu-wenxiang.github.io/2021/06/17/Chpter-17-Using-the-CSS-Selectors-Part-I/</id>
+    <published>2021-06-17T13:39:33.000Z</published>
+    <updated>2022-10-16T02:22:09.161Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="HTML5权威指南" scheme="https://zhu-wenxiang.github.io/categories/HTML5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/"/>
+    
+    
+      <category term="HTML5权威指南" scheme="https://zhu-wenxiang.github.io/tags/HTML5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HTML5权威指南 Chapter 16 CSS in Context</title>
+    <link href="https://zhu-wenxiang.github.io/2021/05/17/Chapter-16-CSS-in-Context/"/>
+    <id>https://zhu-wenxiang.github.io/2021/05/17/Chapter-16-CSS-in-Context/</id>
+    <published>2021-05-17T15:13:43.000Z</published>
+    <updated>2021-06-17T13:36:19.074Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;Understanding-CSS-Standardization&quot;&gt;&lt;a href=&quot;#Understanding-CSS-Standardization&quot; class=&quot;headerlink&quot; title=&quot;Understanding CSS
+        
+      
+    
+    </summary>
+    
+      <category term="HTML5权威指南" scheme="https://zhu-wenxiang.github.io/categories/HTML5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/"/>
+    
+    
+      <category term="HTML5权威指南" scheme="https://zhu-wenxiang.github.io/tags/HTML5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HTML5权威指南 Chapter 15 Embedding Content</title>
+    <link href="https://zhu-wenxiang.github.io/2021/04/21/Chapter-15-Embedding-Content/"/>
+    <id>https://zhu-wenxiang.github.io/2021/04/21/Chapter-15-Embedding-Content/</id>
+    <published>2021-04-21T14:20:16.000Z</published>
+    <updated>2021-04-24T11:01:56.322Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;本章主要给出在HTML中嵌入内容的一些标签，包括图片，将其他文档作为一部分嵌入，一些插件等。当然，本章并没有包含全部的嵌入内容讲解，后面CSS和JS部分还会有。&lt;/p&gt;
+&lt;h2 id=&quot;嵌入图片&quot;&gt;&lt;a href=&quot;#嵌入图片&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="HTML5权威指南" scheme="https://zhu-wenxiang.github.io/categories/HTML5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/"/>
+    
+    
+      <category term="HTML5权威指南" scheme="https://zhu-wenxiang.github.io/tags/HTML5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HTML5权威指南 Chapter 14 Other Form Elements and Input Validation</title>
+    <link href="https://zhu-wenxiang.github.io/2021/04/21/Chapter-14-Other-Form-Elements-and-Input-Validation/"/>
+    <id>https://zhu-wenxiang.github.io/2021/04/21/Chapter-14-Other-Form-Elements-and-Input-Validation/</id>
+    <published>2021-04-21T06:24:31.000Z</published>
+    <updated>2021-04-21T14:17:16.269Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;本章将结束HTML5中表单的讲解。还会讲到HTML5中对于表单验证所能提供的一些支持。&lt;/p&gt;
+&lt;h2 id=&quot;一些标签补充&quot;&gt;&lt;a href=&quot;#一些标签补充&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="HTML5权威指南" scheme="https://zhu-wenxiang.github.io/categories/HTML5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/"/>
+    
+    
+      <category term="HTML5权威指南" scheme="https://zhu-wenxiang.github.io/tags/HTML5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HTML5权威指南 Chapter 13 Customizing the Input Element</title>
+    <link href="https://zhu-wenxiang.github.io/2021/04/17/Chapter-13-Customizing-the-Input-Element/"/>
+    <id>https://zhu-wenxiang.github.io/2021/04/17/Chapter-13-Customizing-the-Input-Element/</id>
+    <published>2021-04-17T07:19:14.000Z</published>
+    <updated>2021-04-20T10:29:21.681Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;通过设置输入框&lt;code&gt;input&lt;/code&gt;标签的&lt;code&gt;type&lt;/code&gt;属性，可以控制能够输入到输入框中的具体数据类型。&lt;code&gt;type&lt;/code&gt;属性对应的值有23种，&lt;code&gt;input&lt;/code&gt;标签所拥有的attributes共有30多种
+        
+      
+    
+    </summary>
+    
+      <category term="HTML5权威指南" scheme="https://zhu-wenxiang.github.io/categories/HTML5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/"/>
+    
+    
+      <category term="HTML5权威指南" scheme="https://zhu-wenxiang.github.io/tags/HTML5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HTML5权威指南 Chapter 12 Working with Forms</title>
+    <link href="https://zhu-wenxiang.github.io/2021/04/15/Chapter-12-Working-with-Forms/"/>
+    <id>https://zhu-wenxiang.github.io/2021/04/15/Chapter-12-Working-with-Forms/</id>
+    <published>2021-04-15T06:02:00.000Z</published>
+    <updated>2021-04-21T06:06:56.290Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;在HTML5中，表单（form）受到了重视，拥有了很多新的特性，包括收集特定数据类型的信息以及甄别输入框中所输入的内容是否符合要求（以前这些操作都是要通过JS来完成的，但是现在已经可以通过HTML5来完成了）。&lt;/p&gt;
+&lt;h2 id=&quot;认识表单相关的基本元素&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="HTML5权威指南" scheme="https://zhu-wenxiang.github.io/categories/HTML5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/"/>
+    
+    
+      <category term="HTML5权威指南" scheme="https://zhu-wenxiang.github.io/tags/HTML5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HTML5权威指南 Chapter 11 Table Elements</title>
+    <link href="https://zhu-wenxiang.github.io/2021/04/12/Chapter-11-Table-Elements/"/>
+    <id>https://zhu-wenxiang.github.io/2021/04/12/Chapter-11-Table-Elements/</id>
+    <published>2021-04-12T14:39:40.000Z</published>
+    <updated>2021-04-17T07:14:48.624Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;表格在HTML文档中的作用主要是从两个维度展示数据。在以前的HTML文档中，经常把表格用来控制页面内容的布局，但是在HTML5中不允许这样做的。而且必须应用最新的CSS表格特性。&lt;/p&gt;
+&lt;h2 id=&quot;有关表格的三个最基本元素&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="HTML5权威指南" scheme="https://zhu-wenxiang.github.io/categories/HTML5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/"/>
+    
+    
+      <category term="HMTL5权威指南" scheme="https://zhu-wenxiang.github.io/tags/HMTL5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HTML5权威指南Chapter 10 Creating Sections</title>
+    <link href="https://zhu-wenxiang.github.io/2021/04/09/Chapter-10-Creating-Section/"/>
+    <id>https://zhu-wenxiang.github.io/2021/04/09/Chapter-10-Creating-Section/</id>
+    <published>2021-04-09T10:27:15.000Z</published>
+    <updated>2021-04-12T14:38:37.829Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;本章所介绍的标签主要作用：分隔内容，从而让每一个主题或者概念（topic or concept）能够相互独立。本章大多数的标签都是新的，而且充分体现了意义与样式相分离的思想，所以大部分标签是不带任何样式效果的。&lt;/p&gt;
+&lt;h2 id=&quot;使用基本的标题标签&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="HTML5权威指南" scheme="https://zhu-wenxiang.github.io/categories/HTML5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/"/>
+    
+    
+      <category term="HTML5权威指南" scheme="https://zhu-wenxiang.github.io/tags/HTML5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HTML5权威指南 Chapter 9 Grouping Content</title>
+    <link href="https://zhu-wenxiang.github.io/2021/04/06/Chapter-9-Grouping-Content/"/>
+    <id>https://zhu-wenxiang.github.io/2021/04/06/Chapter-9-Grouping-Content/</id>
+    <published>2021-04-06T13:48:54.000Z</published>
+    <updated>2021-04-08T16:51:25.226Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;This chapter is for the elements that could group related content together.这些元素能够给予文档一个整体的架构，并且可以给一些内容进一步的意义。&lt;/p&gt;
+&lt;h2
+        
+      
+    
+    </summary>
+    
+      <category term="HTML5权威指南" scheme="https://zhu-wenxiang.github.io/categories/HTML5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/"/>
+    
+    
+      <category term="HTML5权威指南" scheme="https://zhu-wenxiang.github.io/tags/HTML5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>hexo在deploy时无需一直输入用户名密码</title>
+    <link href="https://zhu-wenxiang.github.io/2021/04/02/hexo-deploy%E6%97%B6%E6%97%A0%E9%9C%80%E4%B8%80%E7%9B%B4%E8%BE%93%E5%85%A5%E7%94%A8%E6%88%B7%E5%90%8D%E5%AF%86%E7%A0%81/"/>
+    <id>https://zhu-wenxiang.github.io/2021/04/02/hexo-deploy时无需一直输入用户名密码/</id>
+    <published>2021-04-02T10:42:33.000Z</published>
+    <updated>2021-04-02T10:56:26.642Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;在hexo
+        
+      
+    
+    </summary>
+    
+    
+      <category term="blog遇到的问题" scheme="https://zhu-wenxiang.github.io/tags/blog%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HTML5权威指南第6至8章</title>
+    <link href="https://zhu-wenxiang.github.io/2021/04/02/HTML5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%976%E8%87%B38%E7%AB%A0/"/>
+    <id>https://zhu-wenxiang.github.io/2021/04/02/HTML5权威指南6至8章/</id>
+    <published>2021-04-02T09:36:02.000Z</published>
+    <updated>2021-04-02T10:17:54.837Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;这是HTML5权威指南第六章&quot;&gt;&lt;a href=&quot;#这是HTML5权威指南第六章&quot; class=&quot;headerlink&quot; title=&quot;这是HTML5权威指南第六章&quot;&gt;&lt;/a&gt;这是&lt;a href=&quot;http://www.xmind.net/m/Y2sZxC&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="HTML5权威指南" scheme="https://zhu-wenxiang.github.io/categories/HTML5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/"/>
+    
+    
+      <category term="HTML5权威指南" scheme="https://zhu-wenxiang.github.io/tags/HTML5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HTML5权威指南第5章</title>
+    <link href="https://zhu-wenxiang.github.io/2021/04/02/HTML5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%E7%AC%AC5%E7%AB%A0/"/>
+    <id>https://zhu-wenxiang.github.io/2021/04/02/HTML5权威指南第5章/</id>
+    <published>2021-04-02T09:25:02.000Z</published>
+    <updated>2021-04-02T09:35:09.392Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;这是HTML5权威指南第五章的思维导图，这里放上链接，我也把xmind分享到博客的iframe添加到了当前的博客文档中，但是无法显示。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;这个是链接：&lt;a href=&quot;http://www.xmind.net/m/qHGB4r&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="HTML5权威指南" scheme="https://zhu-wenxiang.github.io/categories/HTML5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/"/>
+    
+    
+      <category term="HTML5权威指南" scheme="https://zhu-wenxiang.github.io/tags/HTML5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HTML5权威指南1-4章</title>
+    <link href="https://zhu-wenxiang.github.io/2021/04/02/HTML5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%971-4%E7%AB%A0/"/>
+    <id>https://zhu-wenxiang.github.io/2021/04/02/HTML5权威指南1-4章/</id>
+    <published>2021-04-02T08:11:08.000Z</published>
+    <updated>2021-04-02T09:01:54.332Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;HTML5权威指南1-4章的思维导图&quot;&gt;&lt;a href=&quot;#HTML5权威指南1-4章的思维导图&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="HTML5权威指南" scheme="https://zhu-wenxiang.github.io/categories/HTML5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/"/>
+    
+    
+      <category term="HTML5权威指南" scheme="https://zhu-wenxiang.github.io/tags/HTML5%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CSAPP Global Edition习题错误（第二章）</title>
+    <link href="https://zhu-wenxiang.github.io/2020/10/22/CSAPP-Global-Edition%E7%BB%83%E4%B9%A0%E9%94%99%E8%AF%AF%EF%BC%88%E4%B8%80%EF%BC%89/"/>
+    <id>https://zhu-wenxiang.github.io/2020/10/22/CSAPP-Global-Edition练习错误（一）/</id>
+    <published>2020-10-22T13:22:46.000Z</published>
+    <updated>2022-10-16T12:18:38.096Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;概要&quot;&gt;&lt;a href=&quot;#概要&quot; class=&quot;headerlink&quot; title=&quot;概要&quot;&gt;&lt;/a&gt;概要&lt;/h2&gt;&lt;p&gt;阅读CSAPP这本书的过程收获很多，笔记都记在了Notion上。由于这本书并没有官方电子版，只有纸质版，电子版的只有影印版和Global
+        
+      
+    
+    </summary>
+    
+      <category term="CSAPP习题错误" scheme="https://zhu-wenxiang.github.io/categories/CSAPP%E4%B9%A0%E9%A2%98%E9%94%99%E8%AF%AF/"/>
+    
+    
+      <category term="CSAPP习题错误记录" scheme="https://zhu-wenxiang.github.io/tags/CSAPP%E4%B9%A0%E9%A2%98%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>深入理解计算机系统补充读物</title>
+    <link href="https://zhu-wenxiang.github.io/2020/10/10/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E8%A1%A5%E5%85%85%E8%AF%BB%E7%89%A9/"/>
+    <id>https://zhu-wenxiang.github.io/2020/10/10/深入理解计算机系统补充读物/</id>
+    <published>2020-10-09T18:12:06.000Z</published>
+    <updated>2020-10-09T18:28:45.171Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;深入理解计算机系统补充读物&quot;&gt;&lt;a href=&quot;#深入理解计算机系统补充读物&quot; class=&quot;headerlink&quot; title=&quot;深入理解计算机系统补充读物&quot;&gt;&lt;/a&gt;深入理解计算机系统补充读物&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;体系结构宗师 David
+        
+      
+    
+    </summary>
+    
+      <category term="CSAPP" scheme="https://zhu-wenxiang.github.io/categories/CSAPP/"/>
+    
+    
+      <category term="读物" scheme="https://zhu-wenxiang.github.io/tags/%E8%AF%BB%E7%89%A9/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>IDEA的Main menu隐藏后如何恢复</title>
+    <link href="https://zhu-wenxiang.github.io/2020/01/18/IDEA%E7%9A%84Main-menu%E9%9A%90%E8%97%8F%E5%90%8E%E5%A6%82%E4%BD%95%E6%81%A2%E5%A4%8D/"/>
+    <id>https://zhu-wenxiang.github.io/2020/01/18/IDEA的Main-menu隐藏后如何恢复/</id>
+    <published>2020-01-18T06:21:16.000Z</published>
+    <updated>2020-01-20T04:26:00.567Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;如何恢复IDEA的Main-Menu&quot;&gt;&lt;a href=&quot;#如何恢复IDEA的Main-Menu&quot; class=&quot;headerlink&quot; title=&quot;如何恢复IDEA的Main Menu&quot;&gt;&lt;/a&gt;如何恢复IDEA的Main
+        
+      
+    
+    </summary>
+    
+      <category term="使用" scheme="https://zhu-wenxiang.github.io/categories/%E4%BD%BF%E7%94%A8/"/>
+    
+    
+      <category term="软件工具问题" scheme="https://zhu-wenxiang.github.io/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7%E9%97%AE%E9%A2%98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Thinking in Java Notes——没什么能逃得过反射</title>
+    <link href="https://zhu-wenxiang.github.io/2020/01/04/Thinking-in-Java/"/>
+    <id>https://zhu-wenxiang.github.io/2020/01/04/Thinking-in-Java/</id>
+    <published>2020-01-04T07:43:05.000Z</published>
+    <updated>2020-01-04T10:15:35.124Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+      <category term="Notes of Thinking in Java" scheme="https://zhu-wenxiang.github.io/tags/Notes-of-Thinking-in-Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Polymorphism和类的初始化</title>
+    <link href="https://zhu-wenxiang.github.io/2019/06/25/Polymorphism%E5%92%8C%E7%B1%BB%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96/"/>
+    <id>https://zhu-wenxiang.github.io/2019/06/25/Polymorphism和类的初始化/</id>
+    <published>2019-06-25T10:59:58.000Z</published>
+    <updated>2019-10-21T05:28:14.165Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;在阅读&quot;&gt;&lt;a href=&quot;#在阅读&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="读书笔记" scheme="https://zhu-wenxiang.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Thinking in Java" scheme="https://zhu-wenxiang.github.io/tags/Thinking-in-Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>图片显示问题</title>
+    <link href="https://zhu-wenxiang.github.io/2019/06/18/%E5%9B%BE%E7%89%87%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/"/>
+    <id>https://zhu-wenxiang.github.io/2019/06/18/图片显示问题/</id>
+    <published>2019-06-18T06:17:10.000Z</published>
+    <updated>2019-06-18T06:44:20.584Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Hello-world文章中的图片无法显示&quot;&gt;&lt;a href=&quot;#Hello-world文章中的图片无法显示&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="blog遇到的问题" scheme="https://zhu-wenxiang.github.io/tags/blog%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+    
+  </entry>
+  
+</feed>
