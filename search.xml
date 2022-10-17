@@ -3,6 +3,27 @@
   
     
     <entry>
+      <title>Spring4.x企业级应用实战第二章第二部分</title>
+      <link href="/2022/10/17/Spring4-x%E4%BC%81%E4%B8%9A%E7%BA%A7%E5%BA%94%E7%94%A8%E5%AE%9E%E6%88%98/"/>
+      <url>/2022/10/17/Spring4-x%E4%BC%81%E4%B8%9A%E7%BA%A7%E5%BA%94%E7%94%A8%E5%AE%9E%E6%88%98/</url>
+      <content type="html"><![CDATA[<h1 id="Spring4-x企业级应用实战第二部分"><a href="#Spring4-x企业级应用实战第二部分" class="headerlink" title="Spring4.x企业级应用实战第二部分"></a>Spring4.x企业级应用实战第二部分</h1><h2 id="JSP页面"><a href="#JSP页面" class="headerlink" title="JSP页面"></a>JSP页面</h2><p>当新建JSP页面之后，需要使用JSTL标签，但是使用<code>&lt;%@taglib uri=&quot;http://java.sun.com/jsp/jstl/core&quot; prefix=&quot;c&quot;%&gt;</code>引入过后，出现了提示<code>Cannot resolve taglib with uri http://java.sun.com/jsp/jstl/core</code> 解决办法是在<code>pom.xml</code>中引入<code>JSTL</code> 核心包即可。</p><pre><code>&lt;dependency&gt;      &lt;groupId&gt;jstl&lt;/groupId&gt;      &lt;artifactId&gt;jstl&lt;/artifactId&gt;      &lt;version&gt;1.2&lt;/version&gt;  &lt;/dependency&gt;</code></pre><h2 id="Hexo博客相关"><a href="#Hexo博客相关" class="headerlink" title="Hexo博客相关"></a>Hexo博客相关</h2><h3 id="node-sass"><a href="#node-sass" class="headerlink" title="node-sass"></a>node-sass</h3><p>在使用<code>hexo -d</code> 发布博客的时候，总是会遇到<code>Cannot download “https://github.com/sass/node-sass/releases/download/binding.nod</code> 从而导致的各种报错。网络上的从<code>tabobao.org</code>镜像进行安装的解决方案也试过，但是使用<code>cnpm</code>并无法解决问题，最后终于在<a href="!https://github.com/sass/node-sass"><code>node-sas</code>的GitHub主页</a>找到了解决方案。</p><blockquote><p>Install From Mirror in China<br><code>npm install -g mirror-config-china --registry=https://registry.npmmirror.com</code><br><code>npm install node-sass</code></p></blockquote><p>完美解决了有关<code>node-sass</code>的一切问题</p><h3 id="nvm版本控制"><a href="#nvm版本控制" class="headerlink" title="nvm版本控制"></a>nvm版本控制</h3><p>关于<code>nvm</code>与<code>npm</code>的区别：Node Version Manager、Node Package Manager，在更新了node.js一些组件过后，需要使用<code>npm rebuild</code>命令来重建，npm是node.js的包管理工具，和node.js的运行有关。nvm则是控制node.js版本的<br>一些基础nvm命令：</p><blockquote><p>nvm ls<br>nvm ls-remote lts//只查看长期支持的版本<br>nvm uninstall<br>nvm install<br>nvm use vxx.xx.x<br>nvm alias default xx.xx.x</p></blockquote><h2 id="IDEA使用小技巧"><a href="#IDEA使用小技巧" class="headerlink" title="IDEA使用小技巧"></a>IDEA使用小技巧</h2><p>使用<code>shift+~</code>组合键位可以将小写字母转换成大写</p>]]></content>
+      
+      <categories>
+          
+          <category> SPring企业级实战 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Spring </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>精通Spring4.x企业级应用实战第二章阅读记录1</title>
       <link href="/2022/10/15/%E7%B2%BE%E9%80%9ASpring4-x%E4%BC%81%E4%B8%9A%E7%BA%A7%E5%BA%94%E7%94%A8%E5%AE%9E%E6%88%98%E7%AC%AC%E4%BA%8C%E7%AB%A0%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%951/"/>
       <url>/2022/10/15/%E7%B2%BE%E9%80%9ASpring4-x%E4%BC%81%E4%B8%9A%E7%BA%A7%E5%BA%94%E7%94%A8%E5%AE%9E%E6%88%98%E7%AC%AC%E4%BA%8C%E7%AB%A0%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%951/</url>
