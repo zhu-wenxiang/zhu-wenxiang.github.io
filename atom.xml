@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zhu-wenxiang.github.io/"/>
-  <updated>2023-01-14T10:14:14.775Z</updated>
+  <updated>2023-03-09T13:09:28.967Z</updated>
   <id>https://zhu-wenxiang.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Maven工程javax.servlet无法导入</title>
+    <link href="https://zhu-wenxiang.github.io/2023/03/09/Maven%E5%B7%A5%E7%A8%8Bjavax-servlet%E6%97%A0%E6%B3%95%E5%AF%BC%E5%85%A5/"/>
+    <id>https://zhu-wenxiang.github.io/2023/03/09/Maven工程javax-servlet无法导入/</id>
+    <published>2023-03-09T12:39:46.000Z</published>
+    <updated>2023-03-09T13:09:28.967Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h6 id=&quot;问题描述：&quot;&gt;&lt;a href=&quot;#问题描述：&quot; class=&quot;headerlink&quot; title=&quot;问题描述：&quot;&gt;&lt;/a&gt;问题描述：&lt;/h6&gt;&lt;p&gt;Maven工程的BaseController类无法导入&lt;code&gt;import
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Maven使用" scheme="https://zhu-wenxiang.github.io/tags/Maven%E4%BD%BF%E7%94%A8/"/>
+    
+  </entry>
   
   <entry>
     <title>MySQL学习笔记</title>
@@ -506,22 +530,6 @@
     
     
       <category term="软件工具问题" scheme="https://zhu-wenxiang.github.io/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7%E9%97%AE%E9%A2%98/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Thinking in Java Notes——没什么能逃得过反射</title>
-    <link href="https://zhu-wenxiang.github.io/2020/01/04/Thinking-in-Java/"/>
-    <id>https://zhu-wenxiang.github.io/2020/01/04/Thinking-in-Java/</id>
-    <published>2020-01-04T07:43:05.000Z</published>
-    <updated>2020-01-04T10:15:35.124Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-      <category term="Notes of Thinking in Java" scheme="https://zhu-wenxiang.github.io/tags/Notes-of-Thinking-in-Java/"/>
     
   </entry>
   

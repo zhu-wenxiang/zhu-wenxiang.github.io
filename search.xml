@@ -3,6 +3,21 @@
   
     
     <entry>
+      <title>Maven工程javax.servlet无法导入</title>
+      <link href="/2023/03/09/Maven%E5%B7%A5%E7%A8%8Bjavax-servlet%E6%97%A0%E6%B3%95%E5%AF%BC%E5%85%A5/"/>
+      <url>/2023/03/09/Maven%E5%B7%A5%E7%A8%8Bjavax-servlet%E6%97%A0%E6%B3%95%E5%AF%BC%E5%85%A5/</url>
+      <content type="html"><![CDATA[<h6 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h6><p>Maven工程的BaseController类无法导入<code>import javax.servlet.http.HttpServletRequest;</code></p><p>问题原因：<br>Maven外层工程<code>shf</code>，子工程结构<code>shf/common-util</code>，<code>common-util</code>中的<code>com.atguigu</code>下的<code>BaseController</code>无法导入<code>HttpServletRequest</code>类。<br>这里是最外层工程依赖配置有问题</p><pre><code class="xml">&lt;dependencyManagement&gt;     &lt;dependencies&gt;        &lt;dependency&gt;            &lt;groupId&gt;javax.servlet&lt;/groupId&gt;            &lt;artifactId&gt;servlet-api&lt;/artifactId&gt;            &lt;version&gt;${servlet-api.version}&lt;/version&gt;            &lt;scope&gt;provided&lt;/scope&gt;        &lt;/dependency&gt;    &lt;/dependencies&gt;&lt;/dependencyManagement&gt;</code></pre><p>，这里该<code>Servlet</code>依赖包不能配置在<code>dependencyManagement</code>标签中，要单独配置到<code>dependencies</code></p><pre><code class="xml">&lt;dependencyManagement&gt;    &lt;dependencies&gt;        &lt;dependency&gt;            ...        &lt;/dependency&gt;    &lt;/dependencies&gt;&lt;/dependencyManagement&gt; &lt;!-- 与dependency Management同级别的dependencies标签--&gt; &lt;dependencies&gt;        &lt;dependency&gt;            &lt;groupId&gt;javax.servlet&lt;/groupId&gt;            &lt;artifactId&gt;servlet-api&lt;/artifactId&gt;            &lt;version&gt;${servlet-api.version}&lt;/version&gt;            &lt;scope&gt;provided&lt;/scope&gt;        &lt;/dependency&gt;    &lt;/dependencies&gt;</code></pre><p>这样子模块中就可以正常引入了。</p>]]></content>
+      
+      
+        <tags>
+            
+            <tag> Maven使用 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>MySQL学习笔记</title>
       <link href="/2022/12/21/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
       <url>/2022/12/21/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
